@@ -1,0 +1,27 @@
+name: update-data
+on:
+  schedule:
+    - cron: '30 9 * * *'    # 台北 17:30（A股/韩股收盘后）
+    - cron: '30 21 * * *'   # 台北 05:30（美股收盘后）
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.11' }
+      - run: pip install -r pipeline/requirements.txt
+      - run: python pipeline/fetch_data.py
+        env:
+          TUSHARE_TOKEN: ${{ secrets.TUSHARE_TOKEN }}
+      - name: commit
+        run: |
+          git config user.name "storage-monitor-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/ pipeline/sw_pe_history.csv
+          git diff --cached --quiet || git commit -m "data: auto refresh $(date -u '+%Y-%m-%d %H:%M UTC')"
+          git push
+
