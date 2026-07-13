@@ -1,0 +1,46 @@
+{
+  "_meta": {
+    "as_of": "2026-07-09",
+    "note": "机器可读参数台账（四闸门纪律：任何 value 变更须经作者批准，prior 保留旧值留痕）。E0 刷新规则见 完整方法论 v1.2 §20。",
+    "hard_boundary": "V_C/V_M/V_S 为描述性情景内在价值参考，非目标价；无仓位/买卖建议。",
+    "baseline_prices_20260601": {"MU": 1035.5, "SNDK": 1716.36, "000660.KS": 2363000, "005930.KS": 365000, "WDC": 558.19, "STX": 921.26, "301308.SZ": 519.5, "688008.SH": 237.0, "002409.SZ": 109.63, "603986.SH": 474.69, "688123.SH": 127.2}
+  },
+  "targets": [
+    {"id": "MU", "name": "Micron", "archetype": "A", "market": "US", "currency": "USD", "src": {"quote": "yf", "ticker": "MU"}, "model": "cyclical",
+     "E0": {"value": 149.64, "prior": 104.0, "source": "yfinance FY27一致(70.77-221.27,n=37)", "grade": "B", "as_of": "2026-07-09"},
+     "E0_cons": {"value": 73.32, "note": "FY26一致(保守口径)"}, "Em": 6.0, "N_S": 3, "gterm_S": 0.04},
+    {"id": "SNDK", "name": "Sandisk", "archetype": "A", "market": "US", "currency": "USD", "src": {"quote": "yf", "ticker": "SNDK"}, "model": "cyclical",
+     "E0": {"value": 204.47, "prior": 180.0, "source": "yfinance FY27一致(137.9-396.1,n=20)", "grade": "B", "as_of": "2026-07-09"},
+     "E0_cons": {"value": 66.41, "note": "FY26一致(保守口径)"}, "Em": 5.0, "N_S": 3, "gterm_S": 0.04},
+    {"id": "SKH", "name": "SK Hynix", "archetype": "A", "market": "KR", "currency": "KRW", "src": {"quote": "yf", "ticker": "000660.KS"}, "model": "cyclical",
+     "E0": {"value": 281000, "prior": null, "source": "2026一致(2026-06快照)", "grade": "B/C", "as_of": "2026-06-02", "refresh_note": "待2026-07-30财报+指引刷新(韩股纪律)"},
+     "E0_cons": {"value": null}, "Em": 26000, "N_S": 3, "gterm_S": 0.04},
+    {"id": "SSNLF", "name": "Samsung", "archetype": "A", "market": "KR", "currency": "KRW", "src": {"quote": "yf", "ticker": "005930.KS"}, "model": "cyclical",
+     "E0": {"value": 42000, "prior": null, "source": "2026一致(2026-06快照)", "grade": "B/C", "as_of": "2026-06-02", "refresh_note": "Q2初步OP₩89.4T远超；待7-30正式财报刷新"},
+     "E0_cons": {"value": 30000, "note": "保守口径"}, "Em": 5800, "N_S": 2, "gterm_S": 0.04},
+    {"id": "WDC", "name": "WDC", "archetype": "B", "market": "US", "currency": "USD", "src": {"quote": "yf", "ticker": "WDC"}, "model": "cyclical",
+     "E0": {"value": 18.27, "prior": 14.25, "source": "yfinance FY27一致raw(15.0-22.4)", "grade": "B/C", "as_of": "2026-07-09", "refresh_note": "raw未做clean再推导(GAAP分拆一次性)，财报季复核"},
+     "E0_cons": {"value": 14.25, "note": "旧clean口径(保守)"}, "Em": 4.0, "N_S": 2, "gterm_S": 0.04},
+    {"id": "STX", "name": "Seagate", "archetype": "B", "market": "US", "currency": "USD", "src": {"quote": "yf", "ticker": "STX"}, "model": "cyclical",
+     "E0": {"value": 27.39, "prior": 22.0, "source": "yfinance FY27一致(22.9-35.4)", "grade": "B", "as_of": "2026-07-09"},
+     "E0_cons": {"value": 14.89, "note": "FY26一致(保守口径)"}, "Em": 4.8, "N_S": 2, "gterm_S": 0.04},
+    {"id": "JBL", "name": "江波龙", "archetype": "E", "market": "CN", "currency": "CNY", "src": {"quote": "ts", "ticker": "301308.SZ"}, "model": "cyclical",
+     "E0": {"value": 20.0, "prior": null, "source": "剥离投机库存收益口径(江波龙原则)", "grade": "C", "as_of": "2026-06-01", "refresh_note": "H1预告92-110亿(+622x)无法拆分；8月中报=剥离比例裁决点"},
+     "E0_cons": {"value": 30.56, "note": "报告口径一致(长城证券7-01,单源)——与剥离口径带位反向,并列展示"}, "Em": 3.5, "N_S": 1, "gterm_S": 0.05},
+    {"id": "MONTAGE", "name": "澜起科技", "archetype": "D", "market": "CN", "currency": "CNY", "src": {"quote": "ts", "ticker": "688008.SH"}, "model": "growth",
+     "E0": {"value": 2.60, "prior": null, "source": "2026E一致(2026-06快照)", "grade": "C", "as_of": "2026-06-01", "refresh_note": "6-15~7-09窗口report_rc无新研报,待刷新"},
+     "growth": {"gC": 0.08, "gM": 0.18, "gS": 0.30, "consensus_note": "一致增速30-37%(6月口径)"}},
+    {"id": "YOKE", "name": "雅克科技", "archetype": "D", "market": "CN", "currency": "CNY", "src": {"quote": "ts", "ticker": "002409.SZ"}, "model": "growth",
+     "E0": {"value": 2.74, "prior": 2.43, "source": "report_rc三家(申万宏源/华鑫/中信建投 6-29~7-06)", "grade": "C/B-", "as_of": "2026-07-09", "refresh_note": "上修发生在股价+91%之后,热数据折价"},
+     "growth": {"gC": 0.10, "gM": 0.20, "gS": 0.30, "consensus_note": "一致增速~30%(2027+30%/2028+32~35%)"}},
+    {"id": "GIGA", "name": "兆易创新", "archetype": "C", "market": "CN", "currency": "CNY", "src": {"quote": "ts", "ticker": "603986.SH"}, "model": "dual",
+     "E0": {"value": 8.0, "prior": null, "source": "Q1年化(真实经营性,扣非占97%)", "grade": "B", "as_of": "2026-06-01"},
+     "E0_cons": {"value": 8.88, "note": "一致已追上(华鑫/中原/国盛 6-29~7-02);旧保守口径3作废"}, "Em": 4.0, "N_S": 2, "gterm_S": 0.05,
+     "growth": {"gC": 0.10, "gM": 0.25, "gS": 0.40, "consensus_note": "成长视角:CXMT/NOR中途站"}, "dual_note": "周期视角 vs 成长视角并列,不下单一裁决"},
+    {"id": "GSME", "name": "聚辰股份", "archetype": "special", "market": "CN", "currency": "CNY", "src": {"quote": "ts", "ticker": "688123.SH"}, "model": "dual",
+     "E0": {"value": 1.8, "prior": null, "source": "塌缩口径TTM", "grade": "B", "as_of": "2026-06-01"},
+     "E0_cons": {"value": null}, "Em": 1.8, "N_S": 1, "gterm_S": 0.05,
+     "growth": {"E0_growth": 3.18, "prior": 3.6, "gC": 0.05, "gM": 0.15, "gS": 0.25, "consensus_note": "复苏视角E0=3.18(华安6-29单源,C级弱);2027-28一致+50%/年"}, "dual_note": "塌缩视角 vs 复苏视角并列"}
+  ]
+}
+
