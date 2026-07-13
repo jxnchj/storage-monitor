@@ -1,0 +1,69 @@
+{
+  "_meta": {
+    "note": "LLM 判断层：仅经 Claude 会话产出并经作者确认后更新（四闸门）。自动 pipeline 只读本文件。",
+    "updated": "2026-07-09",
+    "updated_by": "Claude 会话 · 作者已确认",
+    "hard_boundary": "本页全部内容为描述性研究状态标签与条件触发，无目标价、无仓位、不构成任何投资建议。"
+  },
+  "industry_state": {
+    "label": "顶部钝化",
+    "qualifier": "P",
+    "qualifier_note": "P=预测口径确认（TrendForce 3Q26E），待实测升 A；实测反向则回摆并留痕",
+    "confidence": "中",
+    "since": "2026-07-09",
+    "states": ["上行强化", "顶部钝化", "下行确认", "触底再起"],
+    "basis": "④ 定位三个独立读数：二阶导收窄 + 消费破坏确认 + capex 激增官宣",
+    "prev": "上行强化→顶部钝化过渡（2026-06-01 基线）"
+  },
+  "variables": [
+    {"id": 1, "name": "ASP 二阶导（总开关）", "reading": "bear-lean",
+     "summary": "DRAM 合约环比 1Q26 +90~98% → 2Q26 +58~63% → 3Q26E +13~18%（P口径）；价格水平仍升、未转负", "grade": "B(TrendForce)", "as_of": "2026-07-03"},
+    {"id": 2, "name": "AI 现金兑现度 ROI", "reading": "bull-hold",
+     "summary": "Micron FQ4 指引 $50B/GM86%；2026 CSP capex $630-725B 续升；2027 无净下修；SKH $28B ADR 融资", "grade": "A/B", "as_of": "2026-07-07"},
+    {"id": 3, "name": "供给纪律", "reading": "watch",
+     "summary": "当期纪律未破（三星续提价、Micron 锁需求不加产能）；韩国 ₩800万亿/4 fab 官宣 → ④判据成立、恐慌扩产记观察灯", "grade": "A(官宣)", "as_of": "2026-06-29"},
+    {"id": 4, "name": "需求广度 vs 价格破坏", "reading": "bear-lean",
+     "summary": "消费端破坏获官方确认（TrendForce）+ Apple 6-25 官宣 14 款提价（A级行为证据）；server/eSSD 蔓延阈值未触发", "grade": "A/B", "as_of": "2026-06-25"}
+  ],
+  "ai_layers": [
+    {"layer": "资金层", "light": "yellow", "note": "debt-financed 延续；新增国家资本入场注脚（韩政府 30万亿₩+）"},
+    {"layer": "订单层", "light": "green", "note": "2027 无净下修；Micron SCA $100B take-or-pay（16 客户）更绿"},
+    {"layer": "商业模式层", "light": "yellow", "note": "ROI 未证；消费端破坏确认"}
+  ],
+  "trigger": {
+    "structural_confirmed": 0, "structural_total": 4,
+    "floor_regime": "结构未证伪下轨",
+    "floor_note": "重资产≈V_M 下沿、设计名=穿周期倍数地板；非买入线、不代表亏损有限",
+    "lights": [
+      {"variable": "供给恐慌扩产", "light": "yellow-watch", "date": "2026-07-09", "confirmed_by": "作者",
+       "basis": "韩国+三星+SKH ₩800万亿/15年/4 fab+HBM枢纽官宣（宣示性远期，非当期抢份额）",
+       "adjudication": ["分年 capex 落地节奏 vs 官宣总额", "价格纪律是否随预建产能松动", "新增产能长协/SCA 覆盖比", "CXMT/YMTC 是否跟进加码"],
+       "cadence": "双周复核"}
+    ]
+  },
+  "events": [
+    {"date": "2026-07-03", "grade": "B", "title": "TrendForce 3Q26E：DRAM +13~18% / NAND +10~15%，涨幅显著放缓（P口径）", "url": "https://www.trendforce.com/presscenter/news/20260703-13134.html"},
+    {"date": "2026-07-03", "grade": "A", "title": "江波龙 H1 预告净利 92–110 亿（+622~744x）；归因景气+LTA 续签+端侧 AI", "url": ""},
+    {"date": "2026-06-29", "grade": "A", "title": "韩国+三星+SK Hynix 官宣 ₩800 万亿/15 年：4 座新 fab + HBM 封装枢纽，「五年内存产量翻倍」", "url": "https://www.tomshardware.com/tech-industry/semiconductors/south-korea-unveils-usd520-billion-investment-plan-with-samsung-and-sk-hynix-to-expand-memory-chip-dominance-plan-includes-four-new-fabs-and-hbm-facilities-amid-strong-government-support"},
+    {"date": "2026-06-25", "grade": "A", "title": "Apple 官宣 14 款产品提价、归因存储成本（「从未见过组件价格涨得如此之快」）；iPhone 未动", "url": "https://www.macrumors.com/2026/06/25/apple-explains-why-it-raised-prices/"},
+    {"date": "2026-06-24", "grade": "A", "title": "Micron FY26Q3：营收 $41.46B(+74% QoQ)、GM 84.6%；FQ4 指引 $50B/GM~86%；SCA $100B take-or-pay", "url": "https://investors.micron.com/news-releases/news-release-details/micron-technology-inc-reports-record-results-third-quarter"},
+    {"date": "2026-06-22", "grade": "B", "title": "利基级联短缺蔓延至 DDR2（2Q +55~60%、3Q26E +35~40%）——子赛道轮换「兑现读数」命中", "url": "https://www.trendforce.com/presscenter/news/20260622-13112.html"},
+    {"date": "2026-07-07", "grade": "A-", "title": "Samsung Q2 初步 OP ₩89.4T（19x YoY）但股价下跌——「盈利创纪录 vs 拒付峰值」反身性顶部特征", "url": ""}
+  ],
+  "pending_confirmation": [],
+  "next_checkpoints": [
+    {"date": "2026-07 中旬", "what": "A 股中报预告季：聚辰/兆易/雅克/澜起（复苏与增速兑现 vs 一致）"},
+    {"date": "2026-07-30", "what": "SKH/Samsung 财报+定价指引（韩股 E0 刷新窗口）★ 已预约事件加照"},
+    {"date": "2026-07下旬~08初", "what": "四大 CSP Q2 财报：2027 capex 首批表述（AI 三层订单层复核）"},
+    {"date": "2026-08", "what": "江波龙中报：剥离 vs 报告双口径裁决点"},
+    {"date": "2026-10 前后", "what": "TrendForce 3Q26 实测：顶部钝化 P→A 判定"}
+  ],
+  "cycle_log": [
+    {"date": "2026-06-01", "entry": "基线：③晚→④early（上行强化→顶部钝化过渡）；AI 三层 资金🟡/订单🟢/模式🟡；触发器不点灯"},
+    {"date": "2026-07-09", "entry": "演练：行业态推进「顶部钝化(P)」；美韩原厂回调 vs A股 basket +44% 分化扩大；雅克/澜起带位迁移"},
+    {"date": "2026-07-09", "entry": "v1.1 增补：Apple 提价（A级行为证据）+ 韩国 4 fab 官宣并入；④ 定位证据 2→3 个"},
+    {"date": "2026-07-09", "entry": "作者确认：「供给恐慌扩产」点 🟡 观察灯（非恶化确认）；下轨维持结构未证伪档；双周复核"},
+    {"date": "2026-07-09", "entry": "批1：温度口径锁定 801081.SI（跨口径误比更正）；E0 批量刷新（MU 104→149.64 等7项）；方法论升 v1.2"}
+  ]
+}
+
