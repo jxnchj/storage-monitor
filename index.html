@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>存储板块监控 · 研究状态 Dashboard</title>
+<style>
+:root{
+  --surface-1:#fcfcfb; --page:#f9f9f7; --ink-1:#0b0b0b; --ink-2:#52514e; --muted:#898781;
+  --grid:#e1e0d9; --axis:#c3c2b7; --border:rgba(11,11,11,.10);
+  --s1:#2a78d6; --s2:#1baf7a; --s3:#eda100;
+  --good:#0ca30c; --warn:#fab219; --serious:#ec835a; --crit:#d03b3b;
+  --wash:rgba(42,120,214,.08);
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --surface-1:#1a1a19; --page:#0d0d0d; --ink-1:#ffffff; --ink-2:#c3c2b7; --muted:#898781;
+    --grid:#2c2c2a; --axis:#383835; --border:rgba(255,255,255,.10);
+    --s1:#3987e5; --s2:#199e70; --s3:#c98500; --wash:rgba(57,135,229,.14);
+  }
+}
+*{box-sizing:border-box} html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--page);color:var(--ink-1);
+  font:14px/1.55 system-ui,-apple-system,"Segoe UI","PingFang TC","Microsoft JhengHei",sans-serif}
+.wrap{max-width:1100px;margin:0 auto;padding:20px 16px 60px}
+header.top{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;margin:6px 0 4px}
+h1{font-size:20px;margin:0;font-weight:700}
+.asof{color:var(--muted);font-size:12px}
+.hb{color:var(--muted);font-size:12px;margin:2px 0 14px}
+.banner{display:none;background:var(--warn);color:#0b0b0b;border-radius:8px;padding:8px 12px;font-size:13px;margin:0 0 12px}
+.card{background:var(--surface-1);border:1px solid var(--border);border-radius:12px;padding:16px 18px;margin:0 0 14px}
+.card h2{font-size:15px;margin:0 0 12px;font-weight:700}
+.card h2 .sub{color:var(--muted);font-weight:400;font-size:12px;margin-left:8px}
+/* 状态机 stepper */
+.stepper{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:6px}
+.step{padding:7px 14px;border-radius:999px;border:1px solid var(--grid);color:var(--muted);font-size:13px}
+.step.cur{background:var(--wash);border-color:var(--s1);color:var(--ink-1);font-weight:700}
+.step .q{font-size:11px;color:var(--s1);margin-left:4px;font-weight:700}
+.state-meta{color:var(--ink-2);font-size:13px;margin:8px 0 0}
+.state-meta b{color:var(--ink-1)}
+/* 变量/灯号 */
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px;margin-top:12px}
+.var{border:1px solid var(--grid);border-radius:10px;padding:10px 12px}
+.var .nm{font-weight:700;font-size:13px;display:flex;align-items:center;gap:6px}
+.var .sm{color:var(--ink-2);font-size:12px;margin-top:4px}
+.var .meta{color:var(--muted);font-size:11px;margin-top:4px}
+.chip{display:inline-flex;align-items:center;gap:5px;font-size:12px;border:1px solid var(--grid);
+  border-radius:999px;padding:2px 9px;color:var(--ink-2);white-space:nowrap}
+.dot{width:8px;height:8px;border-radius:50%;flex:none}
+.lights{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+/* 温度 tiles */
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.tile{border:1px solid var(--grid);border-radius:10px;padding:12px 14px}
+.tile .k{color:var(--muted);font-size:12px}
+.tile .v{font-size:24px;font-weight:700;margin-top:2px}
+.tile .d{color:var(--ink-2);font-size:12px;margin-top:2px}
+.note{color:var(--muted);font-size:11px;margin-top:10px}
+/* 个股表 */
+details{border:1px solid var(--border);border-radius:12px;background:var(--surface-1);margin-bottom:14px}
+summary{cursor:pointer;padding:14px 18px;font-weight:700;font-size:15px;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary .hint{color:var(--muted);font-weight:400;font-size:12px;margin-left:8px}
+.stock-body{padding:0 18px 16px}
+.zone-legend{display:flex;gap:14px;flex-wrap:wrap;color:var(--muted);font-size:11px;margin:2px 0 10px}
+.zone-legend span{display:inline-flex;align-items:center;gap:5px}
+.sw{width:14px;height:8px;border-radius:2px;border:1px solid var(--grid)}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th{color:var(--muted);font-weight:500;text-align:left;padding:6px 8px;border-bottom:1px solid var(--grid);white-space:nowrap}
+td{padding:7px 8px;border-bottom:1px solid var(--grid);vertical-align:middle}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+.nm2{font-weight:700;white-space:nowrap}
+.vw{color:var(--muted);font-size:11px}
+.badge{display:inline-block;font-size:11px;border-radius:6px;padding:1px 7px;border:1px solid var(--grid);color:var(--ink-2);white-space:nowrap}
+.badge.over{border-color:var(--serious);color:var(--serious)}
+.badge.extreme_over{border-color:var(--crit);color:var(--crit)}
+.badge.in_range{border-color:var(--axis)}
+.badge.under,.badge.deep_under{border-color:var(--s1);color:var(--s1)}
+.flag{color:var(--muted);font-size:11px;line-height:1.45}
+.bandcell{min-width:190px}
+/* 事件/日志 */
+.ev td:first-child{white-space:nowrap;color:var(--muted)}
+.gr{display:inline-block;width:26px;text-align:center;font-size:11px;font-weight:700;border-radius:6px;border:1px solid var(--grid)}
+.gr.A{color:var(--good);border-color:var(--good)} .gr.Am{color:var(--s2);border-color:var(--s2)}
+.gr.B{color:var(--s1);border-color:var(--s1)} .gr.C{color:var(--muted)}
+.log{margin:0;padding:0;list-style:none}
+.log li{padding:7px 0 7px 18px;border-left:2px solid var(--grid);position:relative;font-size:13px;color:var(--ink-2)}
+.log li::before{content:"";position:absolute;left:-5px;top:13px;width:8px;height:8px;border-radius:50%;background:var(--s1)}
+.log li b{color:var(--ink-1)}
+.log .d{color:var(--muted);font-size:11px;margin-right:8px}
+footer{color:var(--muted);font-size:11.5px;line-height:1.7;margin-top:24px}
+a{color:var(--s1);text-decoration:none} a:hover{text-decoration:underline}
+#tip{position:fixed;display:none;background:var(--surface-1);border:1px solid var(--border);border-radius:8px;
+  padding:8px 10px;font-size:12px;pointer-events:none;z-index:10;box-shadow:0 4px 14px rgba(0,0,0,.12);max-width:260px}
+#tip b{font-variant-numeric:tabular-nums}
+.spark{display:block;margin-top:6px}
+.checkpoints li{font-size:13px;color:var(--ink-2);margin:4px 0}
+.checkpoints b{color:var(--ink-1)}
+@media (max-width:640px){ .tiles{grid-template-columns:1fr 1fr} th,td{padding:6px 5px} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <h1>存储板块监控 <span style="color:var(--muted);font-weight:400">· 研究状态 Dashboard</span></h1>
+    <span class="asof" id="asof"></span>
+  </header>
+  <div class="hb">两步走研究的活体化：<b>行业态为主体，个股为派生下游</b> ｜ 全部内容为描述性研究状态标签与条件触发，<b>无目标价、无仓位、不构成任何投资建议</b></div>
+  <div class="banner" id="banner"></div>
+
+  <div class="card" id="stateCard">
+    <h2>行业双向状态机 <span class="sub" id="stateBasis"></span></h2>
+    <div class="stepper" id="stepper"></div>
+    <div class="state-meta" id="stateMeta"></div>
+    <div class="grid2" id="vars"></div>
+    <div class="lights" id="lights"></div>
+    <div class="note" id="floorNote"></div>
+  </div>
+
+  <div class="card">
+    <h2>市场温度 <span class="sub">聚合口径 · 不用于个股排序</span></h2>
+    <div class="tiles" id="tiles"></div>
+    <div class="note" id="tempNote"></div>
+  </div>
+
+  <details id="stocks">
+    <summary>个股派生层 · 11 标的位置带 <span class="hint">下游折叠内容——标签由「行业态 × 价格位置」映射，随行业态更新；描述性、非交易指令</span></summary>
+    <div class="stock-body">
+      <div class="zone-legend">
+        <span><span class="sw" style="background:var(--wash)"></span>低估区</span>
+        <span><span class="sw" style="background:transparent"></span>区间内（V_C–V_S，竖线=V_M）</span>
+        <span><span class="sw" style="background:rgba(236,131,90,.15)"></span>高估区</span>
+        <span><span class="sw" style="background:rgba(208,59,59,.15)"></span>极端高估区</span>
+        <span>● = 现价 P</span>
+      </div>
+      <table id="stockTable"></table>
+      <div class="note">V_C/V_M/V_S 为显式情景下的内在价值参考（估值锚），非目标价；「保守口径」并列以暴露周期陷阱（E0 口径敏感性）；下轨=状态依赖（当前：结构未证伪档），非买入线。</div>
+    </div>
+  </details>
+
+  <div class="card">
+    <h2>A 类事件台账 <span class="sub">取证协议定级：A 官方行为 &gt; A- 官方表态 &gt; B 专业库 &gt; C 传闻/卖方</span></h2>
+    <table class="ev" id="events"></table>
+  </div>
+
+  <div class="card">
+    <h2>下一检查点</h2>
+    <ul class="checkpoints" id="checkpoints"></ul>
+  </div>
+
+  <div class="card">
+    <h2>周期日志 <span class="sub">只追加、不改写；完整版在项目档案 周期日志.md</span></h2>
+    <ul class="log" id="cyclelog"></ul>
+    <div class="note" id="pending"></div>
+  </div>
+
+  <footer>
+    口径纪律：A 股温度唯一口径=申万半导体 801081.SI（sw_daily），分位基期 2020 起，跨口径禁比；TrendForce 价格标注 P（预测）/A（实测）；所有数值带 as-of。<br>
+    数据分层：行情/估值/温度=自动 pipeline（GitHub Actions，每日两次）；行业态/灯号/事件=LLM 判断层（Claude 会话产出，<b>经作者确认后</b>写入）。<br>
+    硬边界：作者无存储持仓；本页为研究框架的监控视图，无目标价、无仓位百分比、无买入/卖出/持有/做空建议；词汇黑名单由 pipeline 与前端双重审查。<br>
+    方法：《研究纲领 v2.3》《完整方法论 审计版 v1.2》（两步走 · 双向状态机 · 状态依赖下轨 · 三角验证）。
+  </footer>
+</div>
+<div id="tip"></div>
+
+<script type="application/json" id="seed-auto">{
+ "generated_utc": "2026-07-10 03:32 UTC",
+ "degraded": [],
+ "temperature": {
+  "sw_pe": 158.38,
+  "sw_pb": null,
+  "sw_asof": "20260709",
+  "sw_pe_percentile_since2020": 99.1,
+  "sw_spark": [
+   {
+    "d": "20250616",
+    "pe": 79.5
+   },
+   {
+    "d": "20250623",
+    "pe": 80.4
+   },
+   {
+    "d": "20250630",
+    "pe": 84.2
+   },
+   {
+    "d": "20250707",
+    "pe": 82.0
+   },
+   {
+    "d": "20250714",
+    "pe": 82.7
+   },
+   {
+    "d": "20250721",
+    "pe": 83.7
+   },
+   {
+    "d": "20250728",
+    "pe": 87.4
+   },
+   {
+    "d": "20250804",
+    "pe": 87.4
+   },
+   {
+    "d": "20250811",
+    "pe": 88.2
+   },
+   {
+    "d": "20250818",
+    "pe": 95.9
+   },
+   {
+    "d": "20250825",
+    "pe": 107.7
+   },
+   {
+    "d": "20250901",
+    "pe": 106.1
+   },
+   {
+    "d": "20250908",
+    "pe": 97.9
+   },
+   {
+    "d": "20250915",
+    "pe": 104.5
+   },
+   {
+    "d": "20250922",
+    "pe": 111.1
+   },
+   {
+    "d": "20250929",
+    "pe": 116.5
+   },
+   {
+    "d": "20251014",
+    "pe": 111.2
+   },
+   {
+    "d": "20251021",
+    "pe": 112.1
+   },
+   {
+    "d": "20251028",
+    "pe": 118.1
+   },
+   {
+    "d": "20251104",
+    "pe": 97.8
+   },
+   {
+    "d": "20251111",
+    "pe": 97.9
+   },
+   {
+    "d": "20251118",
+    "pe": 96.0
+   },
+   {
+    "d": "20251125",
+    "pe": 91.8
+   },
+   {
+    "d": "20251202",
+    "pe": 95.1
+   },
+   {
+    "d": "20251209",
+    "pe": 97.9
+   },
+   {
+    "d": "20251216",
+    "pe": 94.6
+   },
+   {
+    "d": "20251223",
+    "pe": 99.0
+   },
+   {
+    "d": "20251230",
+    "pe": 102.0
+   },
+   {
+    "d": "20260108",
+    "pe": 110.6
+   },
+   {
+    "d": "20260115",
+    "pe": 113.2
+   },
+   {
+    "d": "20260122",
+    "pe": 119.8
+   },
+   {
+    "d": "20260129",
+    "pe": 117.7
+   },
+   {
+    "d": "20260205",
+    "pe": 111.0
+   },
+   {
+    "d": "20260212",
+    "pe": 115.3
+   },
+   {
+    "d": "20260227",
+    "pe": 118.0
+   },
+   {
+    "d": "20260306",
+    "pe": 109.8
+   },
+   {
+    "d": "20260313",
+    "pe": 106.6
+   },
+   {
+    "d": "20260320",
+    "pe": 102.8
+   },
+   {
+    "d": "20260327",
+    "pe": 100.6
+   },
+   {
+    "d": "20260403",
+    "pe": 95.8
+   },
+   {
+    "d": "20260413",
+    "pe": 105.1
+   },
+   {
+    "d": "20260420",
+    "pe": 112.1
+   },
+   {
+    "d": "20260427",
+    "pe": 118.0
+   },
+   {
+    "d": "20260507",
+    "pe": 105.9
+   },
+   {
+    "d": "20260514",
+    "pe": 111.5
+   },
+   {
+    "d": "20260521",
+    "pe": 115.2
+   },
+   {
+    "d": "20260528",
+    "pe": 123.5
+   },
+   {
+    "d": "20260604",
+    "pe": 118.8
+   },
+   {
+    "d": "20260611",
+    "pe": 115.1
+   },
+   {
+    "d": "20260618",
+    "pe": 134.6
+   },
+   {
+    "d": "20260626",
+    "pe": 148.9
+   },
+   {
+    "d": "20260703",
+    "pe": 145.2
+   },
+   {
+    "d": "20260709",
+    "pe": 158.4
+   }
+  ],
+  "sw_anchor": {
+   "peak2021": 106.5,
+   "median": 82.1,
+   "base_0601": 110.45
+  },
+  "sox": {
+   "value": 12574.97,
+   "asof": "2026-07-08",
+   "chg_vs_0602": -0.0839
+  },
+  "basket_vs_0601_pct": 48.2,
+  "caliber_note": "A股温度唯一口径=申万半导体801081.SI(sw_daily)；分位基期2020-01起；跨口径禁比"
+ },
+ "targets": [
+  {
+   "id": "MU",
+   "name": "Micron",
+   "archetype": "A",
+   "currency": "USD",
+   "ticker": "MU",
+   "P": 948.8,
+   "model": "cyclical",
+   "e0_asof": "2026-07-09",
+   "e0_note": "",
+   "views": [
+    {
+     "view": "主口径",
+     "kind": "cyclical",
+     "E0": 149.64,
+     "note": "",
+     "V_C": 560.67,
+     "V_M": 1187.84,
+     "V_S": 2933.0,
+     "V_stress": 1779.0,
+     "p_vc": 1.69,
+     "p_vm": 0.8,
+     "p_vs": 0.32,
+     "implied": "10.1y",
+     "band": "in_range",
+     "band_label": "区间内（看持久性）",
+     "a2": "中性观察",
+     "p_below_vm": true
+    },
+    {
+     "view": "保守口径",
+     "kind": "cyclical",
+     "E0": 73.32,
+     "note": "FY26一致(保守口径)",
+     "V_C": 290.21,
+     "V_M": 594.38,
+     "V_S": 1437.1,
+     "V_stress": 871.67,
+     "p_vc": 3.27,
+     "p_vm": 1.6,
+     "p_vs": 0.66,
+     "implied": "无界(市场把峰值当近永续)",
+     "band": "in_range",
+     "band_label": "区间内（看持久性）",
+     "a2": "中性观察",
+     "p_below_vm": false
+    }
+   ],
+   "e0_age_days": 1,
+   "flags": [
+    "P<V_M下沿参考·复核结构事实(非买入线)"
+   ],
+   "stale": false,
+   "asof": ""
+  },
+  {
+   "id": "SNDK",
+   "name": "Sandisk",
+   "archetype": "A",
+   "currency": "USD",
+   "ticker": "SNDK",
+   "P": 1727.18,
+   "model": "cyclical",
+   "e0_asof": "2026-07-09",
+   "e0_note": "",
+   "views": [
+    {
+     "view": "主口径",
+     "kind": "cyclical",
+     "E0": 204.47,
+     "note": "",
+     "V_C": 749.92,
+     "V_M": 1610.15,
+     "V_S": 4007.69,
+     "V_stress": 2430.85,
+     "p_vc": 2.3,
+     "p_vm": 1.07,
+     "p_vs": 0.43,
+     "implied": "19.0y",
+     "band": "in_range",
+     "band_label": "区间内（看持久性）",
+     "a2": "中性观察",
+     "p_below_vm": false
+    },
+    {
+     "view": "保守口径",
+     "kind": "cyclical",
+     "E0": 66.41,
+     "note": "FY26一致(保守口径)",
+     "V_C": 260.66,
+     "V_M": 536.61,
+     "V_S": 1301.66,
+     "V_stress": 789.52,
+     "p_vc": 6.63,
+     "p_vm": 3.22,
+     "p_vs": 1.33,
+     "implied": "无界(市场把峰值当近永续)",
+     "band": "over",
+     "band_label": "高估区",
+     "a2": "风险预警",
+     "p_below_vm": false
+    }
+   ],
+   "e0_age_days": 1,
+   "flags": [],
+   "stale": false,
+   "asof": ""
+  },
+  {
+   "id": "SKH",
+   "name": "SK Hynix",
+   "archetype": "A",
+   "currency": "KRW",
+   "ticker": "000660.KS",
+   "P": 2186000,
+   "model": "cyclical",
+   "e0_asof": "2026-06-02",
+   "e0_note": "待2026-07-30财报+指引刷新(韩股纪律)",
+   "views": [
+    {
+     "view": "主口径",
+     "kind": "cyclical",
+     "E0": 281000,
+     "note": "",
+     "V_C": 1127444.75,
+     "V_M": 2290110.83,
+     "V_S": 5507703.37,
+     "V_stress": 3340684.02,
+     "p_vc": 1.94,
+     "p_vm": 0.95,
+     "p_vs": 0.4,
+     "implied": "16.0y",
+     "band": "in_range",
+     "band_label": "区间内（看持久性）",
+     "a2": "中性观察",
+     "p_below_vm": true
+    }
+   ],
+   "e0_age_days": 38,
+   "flags": [
+    "待2026-07-30财报+指引刷新(韩股纪律)",
+    "P<V_M下沿参考·复核结构事实(非买入线)"
+   ],
+   "stale": false,
+   "asof": ""
+  },
+  {
+   "id": "SSNLF",
+   "name": "Samsung",
+   "archetype": "A",
+   "currency": "KRW",
+   "ticker": "005930.KS",
+   "P": 278000,
+   "model": "cyclical",
+   "e0_asof": "2026-06-02",
+   "e0_note": "Q2初步OP₩89.4T远超；待7-30正式财报刷新",
+   "views": [
+    {
+     "view": "主口径",
+     "kind": "cyclical",
+     "E0": 42000,
+     "note": "",
+     "V_C": 157398.64,
+     "V_M": 338688.37,
+     "V_S": 845680.31,
+     "V_stress": 512155.36,
+     "p_vc": 1.77,
+     "p_vm": 0.82,
+     "p_vs": 0.33,
+     "implied": "11.0y",
+     "band": "in_range",
+     "band_label": "区间内（看持久性）",
+     "a2": "中性观察",
+     "p_below_vm": true
+    },
+    {
+     "view": "保守口径",
+     "kind": "cyclical",
+     "E0": 30000,
+     "note": "保守口径",
+     "V_C": 121769.64,
+     "V_M": 249137.04,
+     "V_S": 604057.36,
+     "V_stress": 365825.26,
+     "p_vc": 2.28,
+     "p_vm": 1.12,
+     "p_vs": 0.46,
+     "implied": "25.6y",
+     "band": "in_range",
+     "band_label": "区间内（看持久性）",
+     "a2": "中性观察",
+     "p_below_vm": false
+    }
+   ],
+   "e0_age_days": 38,
+   "flags": [
+    "Q2初步OP₩89.4T远超；待7-30正式财报刷新",
+    "P<V_M下沿参考·复核结构事实(非买入线)"
+   ],
+   "stale": false,
+   "asof": ""
+  },
+  {
+   "id": "WDC",
+   "name": "WDC",
+   "archetype": "B",
+   "currency": "USD",
+   "ticker": "WDC",
+   "P": 550.3,
+   "model": "cyclical",
+   "e0_asof": "2026-07-09",
+   "e0_note": "raw未做clean再推导(GAAP分拆一次性)，财报季复核",
+   "views": [
+    {
+     "view": "主口径",
+     "kind": "cyclical",
+     "E0": 18.27,
+     "note": "",
+     "V_C": 76.79,
+     "V_M": 153.76,
+     "V_S": 367.87,
+     "V_stress": 222.79,
+     "p_vc": 7.17,
+     "p_vm": 3.58,
+     "p_vs": 1.5,
+     "implied": "无界(市场把峰值当近永续)",
+     "band": "over",
+     "band_label": "高估区",
+     "a2": "风险预警",
+     "p_below_vm": false
+    },
+    {
+     "view": "保守口径",
+     "kind": "cyclical",
+     "E0": 14.25,
+     "note": "旧clean口径(保守)",
+     "V_C": 64.86,
+     "V_M": 123.76,
+     "V_S": 286.93,
+     "V_stress": 173.77,
+     "p_vc": 8.48,
+     "p_vm": 4.45,
+     "p_vs": 1.92,
+     "implied": "无界(市场把峰值当近永续)",
+     "band": "over",
+     "band_label": "高估区",
+     "a2": "风险预警",
+     "p_below_vm": false
+    }
+   ],
+   "e0_age_days": 1,
+   "flags": [
+    "raw未做clean再推导(GAAP分拆一次性)，财报季复核"
+   ],
+   "stale": false,
+   "asof": ""
+  },
+  {
+   "id": "STX",
+   "name": "Seagate",
+   "archetype": "B",
+   "currency": "USD",
+   "ticker": "STX",
+   "P": 860.02,
+   "model": "cyclical",
+   "e0_asof": "2026-07-09",
+   "e0_note": "",
+   "views": [
+    {
+     "view": "主口径",
+     "kind": "cyclical",
+     "E0": 27.39,
+     "note": "",
+     "V_C": 108.38,
+     "V_M": 225.3,
+     "V_S": 551.5,
+     "V_stress": 334.0,
+     "p_vc": 7.94,
+     "p_vm": 3.82,
+     "p_vs": 1.56,
+     "implied": "无界(市场把峰值当近永续)",
+     "band": "over",
+     "band_label": "高估区",
+     "a2": "风险预警",
+     "p_below_vm": false
+    },
+    {
+     "view": "保守口径",
+     "kind": "cyclical",
+     "E0": 14.89,
+     "note": "FY26一致(保守口径)",
+     "V_C": 71.27,
+     "V_M": 132.02,
+     "V_S": 299.81,
+     "V_stress": 181.57,
+     "p_vc": 12.07,
+     "p_vm": 6.51,
+     "p_vs": 2.87,
+     "implied": "无界(市场把峰值当近永续)",
+     "band": "extreme_over",
+     "band_label": "极端高估区",
+     "a2": "风险预警",
+     "p_below_vm": false
+    }
+   ],
+   "e0_age_days": 1,
+   "flags": [],
+   "stale": false,
+   "asof": ""
+  },
+  {
+   "id": "JBL",
+   "name": "江波龙",
+   "archetype": "E",
+   "currency": "CNY",
+   "ticker": "301308.SZ",
+   "P": 620.0,
+   "model": "cyclical",
+   "e0_asof": "2026-06-01",
+   "e0_note": "H1预告92-110亿(+622x)无法拆分；8月中报=剥离比例裁决点",
+   "views": [
+    {
+     "view": "主口径",
+     "kind": "cyclical",
+     "E0": 20.0,
+     "note": "",
+     "V_C": 68.49,
+     "V_M": 158.81,
+     "V_S": 493.74,
+     "V_stress": 250.66,
+     "p_vc": 9.05,
+     "p_vm": 3.9,
+     "p_vs": 1.26,
+     "implied": "无界(市场把峰值当近永续)",
+     "band": "over",
+     "band_label": "高估区",
+     "a2": "风险预警",
+     "p_below_vm": false
+    },
+    {
+     "view": "保守口径",
+     "kind": "cyclical",
+     "E0": 30.56,
+     "note": "报告口径一致(长城证券7-01,单源)——与剥离口径带位反向,并列展示",
+     "V_C": 93.05,
+     "V_M": 233.97,
+     "V_S": 754.44,
+     "V_stress": 383.01,
+     "p_vc": 6.66,
+     "p_vm": 2.65,
+     "p_vs": 0.82,
+     "implied": "无界(市场把峰值当近永续)",
+     "band": "in_range",
+     "band_label": "区间内（看持久性）",
+     "a2": "中性观察",
+     "p_below_vm": false
+    }
+   ],
+   "e0_age_days": 39,
+   "flags": [
+    "H1预告92-110亿(+622x)无法拆分；8月中报=剥离比例裁决点"
+   ],
+   "stale": false,
+   "asof": "",
+   "third_leg": {
+    "pe_ttm": 48.24,
+    "pb": 21.53
+   }
+  },
+  {
+   "id": "MONTAGE",
+   "name": "澜起科技",
+   "archetype": "D",
+   "currency": "CNY",
+   "ticker": "688008.SH",
+   "P": 285.8,
+   "model": "growth",
+   "e0_asof": "2026-06-01",
+   "e0_note": "6-15~7-09窗口report_rc无新研报,待刷新",
+   "views": [
+    {
+     "view": "成长档",
+     "kind": "growth",
+     "E0": 2.6,
+     "note": "一致增速30-37%(6月口径)",
+     "V_C": 61.81,
+     "V_M": 107.81,
+     "V_S": 203.34,
+     "p_vc": 4.62,
+     "p_vm": 2.65,
+     "p_vs": 1.41,
+     "implied": "g≈36.7%",
+     "band": "over",
+     "band_label": "高估区",
+     "a2": "风险预警",
+     "p_below_vm": false
+    }
+   ],
+   "e0_age_days": 39,
+   "flags": [
+    "6-15~7-09窗口report_rc无新研报,待刷新"
+   ],
+   "stale": false,
+   "asof": "",
+   "third_leg": {
+    "pe_ttm": 136.39,
+    "pb": 16.73
+   }
+  },
+  {
+   "id": "YOKE",
+   "name": "雅克科技",
+   "archetype": "D",
+   "currency": "CNY",
+   "ticker": "002409.SZ",
+   "P": 209.0,
+   "model": "growth",
+   "e0_asof": "2026-07-09",
+   "e0_note": "上修发生在股价+91%之后,热数据折价",
+   "views": [
+    {
+     "view": "成长档",
+     "kind": "growth",
+     "E0": 2.74,
+     "note": "一致增速~30%(2027+30%/2028+32~35%)",
+     "V_C": 72.94,
+     "V_M": 126.61,
+     "V_S": 214.29,
+     "p_vc": 2.87,
+     "p_vm": 1.65,
+     "p_vs": 0.98,
+     "implied": "g≈29.5%",
+     "band": "in_range",
+     "band_label": "区间内（看持久性）",
+     "a2": "中性观察",
+     "p_below_vm": false
+    }
+   ],
+   "e0_age_days": 1,
+   "flags": [
+    "上修发生在股价+91%之后,热数据折价"
+   ],
+   "stale": false,
+   "asof": "",
+   "third_leg": {
+    "pe_ttm": 98.8,
+    "pb": 12.28
+   }
+  },
+  {
+   "id": "GIGA",
+   "name": "兆易创新",
+   "archetype": "C",
+   "currency": "CNY",
+   "ticker": "603986.SH",
+   "P": 663.49,
+   "model": "dual",
+   "e0_asof": "2026-06-01",
+   "e0_note": "",
+   "views": [
+    {
+     "view": "周期视角",
+     "kind": "cyclical",
+     "E0": 8.0,
+     "note": "",
+     "V_C": 46.3,
+     "V_M": 77.12,
+     "V_S": 191.96,
+     "V_stress": 97.55,
+     "p_vc": 14.33,
+     "p_vm": 8.6,
+     "p_vs": 3.46,
+     "implied": "无界(市场把峰值当近永续)",
+     "band": "extreme_over",
+     "band_label": "极端高估区",
+     "a2": "风险预警",
+     "p_below_vm": false
+    },
+    {
+     "view": "成长/复苏视角",
+     "kind": "growth",
+     "E0": 8.0,
+     "note": "成长视角:CXMT/NOR中途站",
+     "V_C": 212.96,
+     "V_M": 482.47,
+     "V_S": 1032.2,
+     "p_vc": 3.12,
+     "p_vm": 1.38,
+     "p_vs": 0.64,
+     "implied": "g≈31.1%",
+     "band": "in_range",
+     "band_label": "区间内（看持久性）",
+     "a2": "中性观察",
+     "p_below_vm": false
+    }
+   ],
+   "e0_age_days": 39,
+   "flags": [],
+   "stale": false,
+   "asof": "",
+   "third_leg": {
+    "pe_ttm": 161.97,
+    "pb": 18.42
+   }
+  },
+  {
+   "id": "GSME",
+   "name": "聚辰股份",
+   "archetype": "special",
+   "currency": "CNY",
+   "ticker": "688123.SH",
+   "P": 217.12,
+   "model": "dual",
+   "e0_asof": "2026-06-01",
+   "e0_note": "",
+   "views": [
+    {
+     "view": "周期视角",
+     "kind": "cyclical",
+     "E0": 1.8,
+     "note": "",
+     "V_C": 15.49,
+     "V_M": 21.27,
+     "V_S": 44.44,
+     "V_stress": 22.56,
+     "p_vc": 14.02,
+     "p_vm": 10.21,
+     "p_vs": 4.89,
+     "implied": "N/A(ill-conditioned)",
+     "band": "extreme_over",
+     "band_label": "极端高估区",
+     "a2": "风险预警",
+     "p_below_vm": false
+    },
+    {
+     "view": "成长/复苏视角",
+     "kind": "growth",
+     "E0": 3.18,
+     "note": "复苏视角E0=3.18(华安6-29单源,C级弱);2027-28一致+50%/年",
+     "V_C": 63.69,
+     "V_M": 111.87,
+     "V_S": 191.78,
+     "p_vc": 3.41,
+     "p_vm": 1.94,
+     "p_vs": 1.13,
+     "implied": "g≈27.4%",
+     "band": "over",
+     "band_label": "高估区",
+     "a2": "风险预警",
+     "p_below_vm": false
+    }
+   ],
+   "e0_age_days": 39,
+   "flags": [],
+   "stale": false,
+   "asof": "",
+   "third_leg": {
+    "pe_ttm": 116.98,
+    "pb": 12.89
+   }
+  }
+ ]
+}</script>
+<script type="application/json" id="seed-judgment">{
+  "_meta": {
+    "note": "LLM 判断层：仅经 Claude 会话产出并经作者确认后更新（四闸门）。自动 pipeline 只读本文件。",
+    "updated": "2026-07-09",
+    "updated_by": "Claude 会话 · 作者已确认",
+    "hard_boundary": "本页全部内容为描述性研究状态标签与条件触发，无目标价、无仓位、不构成任何投资建议。"
+  },
+  "industry_state": {
+    "label": "顶部钝化",
+    "qualifier": "P",
+    "qualifier_note": "P=预测口径确认（TrendForce 3Q26E），待实测升 A；实测反向则回摆并留痕",
+    "confidence": "中",
+    "since": "2026-07-09",
+    "states": ["上行强化", "顶部钝化", "下行确认", "触底再起"],
+    "basis": "④ 定位三个独立读数：二阶导收窄 + 消费破坏确认 + capex 激增官宣",
+    "prev": "上行强化→顶部钝化过渡（2026-06-01 基线）"
+  },
+  "variables": [
+    {"id": 1, "name": "ASP 二阶导（总开关）", "reading": "bear-lean",
+     "summary": "DRAM 合约环比 1Q26 +90~98% → 2Q26 +58~63% → 3Q26E +13~18%（P口径）；价格水平仍升、未转负", "grade": "B(TrendForce)", "as_of": "2026-07-03"},
+    {"id": 2, "name": "AI 现金兑现度 ROI", "reading": "bull-hold",
+     "summary": "Micron FQ4 指引 $50B/GM86%；2026 CSP capex $630-725B 续升；2027 无净下修；SKH $28B ADR 融资", "grade": "A/B", "as_of": "2026-07-07"},
+    {"id": 3, "name": "供给纪律", "reading": "watch",
+     "summary": "当期纪律未破（三星续提价、Micron 锁需求不加产能）；韩国 ₩800万亿/4 fab 官宣 → ④判据成立、恐慌扩产记观察灯", "grade": "A(官宣)", "as_of": "2026-06-29"},
+    {"id": 4, "name": "需求广度 vs 价格破坏", "reading": "bear-lean",
+     "summary": "消费端破坏获官方确认（TrendForce）+ Apple 6-25 官宣 14 款提价（A级行为证据）；server/eSSD 蔓延阈值未触发", "grade": "A/B", "as_of": "2026-06-25"}
+  ],
+  "ai_layers": [
+    {"layer": "资金层", "light": "yellow", "note": "debt-financed 延续；新增国家资本入场注脚（韩政府 30万亿₩+）"},
+    {"layer": "订单层", "light": "green", "note": "2027 无净下修；Micron SCA $100B take-or-pay（16 客户）更绿"},
+    {"layer": "商业模式层", "light": "yellow", "note": "ROI 未证；消费端破坏确认"}
+  ],
+  "trigger": {
+    "structural_confirmed": 0, "structural_total": 4,
+    "floor_regime": "结构未证伪下轨",
+    "floor_note": "重资产≈V_M 下沿、设计名=穿周期倍数地板；非买入线、不代表亏损有限",
+    "lights": [
+      {"variable": "供给恐慌扩产", "light": "yellow-watch", "date": "2026-07-09", "confirmed_by": "作者",
+       "basis": "韩国+三星+SKH ₩800万亿/15年/4 fab+HBM枢纽官宣（宣示性远期，非当期抢份额）",
+       "adjudication": ["分年 capex 落地节奏 vs 官宣总额", "价格纪律是否随预建产能松动", "新增产能长协/SCA 覆盖比", "CXMT/YMTC 是否跟进加码"],
+       "cadence": "双周复核"}
+    ]
+  },
+  "events": [
+    {"date": "2026-07-03", "grade": "B", "title": "TrendForce 3Q26E：DRAM +13~18% / NAND +10~15%，涨幅显著放缓（P口径）", "url": "https://www.trendforce.com/presscenter/news/20260703-13134.html"},
+    {"date": "2026-07-03", "grade": "A", "title": "江波龙 H1 预告净利 92–110 亿（+622~744x）；归因景气+LTA 续签+端侧 AI", "url": ""},
+    {"date": "2026-06-29", "grade": "A", "title": "韩国+三星+SK Hynix 官宣 ₩800 万亿/15 年：4 座新 fab + HBM 封装枢纽，「五年内存产量翻倍」", "url": "https://www.tomshardware.com/tech-industry/semiconductors/south-korea-unveils-usd520-billion-investment-plan-with-samsung-and-sk-hynix-to-expand-memory-chip-dominance-plan-includes-four-new-fabs-and-hbm-facilities-amid-strong-government-support"},
+    {"date": "2026-06-25", "grade": "A", "title": "Apple 官宣 14 款产品提价、归因存储成本（「从未见过组件价格涨得如此之快」）；iPhone 未动", "url": "https://www.macrumors.com/2026/06/25/apple-explains-why-it-raised-prices/"},
+    {"date": "2026-06-24", "grade": "A", "title": "Micron FY26Q3：营收 $41.46B(+74% QoQ)、GM 84.6%；FQ4 指引 $50B/GM~86%；SCA $100B take-or-pay", "url": "https://investors.micron.com/news-releases/news-release-details/micron-technology-inc-reports-record-results-third-quarter"},
+    {"date": "2026-06-22", "grade": "B", "title": "利基级联短缺蔓延至 DDR2（2Q +55~60%、3Q26E +35~40%）——子赛道轮换「兑现读数」命中", "url": "https://www.trendforce.com/presscenter/news/20260622-13112.html"},
+    {"date": "2026-07-07", "grade": "A-", "title": "Samsung Q2 初步 OP ₩89.4T（19x YoY）但股价下跌——「盈利创纪录 vs 拒付峰值」反身性顶部特征", "url": ""}
+  ],
+  "pending_confirmation": [],
+  "next_checkpoints": [
+    {"date": "2026-07 中旬", "what": "A 股中报预告季：聚辰/兆易/雅克/澜起（复苏与增速兑现 vs 一致）"},
+    {"date": "2026-07-30", "what": "SKH/Samsung 财报+定价指引（韩股 E0 刷新窗口）★ 已预约事件加照"},
+    {"date": "2026-07下旬~08初", "what": "四大 CSP Q2 财报：2027 capex 首批表述（AI 三层订单层复核）"},
+    {"date": "2026-08", "what": "江波龙中报：剥离 vs 报告双口径裁决点"},
+    {"date": "2026-10 前后", "what": "TrendForce 3Q26 实测：顶部钝化 P→A 判定"}
+  ],
+  "cycle_log": [
+    {"date": "2026-06-01", "entry": "基线：③晚→④early（上行强化→顶部钝化过渡）；AI 三层 资金🟡/订单🟢/模式🟡；触发器不点灯"},
+    {"date": "2026-07-09", "entry": "演练：行业态推进「顶部钝化(P)」；美韩原厂回调 vs A股 basket +44% 分化扩大；雅克/澜起带位迁移"},
+    {"date": "2026-07-09", "entry": "v1.1 增补：Apple 提价（A级行为证据）+ 韩国 4 fab 官宣并入；④ 定位证据 2→3 个"},
+    {"date": "2026-07-09", "entry": "作者确认：「供给恐慌扩产」点 🟡 观察灯（非恶化确认）；下轨维持结构未证伪档；双周复核"},
+    {"date": "2026-07-09", "entry": "批1：温度口径锁定 801081.SI（跨口径误比更正）；E0 批量刷新（MU 104→149.64 等7项）；方法论升 v1.2"}
+  ]
+}
+</script>
+<script>
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const LIGHT={green:["var(--good)","🟢"],yellow:["var(--warn)","🟡"],"yellow-watch":["var(--warn)","🟡"],orange:["var(--serious)","🟠"],red:["var(--crit)","🔴"]};
+const READ={"bull-hold":["var(--s2)","偏韧性"],"bear-lean":["var(--serious)","偏钝化"],"watch":["var(--warn)","观察"],"neutral":["var(--axis)","中性"]};
+const BLACK=["目标价","建仓","加仓","减仓","买入","卖出","做空","止损","仓位"];
+const OKPHRASE=["非买入线","无买入","无卖出","无目标价","无仓位","买入/卖出/持有/做空建议","非交易指令","不构成买入"];
+async function load(id,url){try{const r=await fetch(url,{cache:"no-store"});if(r.ok)return await r.json();}catch(e){}
+  return JSON.parse($("#seed-"+id).textContent);}
+function fmtP(p,cur){const n=p>=10000?p.toLocaleString("en-US"):(Math.round(p*100)/100).toLocaleString("en-US");
+  return n+" "+({USD:"$",KRW:"₩",CNY:"¥"}[cur]||"");}
+function tip(html,x,y){const t=$("#tip");if(!html){t.style.display="none";return}
+  t.innerHTML=html;t.style.display="block";
+  const w=t.offsetWidth;t.style.left=Math.min(x+14,innerWidth-w-10)+"px";t.style.top=(y+14)+"px";}
+/* 位置带条：分段线性锚点 0.5VC→10, VC→28, VS→72, 2VS→90 */
+function bandX(v,VC,VS){const a=[[0.5*VC,10],[VC,28],[VS,72],[2*VS,90]];
+  if(v<=a[0][0])return Math.max(3,10*v/(0.5*VC));
+  for(let i=0;i<a.length-1;i++){const[[x1,p1],[x2,p2]]=[a[i],a[i+1]];
+    if(v<=x2)return p1+(v-x1)/(x2-x1)*(p2-p1);}
+  return Math.min(97,90+7*(v-2*VS)/(2*VS));}
+function bandBar(v,cur){const W=190,H=26,VC=v.V_C,VM=v.V_M,VS=v.V_S,P=v.P;
+  const x=p=>p/100*W, pm=bandX(P,VC,VS), vm=bandX(VM,VC,VS);
+  return `<svg class="bb" width="${W}" height="${H}" data-tip="${esc(`<b>${v._nm}</b>（${v.view}）<br>P=${fmtP(P,cur)}<br>V_C ${fmtP(VC,cur)} · V_M ${fmtP(VM,cur)} · V_S ${fmtP(VS,cur)}<br>P/V_C ${v.p_vc} · P/V_M ${v.p_vm} · P/V_S ${v.p_vs}<br>${v.implied?("隐含: "+v.implied):""}`)}">
+  <rect x="${x(10)}" y="9" width="${x(18)}" height="8" fill="var(--wash)"/>
+  <rect x="${x(72)}" y="9" width="${x(18)}" height="8" fill="rgba(236,131,90,.15)"/>
+  <rect x="${x(90)}" y="9" width="${x(10)}" height="8" fill="rgba(208,59,59,.15)"/>
+  <line x1="0" x2="${W}" y1="13" y2="13" stroke="var(--grid)" stroke-width="1"/>
+  ${[28,72].map(p=>`<line x1="${x(p)}" x2="${x(p)}" y1="6" y2="20" stroke="var(--axis)" stroke-width="1"/>`).join("")}
+  <line x1="${x(vm)}" x2="${x(vm)}" y1="8" y2="18" stroke="var(--muted)" stroke-width="1" stroke-dasharray="2 2"/>
+  <circle cx="${x(pm)}" cy="13" r="5" fill="var(--s1)" stroke="var(--surface-1)" stroke-width="2"/>
+</svg>`;}
+function spark(arr){const W=170,H=42,vs=arr.map(a=>a.pe),mn=Math.min(...vs),mx=Math.max(...vs);
+  const pts=vs.map((v,i)=>`${(i/(vs.length-1)*(W-8)+4).toFixed(1)},${(H-6-(v-mn)/(mx-mn)*(H-14)).toFixed(1)}`);
+  const last=pts[pts.length-1].split(",");
+  return `<svg class="spark" width="${W}" height="${H}"><polyline points="${pts.join(" ")}" fill="none" stroke="var(--s1)" stroke-width="2" stroke-linejoin="round"/><circle cx="${last[0]}" cy="${last[1]}" r="3.5" fill="var(--s1)" stroke="var(--surface-1)" stroke-width="1.5"/></svg>`;}
+function render(auto,j){
+  /* 黑名单运行时审查（判断层） */
+  let s=JSON.stringify(j);OKPHRASE.forEach(p=>s=s.split(p).join(""));
+  const hits=BLACK.filter(w=>s.includes(w));
+  if(hits.length){const b=$("#banner");b.style.display="block";b.textContent="⚠ 词汇黑名单命中（判断层）："+hits.join("、")+"——请复核 judgment.json";}
+  if(auto.degraded&&auto.degraded.length){const b=$("#banner");b.style.display="block";
+    b.textContent="⚠ 数据源降级（沿用上期值）："+auto.degraded.map(d=>d.src).join("、")+" ｜ "+(b.textContent||"");}
+  $("#asof").textContent=`自动层 ${auto.generated_utc} ｜ 判断层 ${j._meta.updated}（${j._meta.updated_by}）`;
+  /* 状态机 */
+  const st=j.industry_state;
+  $("#stateBasis").textContent=st.basis;
+  $("#stepper").innerHTML=st.states.map(x=>`<span class="step${x===st.label?" cur":""}">${x}${x===st.label?`<span class="q">(${st.qualifier})</span>`:""}</span>`).join("");
+  $("#stateMeta").innerHTML=`置信度 <b>${st.confidence}</b> ｜ 自 ${st.since} ｜ ${esc(st.qualifier_note)} ｜ 前态：${esc(st.prev)}`;
+  $("#vars").innerHTML=j.variables.map(v=>{const[c,t]=READ[v.reading]||READ.neutral;
+    return `<div class="var"><div class="nm"><span class="dot" style="background:${c}"></span>${esc(v.name)}<span class="chip">${t}</span></div><div class="sm">${esc(v.summary)}</div><div class="meta">${esc(v.grade)} · as-of ${esc(v.as_of)}</div></div>`}).join("");
+  const tl=j.ai_layers.map(l=>{const[c,e]=LIGHT[l.light];return `<span class="chip" title="${esc(l.note)}"><span class="dot" style="background:${c}"></span>AI·${esc(l.layer)} ${e}</span>`}).join("");
+  const tr=j.trigger, wl=tr.lights.map(l=>{const[c,e]=LIGHT[l.light];
+    return `<span class="chip" title="${esc(l.basis)}｜裁决读数: ${esc(l.adjudication.join("；"))}｜${esc(l.cadence)}"><span class="dot" style="background:${c}"></span>${e} 观察灯·${esc(l.variable)}（${esc(l.date)} 作者确认）</span>`}).join("");
+  $("#lights").innerHTML=`<span class="chip">触发器：结构变量 ${tr.structural_confirmed}/${tr.structural_total} 恶化确认</span>${wl}${tl}<span class="chip">下轨档位：${esc(tr.floor_regime)}</span>`;
+  $("#floorNote").textContent=tr.floor_note+"（悬停各灯可见依据与裁决读数）";
+  /* 温度 */
+  const T=auto.temperature;
+  $("#tiles").innerHTML=`
+   <div class="tile"><div class="k">申万半导体 PE(TTM) · ${esc(T.sw_asof)}</div><div class="v">${T.sw_pe}</div>
+     <div class="d">2020 以来分位 <b>${T.sw_pe_percentile_since2020}%</b> ｜ 2021 峰 ${T.sw_anchor.peak2021} · 中位 ${T.sw_anchor.median}</div>${spark(T.sw_spark)}</div>
+   <div class="tile"><div class="k">SOX 费城半导体 · ${esc(T.sox.asof)}</div><div class="v">${Number(T.sox.value).toLocaleString("en-US")}</div><div class="d">基线(06-02)以来 ${(T.sox.chg_vs_0602!=null?(T.sox.chg_vs_0602*100).toFixed(1)+"%":"—")}</div></div>
+   <div class="tile"><div class="k">A股存储 basket（5只等权）</div><div class="v">${T.basket_vs_0601_pct>0?"+":""}${T.basket_vs_0601_pct}%</div><div class="d">vs 2026-06-01 基线</div></div>`;
+  $("#tempNote").textContent=T.caliber_note;
+  /* 个股 */
+  const rows=auto.targets.map(t=>{
+    const vs=t.views.map((v,i)=>{v._nm=t.name;v.P=t.P;
+      return `<tr>
+      ${i===0?`<td class="nm2" rowspan="${t.views.length}">${esc(t.name)}<div class="vw">${esc(t.archetype)} · ${esc(t.ticker)}${t.stale?" · ⚠stale":""}</div></td>`:""}
+      <td class="vw">${esc(v.view)}</td>
+      ${i===0?`<td class="num" rowspan="${t.views.length}">${fmtP(t.P,t.currency)}<div class="vw">${esc(t.asof||"")}</div></td>`:""}
+      <td class="bandcell">${bandBar(v,t.currency)}</td>
+      <td><span class="badge ${v.band}">${esc(v.band_label)}</span></td>
+      <td class="num">${v.p_vm}</td><td class="num">${v.p_vs}</td>
+      <td class="num">${esc(v.implied)}</td>
+      <td>${esc(v.a2)}</td>
+      ${i===0?`<td rowspan="${t.views.length}" class="vw">${t.third_leg?`PE ${t.third_leg.pe_ttm} / PB ${t.third_leg.pb}`:"—"}</td>
+      <td rowspan="${t.views.length}"><div class="flag">${t.flags.map(esc).join("<br>")}</div><div class="vw">E0 as-of ${esc(t.e0_asof)}</div></td>`:""}
+      </tr>`}).join("");
+    return vs;}).join("");
+  $("#stockTable").innerHTML=`<tr><th>标的</th><th>口径/视角</th><th class="num">现价 P</th><th>位置带</th><th>带位</th><th class="num">P/V_M</th><th class="num">P/V_S</th><th class="num">隐含 N*/g</th><th>状态标签</th><th>第三腿</th><th>提示</th></tr>`+rows;
+  /* 事件 */
+  $("#events").innerHTML=j.events.map(e=>{const g=e.grade.replace("-","m");
+    return `<tr><td>${esc(e.date)}</td><td><span class="gr ${g}">${esc(e.grade)}</span></td><td>${e.url?`<a href="${esc(e.url)}" target="_blank" rel="noopener">${esc(e.title)}</a>`:esc(e.title)}</td></tr>`}).join("");
+  $("#checkpoints").innerHTML=j.next_checkpoints.map(c=>`<li><b>${esc(c.date)}</b> ｜ ${esc(c.what)}</li>`).join("");
+  $("#cyclelog").innerHTML=j.cycle_log.slice().reverse().map(l=>`<li><span class="d">${esc(l.date)}</span>${esc(l.entry)}</li>`).join("");
+  $("#pending").textContent=j.pending_confirmation.length?("待作者确认："+j.pending_confirmation.join("；")):"待确认清单：空（所有状态均经作者确认）";
+  /* tooltips */
+  document.querySelectorAll(".bb").forEach(el=>{
+    el.addEventListener("mousemove",e=>tip(el.dataset.tip,e.clientX,e.clientY));
+    el.addEventListener("mouseleave",()=>tip(null));});
+}
+(async()=>{const[a,j]=await Promise.all([load("auto","data/auto/latest.json"),load("judgment","data/judgment.json")]);render(a,j);})();
+</script>
+</body>
+</html>
