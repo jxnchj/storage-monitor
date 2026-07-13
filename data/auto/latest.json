@@ -1,0 +1,799 @@
+{
+ "generated_utc": "2026-07-10 03:32 UTC",
+ "degraded": [],
+ "temperature": {
+  "sw_pe": 158.38,
+  "sw_pb": null,
+  "sw_asof": "20260709",
+  "sw_pe_percentile_since2020": 99.1,
+  "sw_spark": [
+   {
+    "d": "20250616",
+    "pe": 79.5
+   },
+   {
+    "d": "20250623",
+    "pe": 80.4
+   },
+   {
+    "d": "20250630",
+    "pe": 84.2
+   },
+   {
+    "d": "20250707",
+    "pe": 82.0
+   },
+   {
+    "d": "20250714",
+    "pe": 82.7
+   },
+   {
+    "d": "20250721",
+    "pe": 83.7
+   },
+   {
+    "d": "20250728",
+    "pe": 87.4
+   },
+   {
+    "d": "20250804",
+    "pe": 87.4
+   },
+   {
+    "d": "20250811",
+    "pe": 88.2
+   },
+   {
+    "d": "20250818",
+    "pe": 95.9
+   },
+   {
+    "d": "20250825",
+    "pe": 107.7
+   },
+   {
+    "d": "20250901",
+    "pe": 106.1
+   },
+   {
+    "d": "20250908",
+    "pe": 97.9
+   },
+   {
+    "d": "20250915",
+    "pe": 104.5
+   },
+   {
+    "d": "20250922",
+    "pe": 111.1
+   },
+   {
+    "d": "20250929",
+    "pe": 116.5
+   },
+   {
+    "d": "20251014",
+    "pe": 111.2
+   },
+   {
+    "d": "20251021",
+    "pe": 112.1
+   },
+   {
+    "d": "20251028",
+    "pe": 118.1
+   },
+   {
+    "d": "20251104",
+    "pe": 97.8
+   },
+   {
+    "d": "20251111",
+    "pe": 97.9
+   },
+   {
+    "d": "20251118",
+    "pe": 96.0
+   },
+   {
+    "d": "20251125",
+    "pe": 91.8
+   },
+   {
+    "d": "20251202",
+    "pe": 95.1
+   },
+   {
+    "d": "20251209",
+    "pe": 97.9
+   },
+   {
+    "d": "20251216",
+    "pe": 94.6
+   },
+   {
+    "d": "20251223",
+    "pe": 99.0
+   },
+   {
+    "d": "20251230",
+    "pe": 102.0
+   },
+   {
+    "d": "20260108",
+    "pe": 110.6
+   },
+   {
+    "d": "20260115",
+    "pe": 113.2
+   },
+   {
+    "d": "20260122",
+    "pe": 119.8
+   },
+   {
+    "d": "20260129",
+    "pe": 117.7
+   },
+   {
+    "d": "20260205",
+    "pe": 111.0
+   },
+   {
+    "d": "20260212",
+    "pe": 115.3
+   },
+   {
+    "d": "20260227",
+    "pe": 118.0
+   },
+   {
+    "d": "20260306",
+    "pe": 109.8
+   },
+   {
+    "d": "20260313",
+    "pe": 106.6
+   },
+   {
+    "d": "20260320",
+    "pe": 102.8
+   },
+   {
+    "d": "20260327",
+    "pe": 100.6
+   },
+   {
+    "d": "20260403",
+    "pe": 95.8
+   },
+   {
+    "d": "20260413",
+    "pe": 105.1
+   },
+   {
+    "d": "20260420",
+    "pe": 112.1
+   },
+   {
+    "d": "20260427",
+    "pe": 118.0
+   },
+   {
+    "d": "20260507",
+    "pe": 105.9
+   },
+   {
+    "d": "20260514",
+    "pe": 111.5
+   },
+   {
+    "d": "20260521",
+    "pe": 115.2
+   },
+   {
+    "d": "20260528",
+    "pe": 123.5
+   },
+   {
+    "d": "20260604",
+    "pe": 118.8
+   },
+   {
+    "d": "20260611",
+    "pe": 115.1
+   },
+   {
+    "d": "20260618",
+    "pe": 134.6
+   },
+   {
+    "d": "20260626",
+    "pe": 148.9
+   },
+   {
+    "d": "20260703",
+    "pe": 145.2
+   },
+   {
+    "d": "20260709",
+    "pe": 158.4
+   }
+  ],
+  "sw_anchor": {
+   "peak2021": 106.5,
+   "median": 82.1,
+   "base_0601": 110.45
+  },
+  "sox": {
+   "value": 12574.97,
+   "asof": "2026-07-08",
+   "chg_vs_0602": -0.0839
+  },
+  "basket_vs_0601_pct": 48.2,
+  "caliber_note": "A股温度唯一口径=申万半导体801081.SI(sw_daily)；分位基期2020-01起；跨口径禁比"
+ },
+ "targets": [
+  {
+   "id": "MU",
+   "name": "Micron",
+   "archetype": "A",
+   "currency": "USD",
+   "ticker": "MU",
+   "P": 948.8,
+   "model": "cyclical",
+   "e0_asof": "2026-07-09",
+   "e0_note": "",
+   "views": [
+    {
+     "view": "主口径",
+     "kind": "cyclical",
+     "E0": 149.64,
+     "note": "",
+     "V_C": 560.67,
+     "V_M": 1187.84,
+     "V_S": 2933.0,
+     "V_stress": 1779.0,
+     "p_vc": 1.69,
+     "p_vm": 0.8,
+     "p_vs": 0.32,
+     "implied": "10.1y",
+     "band": "in_range",
+     "band_label": "区间内（看持久性）",
+     "a2": "中性观察",
+     "p_below_vm": true
+    },
+    {
+     "view": "保守口径",
+     "kind": "cyclical",
+     "E0": 73.32,
+     "note": "FY26一致(保守口径)",
+     "V_C": 290.21,
+     "V_M": 594.38,
+     "V_S": 1437.1,
+     "V_stress": 871.67,
+     "p_vc": 3.27,
+     "p_vm": 1.6,
+     "p_vs": 0.66,
+     "implied": "无界(市场把峰值当近永续)",
+     "band": "in_range",
+     "band_label": "区间内（看持久性）",
+     "a2": "中性观察",
+     "p_below_vm": false
+    }
+   ],
+   "e0_age_days": 1,
+   "flags": [
+    "P<V_M下沿参考·复核结构事实(非买入线)"
+   ],
+   "stale": false,
+   "asof": ""
+  },
+  {
+   "id": "SNDK",
+   "name": "Sandisk",
+   "archetype": "A",
+   "currency": "USD",
+   "ticker": "SNDK",
+   "P": 1727.18,
+   "model": "cyclical",
+   "e0_asof": "2026-07-09",
+   "e0_note": "",
+   "views": [
+    {
+     "view": "主口径",
+     "kind": "cyclical",
+     "E0": 204.47,
+     "note": "",
+     "V_C": 749.92,
+     "V_M": 1610.15,
+     "V_S": 4007.69,
+     "V_stress": 2430.85,
+     "p_vc": 2.3,
+     "p_vm": 1.07,
+     "p_vs": 0.43,
+     "implied": "19.0y",
+     "band": "in_range",
+     "band_label": "区间内（看持久性）",
+     "a2": "中性观察",
+     "p_below_vm": false
+    },
+    {
+     "view": "保守口径",
+     "kind": "cyclical",
+     "E0": 66.41,
+     "note": "FY26一致(保守口径)",
+     "V_C": 260.66,
+     "V_M": 536.61,
+     "V_S": 1301.66,
+     "V_stress": 789.52,
+     "p_vc": 6.63,
+     "p_vm": 3.22,
+     "p_vs": 1.33,
+     "implied": "无界(市场把峰值当近永续)",
+     "band": "over",
+     "band_label": "高估区",
+     "a2": "风险预警",
+     "p_below_vm": false
+    }
+   ],
+   "e0_age_days": 1,
+   "flags": [],
+   "stale": false,
+   "asof": ""
+  },
+  {
+   "id": "SKH",
+   "name": "SK Hynix",
+   "archetype": "A",
+   "currency": "KRW",
+   "ticker": "000660.KS",
+   "P": 2186000,
+   "model": "cyclical",
+   "e0_asof": "2026-06-02",
+   "e0_note": "待2026-07-30财报+指引刷新(韩股纪律)",
+   "views": [
+    {
+     "view": "主口径",
+     "kind": "cyclical",
+     "E0": 281000,
+     "note": "",
+     "V_C": 1127444.75,
+     "V_M": 2290110.83,
+     "V_S": 5507703.37,
+     "V_stress": 3340684.02,
+     "p_vc": 1.94,
+     "p_vm": 0.95,
+     "p_vs": 0.4,
+     "implied": "16.0y",
+     "band": "in_range",
+     "band_label": "区间内（看持久性）",
+     "a2": "中性观察",
+     "p_below_vm": true
+    }
+   ],
+   "e0_age_days": 38,
+   "flags": [
+    "待2026-07-30财报+指引刷新(韩股纪律)",
+    "P<V_M下沿参考·复核结构事实(非买入线)"
+   ],
+   "stale": false,
+   "asof": ""
+  },
+  {
+   "id": "SSNLF",
+   "name": "Samsung",
+   "archetype": "A",
+   "currency": "KRW",
+   "ticker": "005930.KS",
+   "P": 278000,
+   "model": "cyclical",
+   "e0_asof": "2026-06-02",
+   "e0_note": "Q2初步OP₩89.4T远超；待7-30正式财报刷新",
+   "views": [
+    {
+     "view": "主口径",
+     "kind": "cyclical",
+     "E0": 42000,
+     "note": "",
+     "V_C": 157398.64,
+     "V_M": 338688.37,
+     "V_S": 845680.31,
+     "V_stress": 512155.36,
+     "p_vc": 1.77,
+     "p_vm": 0.82,
+     "p_vs": 0.33,
+     "implied": "11.0y",
+     "band": "in_range",
+     "band_label": "区间内（看持久性）",
+     "a2": "中性观察",
+     "p_below_vm": true
+    },
+    {
+     "view": "保守口径",
+     "kind": "cyclical",
+     "E0": 30000,
+     "note": "保守口径",
+     "V_C": 121769.64,
+     "V_M": 249137.04,
+     "V_S": 604057.36,
+     "V_stress": 365825.26,
+     "p_vc": 2.28,
+     "p_vm": 1.12,
+     "p_vs": 0.46,
+     "implied": "25.6y",
+     "band": "in_range",
+     "band_label": "区间内（看持久性）",
+     "a2": "中性观察",
+     "p_below_vm": false
+    }
+   ],
+   "e0_age_days": 38,
+   "flags": [
+    "Q2初步OP₩89.4T远超；待7-30正式财报刷新",
+    "P<V_M下沿参考·复核结构事实(非买入线)"
+   ],
+   "stale": false,
+   "asof": ""
+  },
+  {
+   "id": "WDC",
+   "name": "WDC",
+   "archetype": "B",
+   "currency": "USD",
+   "ticker": "WDC",
+   "P": 550.3,
+   "model": "cyclical",
+   "e0_asof": "2026-07-09",
+   "e0_note": "raw未做clean再推导(GAAP分拆一次性)，财报季复核",
+   "views": [
+    {
+     "view": "主口径",
+     "kind": "cyclical",
+     "E0": 18.27,
+     "note": "",
+     "V_C": 76.79,
+     "V_M": 153.76,
+     "V_S": 367.87,
+     "V_stress": 222.79,
+     "p_vc": 7.17,
+     "p_vm": 3.58,
+     "p_vs": 1.5,
+     "implied": "无界(市场把峰值当近永续)",
+     "band": "over",
+     "band_label": "高估区",
+     "a2": "风险预警",
+     "p_below_vm": false
+    },
+    {
+     "view": "保守口径",
+     "kind": "cyclical",
+     "E0": 14.25,
+     "note": "旧clean口径(保守)",
+     "V_C": 64.86,
+     "V_M": 123.76,
+     "V_S": 286.93,
+     "V_stress": 173.77,
+     "p_vc": 8.48,
+     "p_vm": 4.45,
+     "p_vs": 1.92,
+     "implied": "无界(市场把峰值当近永续)",
+     "band": "over",
+     "band_label": "高估区",
+     "a2": "风险预警",
+     "p_below_vm": false
+    }
+   ],
+   "e0_age_days": 1,
+   "flags": [
+    "raw未做clean再推导(GAAP分拆一次性)，财报季复核"
+   ],
+   "stale": false,
+   "asof": ""
+  },
+  {
+   "id": "STX",
+   "name": "Seagate",
+   "archetype": "B",
+   "currency": "USD",
+   "ticker": "STX",
+   "P": 860.02,
+   "model": "cyclical",
+   "e0_asof": "2026-07-09",
+   "e0_note": "",
+   "views": [
+    {
+     "view": "主口径",
+     "kind": "cyclical",
+     "E0": 27.39,
+     "note": "",
+     "V_C": 108.38,
+     "V_M": 225.3,
+     "V_S": 551.5,
+     "V_stress": 334.0,
+     "p_vc": 7.94,
+     "p_vm": 3.82,
+     "p_vs": 1.56,
+     "implied": "无界(市场把峰值当近永续)",
+     "band": "over",
+     "band_label": "高估区",
+     "a2": "风险预警",
+     "p_below_vm": false
+    },
+    {
+     "view": "保守口径",
+     "kind": "cyclical",
+     "E0": 14.89,
+     "note": "FY26一致(保守口径)",
+     "V_C": 71.27,
+     "V_M": 132.02,
+     "V_S": 299.81,
+     "V_stress": 181.57,
+     "p_vc": 12.07,
+     "p_vm": 6.51,
+     "p_vs": 2.87,
+     "implied": "无界(市场把峰值当近永续)",
+     "band": "extreme_over",
+     "band_label": "极端高估区",
+     "a2": "风险预警",
+     "p_below_vm": false
+    }
+   ],
+   "e0_age_days": 1,
+   "flags": [],
+   "stale": false,
+   "asof": ""
+  },
+  {
+   "id": "JBL",
+   "name": "江波龙",
+   "archetype": "E",
+   "currency": "CNY",
+   "ticker": "301308.SZ",
+   "P": 620.0,
+   "model": "cyclical",
+   "e0_asof": "2026-06-01",
+   "e0_note": "H1预告92-110亿(+622x)无法拆分；8月中报=剥离比例裁决点",
+   "views": [
+    {
+     "view": "主口径",
+     "kind": "cyclical",
+     "E0": 20.0,
+     "note": "",
+     "V_C": 68.49,
+     "V_M": 158.81,
+     "V_S": 493.74,
+     "V_stress": 250.66,
+     "p_vc": 9.05,
+     "p_vm": 3.9,
+     "p_vs": 1.26,
+     "implied": "无界(市场把峰值当近永续)",
+     "band": "over",
+     "band_label": "高估区",
+     "a2": "风险预警",
+     "p_below_vm": false
+    },
+    {
+     "view": "保守口径",
+     "kind": "cyclical",
+     "E0": 30.56,
+     "note": "报告口径一致(长城证券7-01,单源)——与剥离口径带位反向,并列展示",
+     "V_C": 93.05,
+     "V_M": 233.97,
+     "V_S": 754.44,
+     "V_stress": 383.01,
+     "p_vc": 6.66,
+     "p_vm": 2.65,
+     "p_vs": 0.82,
+     "implied": "无界(市场把峰值当近永续)",
+     "band": "in_range",
+     "band_label": "区间内（看持久性）",
+     "a2": "中性观察",
+     "p_below_vm": false
+    }
+   ],
+   "e0_age_days": 39,
+   "flags": [
+    "H1预告92-110亿(+622x)无法拆分；8月中报=剥离比例裁决点"
+   ],
+   "stale": false,
+   "asof": "",
+   "third_leg": {
+    "pe_ttm": 48.24,
+    "pb": 21.53
+   }
+  },
+  {
+   "id": "MONTAGE",
+   "name": "澜起科技",
+   "archetype": "D",
+   "currency": "CNY",
+   "ticker": "688008.SH",
+   "P": 285.8,
+   "model": "growth",
+   "e0_asof": "2026-06-01",
+   "e0_note": "6-15~7-09窗口report_rc无新研报,待刷新",
+   "views": [
+    {
+     "view": "成长档",
+     "kind": "growth",
+     "E0": 2.6,
+     "note": "一致增速30-37%(6月口径)",
+     "V_C": 61.81,
+     "V_M": 107.81,
+     "V_S": 203.34,
+     "p_vc": 4.62,
+     "p_vm": 2.65,
+     "p_vs": 1.41,
+     "implied": "g≈36.7%",
+     "band": "over",
+     "band_label": "高估区",
+     "a2": "风险预警",
+     "p_below_vm": false
+    }
+   ],
+   "e0_age_days": 39,
+   "flags": [
+    "6-15~7-09窗口report_rc无新研报,待刷新"
+   ],
+   "stale": false,
+   "asof": "",
+   "third_leg": {
+    "pe_ttm": 136.39,
+    "pb": 16.73
+   }
+  },
+  {
+   "id": "YOKE",
+   "name": "雅克科技",
+   "archetype": "D",
+   "currency": "CNY",
+   "ticker": "002409.SZ",
+   "P": 209.0,
+   "model": "growth",
+   "e0_asof": "2026-07-09",
+   "e0_note": "上修发生在股价+91%之后,热数据折价",
+   "views": [
+    {
+     "view": "成长档",
+     "kind": "growth",
+     "E0": 2.74,
+     "note": "一致增速~30%(2027+30%/2028+32~35%)",
+     "V_C": 72.94,
+     "V_M": 126.61,
+     "V_S": 214.29,
+     "p_vc": 2.87,
+     "p_vm": 1.65,
+     "p_vs": 0.98,
+     "implied": "g≈29.5%",
+     "band": "in_range",
+     "band_label": "区间内（看持久性）",
+     "a2": "中性观察",
+     "p_below_vm": false
+    }
+   ],
+   "e0_age_days": 1,
+   "flags": [
+    "上修发生在股价+91%之后,热数据折价"
+   ],
+   "stale": false,
+   "asof": "",
+   "third_leg": {
+    "pe_ttm": 98.8,
+    "pb": 12.28
+   }
+  },
+  {
+   "id": "GIGA",
+   "name": "兆易创新",
+   "archetype": "C",
+   "currency": "CNY",
+   "ticker": "603986.SH",
+   "P": 663.49,
+   "model": "dual",
+   "e0_asof": "2026-06-01",
+   "e0_note": "",
+   "views": [
+    {
+     "view": "周期视角",
+     "kind": "cyclical",
+     "E0": 8.0,
+     "note": "",
+     "V_C": 46.3,
+     "V_M": 77.12,
+     "V_S": 191.96,
+     "V_stress": 97.55,
+     "p_vc": 14.33,
+     "p_vm": 8.6,
+     "p_vs": 3.46,
+     "implied": "无界(市场把峰值当近永续)",
+     "band": "extreme_over",
+     "band_label": "极端高估区",
+     "a2": "风险预警",
+     "p_below_vm": false
+    },
+    {
+     "view": "成长/复苏视角",
+     "kind": "growth",
+     "E0": 8.0,
+     "note": "成长视角:CXMT/NOR中途站",
+     "V_C": 212.96,
+     "V_M": 482.47,
+     "V_S": 1032.2,
+     "p_vc": 3.12,
+     "p_vm": 1.38,
+     "p_vs": 0.64,
+     "implied": "g≈31.1%",
+     "band": "in_range",
+     "band_label": "区间内（看持久性）",
+     "a2": "中性观察",
+     "p_below_vm": false
+    }
+   ],
+   "e0_age_days": 39,
+   "flags": [],
+   "stale": false,
+   "asof": "",
+   "third_leg": {
+    "pe_ttm": 161.97,
+    "pb": 18.42
+   }
+  },
+  {
+   "id": "GSME",
+   "name": "聚辰股份",
+   "archetype": "special",
+   "currency": "CNY",
+   "ticker": "688123.SH",
+   "P": 217.12,
+   "model": "dual",
+   "e0_asof": "2026-06-01",
+   "e0_note": "",
+   "views": [
+    {
+     "view": "周期视角",
+     "kind": "cyclical",
+     "E0": 1.8,
+     "note": "",
+     "V_C": 15.49,
+     "V_M": 21.27,
+     "V_S": 44.44,
+     "V_stress": 22.56,
+     "p_vc": 14.02,
+     "p_vm": 10.21,
+     "p_vs": 4.89,
+     "implied": "N/A(ill-conditioned)",
+     "band": "extreme_over",
+     "band_label": "极端高估区",
+     "a2": "风险预警",
+     "p_below_vm": false
+    },
+    {
+     "view": "成长/复苏视角",
+     "kind": "growth",
+     "E0": 3.18,
+     "note": "复苏视角E0=3.18(华安6-29单源,C级弱);2027-28一致+50%/年",
+     "V_C": 63.69,
+     "V_M": 111.87,
+     "V_S": 191.78,
+     "p_vc": 3.41,
+     "p_vm": 1.94,
+     "p_vs": 1.13,
+     "implied": "g≈27.4%",
+     "band": "over",
+     "band_label": "高估区",
+     "a2": "风险预警",
+     "p_below_vm": false
+    }
+   ],
+   "e0_age_days": 39,
+   "flags": [],
+   "stale": false,
+   "asof": "",
+   "third_leg": {
+    "pe_ttm": 116.98,
+    "pb": 12.89
+   }
+  }
+ ]
+}
