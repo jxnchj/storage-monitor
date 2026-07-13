@@ -1,0 +1,2 @@
+# keeps the history directory so pipeline shutil.copy works; daily snapshots land here
+
