@@ -57,9 +57,16 @@ h1{font-size:20px;margin:0;font-weight:700}
 .note{color:var(--muted);font-size:11px;margin-top:10px}
 /* 个股表 */
 details{border:1px solid var(--border);border-radius:12px;background:var(--surface-1);margin-bottom:14px}
-summary{cursor:pointer;padding:14px 18px;font-weight:700;font-size:15px;list-style:none}
+summary{cursor:pointer;padding:14px 18px;font-weight:700;font-size:15px;list-style:none;border-radius:12px}
+summary:hover{background:var(--wash)}
+details[open] summary{border-radius:12px 12px 0 0}
 summary::-webkit-details-marker{display:none}
 summary .hint{color:var(--muted);font-weight:400;font-size:12px;margin-left:8px}
+.caret{display:inline-block;color:var(--s1);font-size:12px;margin-right:8px;transition:transform .15s ease}
+details[open] .caret{transform:rotate(90deg)}
+.togglehint{float:right;font-size:12px;font-weight:400;color:var(--s1);border:1px solid var(--s1);border-radius:999px;padding:2px 12px;white-space:nowrap}
+.togglehint::after{content:"点击展开 ▾"}
+details[open] .togglehint::after{content:"点击收起 ▴"}
 .stock-body{padding:0 18px 16px}
 .zone-legend{display:flex;gap:14px;flex-wrap:wrap;color:var(--muted);font-size:11px;margin:2px 0 10px}
 .zone-legend span{display:inline-flex;align-items:center;gap:5px}
@@ -140,7 +147,7 @@ body.plain .pro-only{display:none!important}
   </div>
 
   <details id="stocks">
-    <summary>个股派生层 · 11 标的位置带 <span class="hint">下游折叠内容——标签由「行业态 × 价格位置」映射，随行业态更新；描述性、非交易指令</span></summary>
+    <summary><span class="caret">▶</span>个股派生层 · 11 标的位置带 <span class="togglehint"></span><span class="hint">下游折叠内容——标签由「行业态 × 价格位置」映射，随行业态更新；描述性、非交易指令</span></summary>
     <div class="stock-body">
       <div class="zone-legend">
         <span><span class="sw" style="background:var(--wash)"></span>低估区</span>
