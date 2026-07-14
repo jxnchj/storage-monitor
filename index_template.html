@@ -96,6 +96,20 @@ a{color:var(--s1);text-decoration:none} a:hover{text-decoration:underline}
 .checkpoints li{font-size:13px;color:var(--ink-2);margin:4px 0}
 .checkpoints b{color:var(--ink-1)}
 @media (max-width:640px){ .tiles{grid-template-columns:1fr 1fr} th,td{padding:6px 5px} }
+
+/* 双视图切换 */
+.vtoggle{display:inline-flex;border:1px solid var(--grid);border-radius:999px;overflow:hidden;vertical-align:middle}
+.vtoggle button{border:none;background:transparent;color:var(--muted);font:inherit;font-size:12px;padding:5px 14px;cursor:pointer}
+.vtoggle button.on{background:var(--wash);color:var(--ink-1);font-weight:700}
+.plain-only{display:none}
+body.plain div.plain-only{display:block}
+body.plain td.plain-only{display:table-cell}
+body.plain th.plain-only{display:table-cell}
+body.plain .pro-only{display:none!important}
+.plainbox{margin-top:12px;border:1px solid var(--grid);border-left:4px solid var(--s1);border-radius:8px;padding:10px 14px;font-size:13.5px;color:var(--ink-2);line-height:1.75}
+.plainbox b{color:var(--ink-1)}
+.gloss dt{font-weight:700;font-size:13px;margin-top:8px}
+.gloss dd{margin:2px 0 0;color:var(--ink-2);font-size:12.5px}
 </style>
 </head>
 <body>
@@ -103,6 +117,7 @@ a{color:var(--s1);text-decoration:none} a:hover{text-decoration:underline}
   <header class="top">
     <h1>存储板块监控 <span style="color:var(--muted);font-weight:400">· 研究状态 Dashboard</span></h1>
     <span class="asof" id="asof"></span>
+    <span class="vtoggle"><button id="btnPro" class="on">专业版</button><button id="btnPlain">普通版</button></span>
   </header>
   <div class="hb">两步走研究的活体化：<b>行业态为主体，个股为派生下游</b> ｜ 全部内容为描述性研究状态标签与条件触发，<b>无目标价、无仓位、不构成任何投资建议</b></div>
   <div class="banner" id="banner"></div>
@@ -110,16 +125,18 @@ a{color:var(--s1);text-decoration:none} a:hover{text-decoration:underline}
   <div class="card" id="stateCard">
     <h2>行业双向状态机 <span class="sub" id="stateBasis"></span></h2>
     <div class="stepper" id="stepper"></div>
-    <div class="state-meta" id="stateMeta"></div>
-    <div class="grid2" id="vars"></div>
+    <div class="plainbox plain-only" id="plainState"></div>
+    <div class="state-meta pro-only" id="stateMeta"></div>
+    <div class="grid2 pro-only" id="vars"></div>
     <div class="lights" id="lights"></div>
-    <div class="note" id="floorNote"></div>
+    <div class="note pro-only" id="floorNote"></div>
   </div>
 
   <div class="card">
     <h2>市场温度 <span class="sub">聚合口径 · 不用于个股排序</span></h2>
     <div class="tiles" id="tiles"></div>
-    <div class="note" id="tempNote"></div>
+    <div class="plainbox plain-only" id="plainTemp"></div>
+    <div class="note pro-only" id="tempNote"></div>
   </div>
 
   <details id="stocks">
@@ -136,6 +153,19 @@ a{color:var(--s1);text-decoration:none} a:hover{text-decoration:underline}
       <div class="note">V_C/V_M/V_S 为显式情景下的内在价值参考（估值锚），非目标价；「保守口径」并列以暴露周期陷阱（E0 口径敏感性）；下轨=状态依赖（当前：结构未证伪档），非买入线。</div>
     </div>
   </details>
+
+  <div class="card plain-only">
+    <h2>小术语表</h2>
+    <dl class="gloss">
+      <dt>估值锚（V_C / V_M / V_S）</dt><dd>悲观 / 中间 / 乐观三种假设情景下算出的参考价值，用来给现价"定位"——不是目标价。</dd>
+      <dt>位置带</dt><dd>现价落在三个估值锚的哪一段：低于悲观锚=低估区；悲观锚与乐观锚之间=合理区间；高于乐观锚=高估区（隐含较强乐观预期）。</dd>
+      <dt>HBM</dt><dd>AI 芯片旁边的高端内存，本轮行情的发动机；它挤占了普通内存的产能。</dd>
+      <dt>合约价二阶导</dt><dd>不看"涨没涨"，看"涨价速度是快了还是慢了"——速度放缓往往比价格下跌更早出现，是判断周期位置的总开关。</dd>
+      <dt>顶部钝化</dt><dd>我们对行业现状的标签：上涨动能仍在但已放缓，处于"由盛转平"的观察期。</dd>
+      <dt>黄色观察灯</dt><dd>出现了值得警惕但尚未确认恶化的信号，提高观察频率；不是"确认变坏"。</dd>
+      <dt>(P) / (A) 口径</dt><dd>P=基于权威机构的预测数据；A=基于实际成交数据。P 态要等实测数据落地才升级确认。</dd>
+    </dl>
+  </div>
 
   <div class="card">
     <h2>A 类事件台账 <span class="sub">取证协议定级：A 官方行为 &gt; A- 官方表态 &gt; B 专业库 &gt; C 传闻/卖方</span></h2>
@@ -171,6 +201,30 @@ const LIGHT={green:["var(--good)","🟢"],yellow:["var(--warn)","🟡"],"yellow-
 const READ={"bull-hold":["var(--s2)","偏韧性"],"bear-lean":["var(--serious)","偏钝化"],"watch":["var(--warn)","观察"],"neutral":["var(--axis)","中性"]};
 const BLACK=["目标价","建仓","加仓","减仓","买入","卖出","做空","止损","仓位"];
 const OKPHRASE=["非买入线","无买入","无卖出","无目标价","无仓位","买入/卖出/持有/做空建议","非交易指令","不构成买入"];
+
+const PLAIN_BAND={
+ deep_under:"价格远低于悲观情景的估值锚——市场定价极度保守（描述性状态，非任何建议）",
+ under:"价格低于悲观情景的估值锚——市场定价非常保守",
+ in_range:"价格处于合理区间；是否偏贵，取决于当前的高盈利能持续多久",
+ over:"价格已高于最乐观情景的估值锚——隐含了较强的乐观预期，风险敞口较大",
+ extreme_over:"价格远超最乐观情景的估值锚——隐含的乐观预期非常激进"};
+const PLAIN_STATE={
+ "上行强化":"行业处于上升期：涨价与盈利动能仍在增强。",
+ "顶部钝化":"行业还在挣大钱、芯片价格还在上涨，但<b>涨价的速度已经明显放慢</b>——就像汽车还在前进、油门却在松开。历史上这通常是周期进入后段的信号。我们把这个阶段叫「顶部钝化」：<b>既没有确认见顶回落，也不再是单边上行</b>，属于观察期。",
+ "下行确认":"行业已确认进入下行段：价格环比转负、盈利自峰值回落。",
+ "触底再起":"下行段出现企稳信号：跌幅收窄、库存去化、订单回稳。"};
+function plainState(j){const st=j.industry_state;let s="<b>行业现在处于："+st.label+"</b>。"+(PLAIN_STATE[st.label]||"");
+ if(st.qualifier==="P")s+=" 目前的判定基于权威机构的<b>预测</b>数据（P 口径），要等实际成交数据落地才升级确认。";
+ const wl=j.trigger&&j.trigger.lights&&j.trigger.lights.length;
+ if(wl)s+=" 另有 "+j.trigger.lights.length+" 盏<b>黄色观察灯</b>（"+j.trigger.lights.map(l=>l.variable).join("、")+"）——值得警惕、但尚未确认恶化。";
+ return s;}
+function plainTemp(T){const pct=T.sw_pe_percentile_since2020;const hot=(100-pct).toFixed(1);
+ return "<b>估值温度怎么读：</b>A 股半导体板块的估值处于 2020 年以来最热的 <b>"+hot+"%</b> 区间（分位 "+pct+"%）——仍然很热"+(T.sw_spark&&T.sw_spark.length>1&&T.sw_spark[T.sw_spark.length-1].pe<Math.max(...T.sw_spark.map(x=>x.pe))?"，但已自峰值回落":"")+
+ "；A 股存储五股组合较 6 月 1 日累计 "+(T.basket_vs_0601_pct>0?"+":"")+T.basket_vs_0601_pct+"%；美国费城半导体指数较 6 月初 "+(T.sox&&T.sox.chg_vs_0602!=null?(T.sox.chg_vs_0602*100).toFixed(1)+"%":"—")+"。";}
+function setView(v){document.body.classList.toggle("plain",v==="plain");
+ $("#btnPro").classList.toggle("on",v!=="plain");$("#btnPlain").classList.toggle("on",v==="plain");
+ try{location.hash=(v==="plain"?"plain":"");}catch(e){}}
+
 async function load(id,url){try{const r=await fetch(url,{cache:"no-store"});if(r.ok)return await r.json();}catch(e){}
   return JSON.parse($("#seed-"+id).textContent);}
 function fmtP(p,cur){const n=p>=10000?p.toLocaleString("en-US"):(Math.round(p*100)/100).toLocaleString("en-US");
@@ -236,27 +290,31 @@ function render(auto,j){
       ${i===0?`<td class="num" rowspan="${t.views.length}">${fmtP(t.P,t.currency)}<div class="vw">${esc(t.asof||"")}</div></td>`:""}
       <td class="bandcell">${bandBar(v,t.currency)}</td>
       <td><span class="badge ${v.band}">${esc(v.band_label)}</span></td>
-      <td class="num">${v.p_vm}</td><td class="num">${v.p_vs}</td>
-      <td class="num">${esc(v.implied)}</td>
+      <td class="num pro-only">${v.p_vm}</td><td class="num pro-only">${v.p_vs}</td>
+      <td class="num pro-only">${esc(v.implied)}</td>
       <td>${esc(v.a2)}</td>
-      ${i===0?`<td rowspan="${t.views.length}" class="vw">${t.third_leg?`PE ${t.third_leg.pe_ttm} / PB ${t.third_leg.pb}`:"—"}</td>
-      <td rowspan="${t.views.length}"><div class="flag">${t.flags.map(esc).join("<br>")}</div><div class="vw">E0 as-of ${esc(t.e0_asof)}</div></td>`:""}
+      <td class="plain-only vw" style="max-width:280px">${esc(PLAIN_BAND[v.band]||"")}</td>
+      ${i===0?`<td rowspan="${t.views.length}" class="vw pro-only">${t.third_leg?`PE ${t.third_leg.pe_ttm} / PB ${t.third_leg.pb}`:"—"}</td>
+      <td rowspan="${t.views.length}" class="pro-only"><div class="flag">${t.flags.map(esc).join("<br>")}</div><div class="vw">E0 as-of ${esc(t.e0_asof)}</div></td>`:""}
       </tr>`}).join("");
     return vs;}).join("");
-  $("#stockTable").innerHTML=`<tr><th>标的</th><th>口径/视角</th><th class="num">现价 P</th><th>位置带</th><th>带位</th><th class="num">P/V_M</th><th class="num">P/V_S</th><th class="num">隐含 N*/g</th><th>状态标签</th><th>第三腿</th><th>提示</th></tr>`+rows;
+  $("#stockTable").innerHTML=`<tr><th>标的</th><th>口径/视角</th><th class="num">现价 P</th><th>位置带</th><th>带位</th><th class="num pro-only">P/V_M</th><th class="num pro-only">P/V_S</th><th class="num pro-only">隐含 N*/g</th><th>状态标签</th><th class="plain-only">通俗解读</th><th class="pro-only">第三腿</th><th class="pro-only">提示</th></tr>`+rows;
   /* 事件 */
   $("#events").innerHTML=j.events.map(e=>{const g=e.grade.replace("-","m");
     return `<tr><td>${esc(e.date)}</td><td><span class="gr ${g}">${esc(e.grade)}</span></td><td>${e.url?`<a href="${esc(e.url)}" target="_blank" rel="noopener">${esc(e.title)}</a>`:esc(e.title)}</td></tr>`}).join("");
   $("#checkpoints").innerHTML=j.next_checkpoints.map(c=>`<li><b>${esc(c.date)}</b> ｜ ${esc(c.what)}</li>`).join("");
   $("#cyclelog").innerHTML=j.cycle_log.slice().reverse().map(l=>`<li><span class="d">${esc(l.date)}</span>${esc(l.entry)}</li>`).join("");
   $("#pending").textContent=j.pending_confirmation.length?("待作者确认："+j.pending_confirmation.join("；")):"待确认清单：空（所有状态均经作者确认）";
+  $("#plainState").innerHTML=plainState(j);
+  $("#plainTemp").innerHTML=plainTemp(auto.temperature);
   /* tooltips */
   document.querySelectorAll(".bb").forEach(el=>{
     el.addEventListener("mousemove",e=>tip(el.dataset.tip,e.clientX,e.clientY));
     el.addEventListener("mouseleave",()=>tip(null));});
 }
-(async()=>{const[a,j]=await Promise.all([load("auto","data/auto/latest.json"),load("judgment","data/judgment.json")]);render(a,j);})();
+$("#btnPro").onclick=()=>setView("pro");$("#btnPlain").onclick=()=>setView("plain");
+(async()=>{const[a,j]=await Promise.all([load("auto","data/auto/latest.json"),load("judgment","data/judgment.json")]);render(a,j);
+ if(location.hash.replace("#","")==="plain")setView("plain");})();
 </script>
 </body>
 </html>
-
