@@ -1,5 +1,5 @@
 {
- "generated_utc": "2026-10-16 23:44 UTC",
+ "generated_utc": "2026-10-17 13:04 UTC",
  "degraded": [],
  "temperature": {
   "sw_pe": 60.99,
@@ -226,7 +226,7 @@
    "base_0601": 110.45
   },
   "sox": {
-   "value": 11137.287109375,
+   "value": 11137.2900390625,
    "asof": "2026-10-16",
    "chg_vs_0602": -0.1886
   },
@@ -282,7 +282,7 @@
      "p_below_vm": false
     }
    ],
-   "e0_age_days": 99,
+   "e0_age_days": 100,
    "flags": [
     "E0超一季未复核·置信度降档",
     "P<V_M下沿参考·复核结构事实(非买入线)"
@@ -338,7 +338,7 @@
      "p_below_vm": false
     }
    ],
-   "e0_age_days": 99,
+   "e0_age_days": 100,
    "flags": [
     "E0超一季未复核·置信度降档",
     "P<V_M下沿参考·复核结构事实(非买入线)"
@@ -376,7 +376,7 @@
      "p_below_vm": true
     }
    ],
-   "e0_age_days": 136,
+   "e0_age_days": 137,
    "flags": [
     "E0超一季未复核·置信度降档",
     "待2026-07-30财报+指引刷新(韩股纪律)",
@@ -433,7 +433,7 @@
      "p_below_vm": true
     }
    ],
-   "e0_age_days": 136,
+   "e0_age_days": 137,
    "flags": [
     "E0超一季未复核·置信度降档",
     "Q2初步OP₩89.4T远超；待7-30正式财报刷新",
@@ -490,7 +490,7 @@
      "p_below_vm": false
     }
    ],
-   "e0_age_days": 99,
+   "e0_age_days": 100,
    "flags": [
     "E0超一季未复核·置信度降档",
     "raw未做clean再推导(GAAP分拆一次性)，财报季复核"
@@ -546,7 +546,7 @@
      "p_below_vm": false
     }
    ],
-   "e0_age_days": 99,
+   "e0_age_days": 100,
    "flags": [
     "E0超一季未复核·置信度降档"
    ],
@@ -601,7 +601,7 @@
      "p_below_vm": false
     }
    ],
-   "e0_age_days": 137,
+   "e0_age_days": 138,
    "flags": [
     "E0超一季未复核·置信度降档",
     "H1预告92-110亿(+622x)无法拆分；8月中报=剥离比例裁决点"
@@ -638,7 +638,7 @@
      "p_below_vm": false
     }
    ],
-   "e0_age_days": 137,
+   "e0_age_days": 138,
    "flags": [
     "E0超一季未复核·置信度降档",
     "6-15~7-09窗口report_rc无新研报,待刷新"
@@ -675,7 +675,7 @@
      "p_below_vm": true
     }
    ],
-   "e0_age_days": 99,
+   "e0_age_days": 100,
    "flags": [
     "E0超一季未复核·置信度降档",
     "上修发生在股价+91%之后,热数据折价"
@@ -730,7 +730,7 @@
      "p_below_vm": true
     }
    ],
-   "e0_age_days": 137,
+   "e0_age_days": 138,
    "flags": [
     "E0超一季未复核·置信度降档"
    ],
@@ -784,7 +784,7 @@
      "p_below_vm": false
     }
    ],
-   "e0_age_days": 137,
+   "e0_age_days": 138,
    "flags": [
     "E0超一季未复核·置信度降档"
    ],
