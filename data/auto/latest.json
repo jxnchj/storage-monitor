@@ -1,5 +1,5 @@
 {
- "generated_utc": "2026-10-19 16:34 UTC",
+ "generated_utc": "2026-10-20 00:28 UTC",
  "degraded": [],
  "temperature": {
   "sw_pe": 59.73,
@@ -226,9 +226,9 @@
    "base_0601": 110.45
   },
   "sox": {
-   "value": 11446.9765625,
+   "value": 11316.3427734375,
    "asof": "2026-10-19",
-   "chg_vs_0602": -0.1661
+   "chg_vs_0602": -0.1756
   },
   "basket_vs_0601_pct": -27.4,
   "caliber_note": "A股温度唯一口径=申万半导体801081.SI(sw_daily)；分位基期2020-01起；跨口径禁比"
@@ -240,7 +240,7 @@
    "archetype": "A",
    "currency": "USD",
    "ticker": "MU",
-   "P": 910.9500122070312,
+   "P": 878.8400268554688,
    "model": "cyclical",
    "e0_asof": "2026-07-09",
    "e0_note": "",
@@ -254,10 +254,10 @@
      "V_M": 1187.84,
      "V_S": 2933.0,
      "V_stress": 1779.0,
-     "p_vc": 1.62,
-     "p_vm": 0.77,
-     "p_vs": 0.31,
-     "implied": "9.1y",
+     "p_vc": 1.57,
+     "p_vm": 0.74,
+     "p_vs": 0.3,
+     "implied": "10.0y",
      "band": "in_range",
      "band_label": "区间内（看持久性）",
      "a2": "中性观察",
@@ -272,9 +272,9 @@
      "V_M": 594.38,
      "V_S": 1437.1,
      "V_stress": 871.67,
-     "p_vc": 3.14,
-     "p_vm": 1.53,
-     "p_vs": 0.63,
+     "p_vc": 3.03,
+     "p_vm": 1.48,
+     "p_vs": 0.61,
      "implied": "无界(市场把峰值当近永续)",
      "band": "in_range",
      "band_label": "区间内（看持久性）",
@@ -282,13 +282,13 @@
      "p_below_vm": false
     }
    ],
-   "e0_age_days": 102,
+   "e0_age_days": 103,
    "flags": [
     "E0超一季未复核·置信度降档",
     "P<V_M下沿参考·复核结构事实(非买入线)"
    ],
    "stale": false,
-   "asof": "2026-10-19"
+   "asof": "2026-10-16"
   },
   {
    "id": "SNDK",
@@ -296,7 +296,7 @@
    "archetype": "A",
    "currency": "USD",
    "ticker": "SNDK",
-   "P": 1383.6800537109375,
+   "P": 1299.300048828125,
    "model": "cyclical",
    "e0_asof": "2026-07-09",
    "e0_note": "",
@@ -310,10 +310,10 @@
      "V_M": 1610.15,
      "V_S": 4007.69,
      "V_stress": 2430.85,
-     "p_vc": 1.85,
-     "p_vm": 0.86,
-     "p_vs": 0.35,
-     "implied": "13.0y",
+     "p_vc": 1.73,
+     "p_vm": 0.81,
+     "p_vs": 0.32,
+     "implied": "10.1y",
      "band": "in_range",
      "band_label": "区间内（看持久性）",
      "a2": "中性观察",
@@ -328,23 +328,23 @@
      "V_M": 536.61,
      "V_S": 1301.66,
      "V_stress": 789.52,
-     "p_vc": 5.31,
-     "p_vm": 2.58,
-     "p_vs": 1.06,
+     "p_vc": 4.98,
+     "p_vm": 2.42,
+     "p_vs": 1.0,
      "implied": "无界(市场把峰值当近永续)",
-     "band": "over",
-     "band_label": "高估区",
-     "a2": "风险预警",
+     "band": "in_range",
+     "band_label": "区间内（看持久性）",
+     "a2": "中性观察",
      "p_below_vm": false
     }
    ],
-   "e0_age_days": 102,
+   "e0_age_days": 103,
    "flags": [
     "E0超一季未复核·置信度降档",
     "P<V_M下沿参考·复核结构事实(非买入线)"
    ],
    "stale": false,
-   "asof": "2026-10-19"
+   "asof": "2026-10-16"
   },
   {
    "id": "SKH",
@@ -352,7 +352,7 @@
    "archetype": "A",
    "currency": "KRW",
    "ticker": "000660.KS",
-   "P": 1272000.0,
+   "P": 1224000.0,
    "model": "cyclical",
    "e0_asof": "2026-06-02",
    "e0_note": "待2026-07-30财报+指引刷新(韩股纪律)",
@@ -366,24 +366,24 @@
      "V_M": 2290110.83,
      "V_S": 5507703.37,
      "V_stress": 3340684.02,
-     "p_vc": 1.13,
-     "p_vm": 0.56,
-     "p_vs": 0.23,
-     "implied": "5.1y",
+     "p_vc": 1.09,
+     "p_vm": 0.53,
+     "p_vs": 0.22,
+     "implied": "6.0y",
      "band": "in_range",
      "band_label": "区间内（看持久性）",
      "a2": "中性观察",
      "p_below_vm": true
     }
    ],
-   "e0_age_days": 139,
+   "e0_age_days": 140,
    "flags": [
     "E0超一季未复核·置信度降档",
     "待2026-07-30财报+指引刷新(韩股纪律)",
     "P<V_M下沿参考·复核结构事实(非买入线)"
    ],
    "stale": false,
-   "asof": "2026-10-16"
+   "asof": "2026-10-20"
   },
   {
    "id": "SSNLF",
@@ -391,7 +391,7 @@
    "archetype": "A",
    "currency": "KRW",
    "ticker": "005930.KS",
-   "P": 215500.0,
+   "P": 214000.0,
    "model": "cyclical",
    "e0_asof": "2026-06-02",
    "e0_note": "Q2初步OP₩89.4T远超；待7-30正式财报刷新",
@@ -405,8 +405,8 @@
      "V_M": 338688.37,
      "V_S": 845680.31,
      "V_stress": 512155.36,
-     "p_vc": 1.37,
-     "p_vm": 0.64,
+     "p_vc": 1.36,
+     "p_vm": 0.63,
      "p_vs": 0.25,
      "implied": "7.0y",
      "band": "in_range",
@@ -423,9 +423,9 @@
      "V_M": 249137.04,
      "V_S": 604057.36,
      "V_stress": 365825.26,
-     "p_vc": 1.77,
+     "p_vc": 1.76,
      "p_vm": 0.86,
-     "p_vs": 0.36,
+     "p_vs": 0.35,
      "implied": "12.0y",
      "band": "in_range",
      "band_label": "区间内（看持久性）",
@@ -433,14 +433,14 @@
      "p_below_vm": true
     }
    ],
-   "e0_age_days": 139,
+   "e0_age_days": 140,
    "flags": [
     "E0超一季未复核·置信度降档",
     "Q2初步OP₩89.4T远超；待7-30正式财报刷新",
     "P<V_M下沿参考·复核结构事实(非买入线)"
    ],
    "stale": false,
-   "asof": "2026-10-16"
+   "asof": "2026-10-20"
   },
   {
    "id": "WDC",
@@ -448,7 +448,7 @@
    "archetype": "B",
    "currency": "USD",
    "ticker": "WDC",
-   "P": 349.260009765625,
+   "P": 332.0,
    "model": "cyclical",
    "e0_asof": "2026-07-09",
    "e0_note": "raw未做clean再推导(GAAP分拆一次性)，财报季复核",
@@ -462,9 +462,9 @@
      "V_M": 153.76,
      "V_S": 367.87,
      "V_stress": 222.79,
-     "p_vc": 4.55,
-     "p_vm": 2.27,
-     "p_vs": 0.95,
+     "p_vc": 4.32,
+     "p_vm": 2.16,
+     "p_vs": 0.9,
      "implied": "无界(市场把峰值当近永续)",
      "band": "in_range",
      "band_label": "区间内（看持久性）",
@@ -480,9 +480,9 @@
      "V_M": 123.76,
      "V_S": 286.93,
      "V_stress": 173.77,
-     "p_vc": 5.38,
-     "p_vm": 2.82,
-     "p_vs": 1.22,
+     "p_vc": 5.12,
+     "p_vm": 2.68,
+     "p_vs": 1.16,
      "implied": "无界(市场把峰值当近永续)",
      "band": "over",
      "band_label": "高估区",
@@ -490,13 +490,13 @@
      "p_below_vm": false
     }
    ],
-   "e0_age_days": 102,
+   "e0_age_days": 103,
    "flags": [
     "E0超一季未复核·置信度降档",
     "raw未做clean再推导(GAAP分拆一次性)，财报季复核"
    ],
    "stale": false,
-   "asof": "2026-10-19"
+   "asof": "2026-10-16"
   },
   {
    "id": "STX",
@@ -504,7 +504,7 @@
    "archetype": "B",
    "currency": "USD",
    "ticker": "STX",
-   "P": 662.7550048828125,
+   "P": 639.010009765625,
    "model": "cyclical",
    "e0_asof": "2026-07-09",
    "e0_note": "",
@@ -518,9 +518,9 @@
      "V_M": 225.3,
      "V_S": 551.5,
      "V_stress": 334.0,
-     "p_vc": 6.11,
-     "p_vm": 2.94,
-     "p_vs": 1.2,
+     "p_vc": 5.9,
+     "p_vm": 2.84,
+     "p_vs": 1.16,
      "implied": "无界(市场把峰值当近永续)",
      "band": "over",
      "band_label": "高估区",
@@ -536,9 +536,9 @@
      "V_M": 132.02,
      "V_S": 299.81,
      "V_stress": 181.57,
-     "p_vc": 9.3,
-     "p_vm": 5.02,
-     "p_vs": 2.21,
+     "p_vc": 8.97,
+     "p_vm": 4.84,
+     "p_vs": 2.13,
      "implied": "无界(市场把峰值当近永续)",
      "band": "extreme_over",
      "band_label": "极端高估区",
@@ -546,12 +546,12 @@
      "p_below_vm": false
     }
    ],
-   "e0_age_days": 102,
+   "e0_age_days": 103,
    "flags": [
     "E0超一季未复核·置信度降档"
    ],
    "stale": false,
-   "asof": "2026-10-19"
+   "asof": "2026-10-16"
   },
   {
    "id": "JBL",
@@ -601,7 +601,7 @@
      "p_below_vm": false
     }
    ],
-   "e0_age_days": 140,
+   "e0_age_days": 141,
    "flags": [
     "E0超一季未复核·置信度降档",
     "H1预告92-110亿(+622x)无法拆分；8月中报=剥离比例裁决点"
@@ -638,7 +638,7 @@
      "p_below_vm": false
     }
    ],
-   "e0_age_days": 140,
+   "e0_age_days": 141,
    "flags": [
     "E0超一季未复核·置信度降档",
     "6-15~7-09窗口report_rc无新研报,待刷新"
@@ -675,7 +675,7 @@
      "p_below_vm": true
     }
    ],
-   "e0_age_days": 102,
+   "e0_age_days": 103,
    "flags": [
     "E0超一季未复核·置信度降档",
     "上修发生在股价+91%之后,热数据折价"
@@ -730,7 +730,7 @@
      "p_below_vm": true
     }
    ],
-   "e0_age_days": 140,
+   "e0_age_days": 141,
    "flags": [
     "E0超一季未复核·置信度降档"
    ],
@@ -784,7 +784,7 @@
      "p_below_vm": false
     }
    ],
-   "e0_age_days": 140,
+   "e0_age_days": 141,
    "flags": [
     "E0超一季未复核·置信度降档"
    ],
