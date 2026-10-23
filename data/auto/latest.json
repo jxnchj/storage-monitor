@@ -1,5 +1,5 @@
 {
- "generated_utc": "2026-10-22 14:35 UTC",
+ "generated_utc": "2026-10-23 00:03 UTC",
  "degraded": [],
  "temperature": {
   "sw_pe": 59.04,
@@ -226,9 +226,9 @@
    "base_0601": 110.45
   },
   "sox": {
-   "value": 10926.53125,
+   "value": 10731.9775390625,
    "asof": "2026-10-22",
-   "chg_vs_0602": -0.204
+   "chg_vs_0602": -0.2181
   },
   "basket_vs_0601_pct": -27.7,
   "caliber_note": "A股温度唯一口径=申万半导体801081.SI(sw_daily)；分位基期2020-01起；跨口径禁比"
@@ -240,7 +240,7 @@
    "archetype": "A",
    "currency": "USD",
    "ticker": "MU",
-   "P": 882.9600219726562,
+   "P": 913.6699829101562,
    "model": "cyclical",
    "e0_asof": "2026-07-09",
    "e0_note": "",
@@ -254,10 +254,10 @@
      "V_M": 1187.84,
      "V_S": 2933.0,
      "V_stress": 1779.0,
-     "p_vc": 1.57,
-     "p_vm": 0.74,
-     "p_vs": 0.3,
-     "implied": "10.0y",
+     "p_vc": 1.63,
+     "p_vm": 0.77,
+     "p_vs": 0.31,
+     "implied": "9.1y",
      "band": "in_range",
      "band_label": "区间内（看持久性）",
      "a2": "中性观察",
@@ -272,9 +272,9 @@
      "V_M": 594.38,
      "V_S": 1437.1,
      "V_stress": 871.67,
-     "p_vc": 3.04,
-     "p_vm": 1.49,
-     "p_vs": 0.61,
+     "p_vc": 3.15,
+     "p_vm": 1.54,
+     "p_vs": 0.64,
      "implied": "无界(市场把峰值当近永续)",
      "band": "in_range",
      "band_label": "区间内（看持久性）",
@@ -282,13 +282,13 @@
      "p_below_vm": false
     }
    ],
-   "e0_age_days": 105,
+   "e0_age_days": 106,
    "flags": [
     "E0超一季未复核·置信度降档",
     "P<V_M下沿参考·复核结构事实(非买入线)"
    ],
    "stale": false,
-   "asof": "2026-10-22"
+   "asof": "2026-10-21"
   },
   {
    "id": "SNDK",
@@ -296,7 +296,7 @@
    "archetype": "A",
    "currency": "USD",
    "ticker": "SNDK",
-   "P": 1311.4300537109375,
+   "P": 1378.219970703125,
    "model": "cyclical",
    "e0_asof": "2026-07-09",
    "e0_note": "",
@@ -310,10 +310,10 @@
      "V_M": 1610.15,
      "V_S": 4007.69,
      "V_stress": 2430.85,
-     "p_vc": 1.75,
-     "p_vm": 0.81,
-     "p_vs": 0.33,
-     "implied": "10.1y",
+     "p_vc": 1.84,
+     "p_vm": 0.86,
+     "p_vs": 0.34,
+     "implied": "11.1y",
      "band": "in_range",
      "band_label": "区间内（看持久性）",
      "a2": "中性观察",
@@ -328,9 +328,9 @@
      "V_M": 536.61,
      "V_S": 1301.66,
      "V_stress": 789.52,
-     "p_vc": 5.03,
-     "p_vm": 2.44,
-     "p_vs": 1.01,
+     "p_vc": 5.29,
+     "p_vm": 2.57,
+     "p_vs": 1.06,
      "implied": "无界(市场把峰值当近永续)",
      "band": "over",
      "band_label": "高估区",
@@ -338,13 +338,13 @@
      "p_below_vm": false
     }
    ],
-   "e0_age_days": 105,
+   "e0_age_days": 106,
    "flags": [
     "E0超一季未复核·置信度降档",
     "P<V_M下沿参考·复核结构事实(非买入线)"
    ],
    "stale": false,
-   "asof": "2026-10-22"
+   "asof": "2026-10-21"
   },
   {
    "id": "SKH",
@@ -376,7 +376,7 @@
      "p_below_vm": true
     }
    ],
-   "e0_age_days": 142,
+   "e0_age_days": 143,
    "flags": [
     "E0超一季未复核·置信度降档",
     "待2026-07-30财报+指引刷新(韩股纪律)",
@@ -433,7 +433,7 @@
      "p_below_vm": true
     }
    ],
-   "e0_age_days": 142,
+   "e0_age_days": 143,
    "flags": [
     "E0超一季未复核·置信度降档",
     "Q2初步OP₩89.4T远超；待7-30正式财报刷新",
@@ -448,7 +448,7 @@
    "archetype": "B",
    "currency": "USD",
    "ticker": "WDC",
-   "P": 356.07000732421875,
+   "P": 378.510009765625,
    "model": "cyclical",
    "e0_asof": "2026-07-09",
    "e0_note": "raw未做clean再推导(GAAP分拆一次性)，财报季复核",
@@ -462,13 +462,13 @@
      "V_M": 153.76,
      "V_S": 367.87,
      "V_stress": 222.79,
-     "p_vc": 4.64,
-     "p_vm": 2.32,
-     "p_vs": 0.97,
+     "p_vc": 4.93,
+     "p_vm": 2.46,
+     "p_vs": 1.03,
      "implied": "无界(市场把峰值当近永续)",
-     "band": "in_range",
-     "band_label": "区间内（看持久性）",
-     "a2": "中性观察",
+     "band": "over",
+     "band_label": "高估区",
+     "a2": "风险预警",
      "p_below_vm": false
     },
     {
@@ -480,9 +480,9 @@
      "V_M": 123.76,
      "V_S": 286.93,
      "V_stress": 173.77,
-     "p_vc": 5.49,
-     "p_vm": 2.88,
-     "p_vs": 1.24,
+     "p_vc": 5.84,
+     "p_vm": 3.06,
+     "p_vs": 1.32,
      "implied": "无界(市场把峰值当近永续)",
      "band": "over",
      "band_label": "高估区",
@@ -490,13 +490,14 @@
      "p_below_vm": false
     }
    ],
-   "e0_age_days": 105,
+   "e0_age_days": 106,
    "flags": [
     "E0超一季未复核·置信度降档",
-    "raw未做clean再推导(GAAP分拆一次性)，财报季复核"
+    "raw未做clean再推导(GAAP分拆一次性)，财报季复核",
+    "带位迁移: 区间内（看持久性）→高估区"
    ],
    "stale": false,
-   "asof": "2026-10-22"
+   "asof": "2026-10-21"
   },
   {
    "id": "STX",
@@ -504,7 +505,7 @@
    "archetype": "B",
    "currency": "USD",
    "ticker": "STX",
-   "P": 651.4550170898438,
+   "P": 696.8900146484375,
    "model": "cyclical",
    "e0_asof": "2026-07-09",
    "e0_note": "",
@@ -518,9 +519,9 @@
      "V_M": 225.3,
      "V_S": 551.5,
      "V_stress": 334.0,
-     "p_vc": 6.01,
-     "p_vm": 2.89,
-     "p_vs": 1.18,
+     "p_vc": 6.43,
+     "p_vm": 3.09,
+     "p_vs": 1.26,
      "implied": "无界(市场把峰值当近永续)",
      "band": "over",
      "band_label": "高估区",
@@ -536,9 +537,9 @@
      "V_M": 132.02,
      "V_S": 299.81,
      "V_stress": 181.57,
-     "p_vc": 9.14,
-     "p_vm": 4.93,
-     "p_vs": 2.17,
+     "p_vc": 9.78,
+     "p_vm": 5.28,
+     "p_vs": 2.32,
      "implied": "无界(市场把峰值当近永续)",
      "band": "extreme_over",
      "band_label": "极端高估区",
@@ -546,12 +547,12 @@
      "p_below_vm": false
     }
    ],
-   "e0_age_days": 105,
+   "e0_age_days": 106,
    "flags": [
     "E0超一季未复核·置信度降档"
    ],
    "stale": false,
-   "asof": "2026-10-22"
+   "asof": "2026-10-21"
   },
   {
    "id": "JBL",
@@ -601,7 +602,7 @@
      "p_below_vm": false
     }
    ],
-   "e0_age_days": 143,
+   "e0_age_days": 144,
    "flags": [
     "E0超一季未复核·置信度降档",
     "H1预告92-110亿(+622x)无法拆分；8月中报=剥离比例裁决点"
@@ -638,7 +639,7 @@
      "p_below_vm": false
     }
    ],
-   "e0_age_days": 143,
+   "e0_age_days": 144,
    "flags": [
     "E0超一季未复核·置信度降档",
     "6-15~7-09窗口report_rc无新研报,待刷新"
@@ -675,7 +676,7 @@
      "p_below_vm": true
     }
    ],
-   "e0_age_days": 105,
+   "e0_age_days": 106,
    "flags": [
     "E0超一季未复核·置信度降档",
     "上修发生在股价+91%之后,热数据折价"
@@ -730,7 +731,7 @@
      "p_below_vm": true
     }
    ],
-   "e0_age_days": 143,
+   "e0_age_days": 144,
    "flags": [
     "E0超一季未复核·置信度降档"
    ],
@@ -784,7 +785,7 @@
      "p_below_vm": false
     }
    ],
-   "e0_age_days": 143,
+   "e0_age_days": 144,
    "flags": [
     "E0超一季未复核·置信度降档"
    ],
