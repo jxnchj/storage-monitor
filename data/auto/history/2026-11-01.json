@@ -1,11 +1,16 @@
 {
- "generated_utc": "2026-11-01 00:15 UTC",
- "degraded": [],
+ "generated_utc": "2026-11-01 16:11 UTC",
+ "degraded": [
+  {
+   "src": "tushare",
+   "error": "No module named 'six'"
+  }
+ ],
  "temperature": {
-  "sw_pe": 52.98,
-  "sw_pb": 5.29,
-  "sw_asof": "20261030",
-  "sw_pe_percentile_since2020": 18.5,
+  "sw_pe": null,
+  "sw_pb": null,
+  "sw_asof": null,
+  "sw_pe_percentile_since2020": null,
   "sw_spark": [
    {
     "d": "20250929",
@@ -606,8 +611,8 @@
     "E0超一季未复核·置信度降档",
     "H1预告92-110亿(+622x)无法拆分；8月中报=剥离比例裁决点"
    ],
-   "stale": false,
-   "asof": "20261030"
+   "stale": true,
+   "asof": ""
   },
   {
    "id": "MONTAGE",
@@ -643,8 +648,8 @@
     "E0超一季未复核·置信度降档",
     "6-15~7-09窗口report_rc无新研报,待刷新"
    ],
-   "stale": false,
-   "asof": "20261030"
+   "stale": true,
+   "asof": ""
   },
   {
    "id": "YOKE",
@@ -680,8 +685,8 @@
     "E0超一季未复核·置信度降档",
     "上修发生在股价+91%之后,热数据折价"
    ],
-   "stale": false,
-   "asof": "20261030"
+   "stale": true,
+   "asof": ""
   },
   {
    "id": "GIGA",
@@ -734,8 +739,8 @@
    "flags": [
     "E0超一季未复核·置信度降档"
    ],
-   "stale": false,
-   "asof": "20261030"
+   "stale": true,
+   "asof": ""
   },
   {
    "id": "GSME",
@@ -788,8 +793,8 @@
    "flags": [
     "E0超一季未复核·置信度降档"
    ],
-   "stale": false,
-   "asof": "20261030"
+   "stale": true,
+   "asof": ""
   }
  ]
 }
