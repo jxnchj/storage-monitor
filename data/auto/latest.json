@@ -1,5 +1,5 @@
 {
- "generated_utc": "2026-11-01 16:11 UTC",
+ "generated_utc": "2026-11-02 00:55 UTC",
  "degraded": [
   {
    "src": "tushare",
@@ -287,7 +287,7 @@
      "p_below_vm": false
     }
    ],
-   "e0_age_days": 115,
+   "e0_age_days": 116,
    "flags": [
     "E0超一季未复核·置信度降档",
     "P<V_M下沿参考·复核结构事实(非买入线)"
@@ -343,7 +343,7 @@
      "p_below_vm": false
     }
    ],
-   "e0_age_days": 115,
+   "e0_age_days": 116,
    "flags": [
     "E0超一季未复核·置信度降档",
     "P<V_M下沿参考·复核结构事实(非买入线)"
@@ -357,7 +357,7 @@
    "archetype": "A",
    "currency": "KRW",
    "ticker": "000660.KS",
-   "P": 1418000.0,
+   "P": 1422000.0,
    "model": "cyclical",
    "e0_asof": "2026-06-02",
    "e0_note": "待2026-07-30财报+指引刷新(韩股纪律)",
@@ -381,14 +381,14 @@
      "p_below_vm": true
     }
    ],
-   "e0_age_days": 152,
+   "e0_age_days": 153,
    "flags": [
     "E0超一季未复核·置信度降档",
     "待2026-07-30财报+指引刷新(韩股纪律)",
     "P<V_M下沿参考·复核结构事实(非买入线)"
    ],
    "stale": false,
-   "asof": "2026-10-30"
+   "asof": "2026-11-02"
   },
   {
    "id": "SSNLF",
@@ -396,7 +396,7 @@
    "archetype": "A",
    "currency": "KRW",
    "ticker": "005930.KS",
-   "P": 225000.0,
+   "P": 221250.0,
    "model": "cyclical",
    "e0_asof": "2026-06-02",
    "e0_note": "Q2初步OP₩89.4T远超；待7-30正式财报刷新",
@@ -410,9 +410,9 @@
      "V_M": 338688.37,
      "V_S": 845680.31,
      "V_stress": 512155.36,
-     "p_vc": 1.43,
-     "p_vm": 0.66,
-     "p_vs": 0.27,
+     "p_vc": 1.41,
+     "p_vm": 0.65,
+     "p_vs": 0.26,
      "implied": "6.1y",
      "band": "in_range",
      "band_label": "区间内（看持久性）",
@@ -428,24 +428,24 @@
      "V_M": 249137.04,
      "V_S": 604057.36,
      "V_stress": 365825.26,
-     "p_vc": 1.85,
-     "p_vm": 0.9,
+     "p_vc": 1.82,
+     "p_vm": 0.89,
      "p_vs": 0.37,
-     "implied": "12.1y",
+     "implied": "13.0y",
      "band": "in_range",
      "band_label": "区间内（看持久性）",
      "a2": "中性观察",
      "p_below_vm": true
     }
    ],
-   "e0_age_days": 152,
+   "e0_age_days": 153,
    "flags": [
     "E0超一季未复核·置信度降档",
     "Q2初步OP₩89.4T远超；待7-30正式财报刷新",
     "P<V_M下沿参考·复核结构事实(非买入线)"
    ],
    "stale": false,
-   "asof": "2026-10-30"
+   "asof": "2026-11-02"
   },
   {
    "id": "WDC",
@@ -495,7 +495,7 @@
      "p_below_vm": false
     }
    ],
-   "e0_age_days": 115,
+   "e0_age_days": 116,
    "flags": [
     "E0超一季未复核·置信度降档",
     "raw未做clean再推导(GAAP分拆一次性)，财报季复核"
@@ -551,7 +551,7 @@
      "p_below_vm": false
     }
    ],
-   "e0_age_days": 115,
+   "e0_age_days": 116,
    "flags": [
     "E0超一季未复核·置信度降档"
    ],
@@ -606,7 +606,7 @@
      "p_below_vm": true
     }
    ],
-   "e0_age_days": 153,
+   "e0_age_days": 154,
    "flags": [
     "E0超一季未复核·置信度降档",
     "H1预告92-110亿(+622x)无法拆分；8月中报=剥离比例裁决点"
@@ -643,7 +643,7 @@
      "p_below_vm": false
     }
    ],
-   "e0_age_days": 153,
+   "e0_age_days": 154,
    "flags": [
     "E0超一季未复核·置信度降档",
     "6-15~7-09窗口report_rc无新研报,待刷新"
@@ -680,7 +680,7 @@
      "p_below_vm": true
     }
    ],
-   "e0_age_days": 115,
+   "e0_age_days": 116,
    "flags": [
     "E0超一季未复核·置信度降档",
     "上修发生在股价+91%之后,热数据折价"
@@ -735,7 +735,7 @@
      "p_below_vm": true
     }
    ],
-   "e0_age_days": 153,
+   "e0_age_days": 154,
    "flags": [
     "E0超一季未复核·置信度降档"
    ],
@@ -789,7 +789,7 @@
      "p_below_vm": true
     }
    ],
-   "e0_age_days": 153,
+   "e0_age_days": 154,
    "flags": [
     "E0超一季未复核·置信度降档"
    ],
