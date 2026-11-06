@@ -157,7 +157,7 @@ body.plain .pro-only{display:none!important}
         <span>● = 现价 P</span>
       </div>
       <table id="stockTable"></table>
-      <div class="note">V_C/V_M/V_S 为显式情景下的内在价值参考（估值锚），非目标价；「保守口径」并列以暴露周期陷阱（E0 口径敏感性）；下轨=状态依赖（当前：结构未证伪档），非买入线。</div>
+      <div class="note">V_C/V_M/V_S 为显式情景下的内在价值参考（估值锚），非目标价；「保守口径」「并列口径」并列以暴露周期陷阱（E0 口径敏感性；第二口径高于主口径时称并列）；现价 P 为最近已收盘交易日的收盘价，不含盘中价；下轨=状态依赖（当前：结构未证伪档），非买入线。</div>
     </div>
   </details>
 
@@ -225,9 +225,9 @@ function plainState(j){const st=j.industry_state;let s="<b>行业现在处于：
  const wl=j.trigger&&j.trigger.lights&&j.trigger.lights.length;
  if(wl)s+=" 另有 "+j.trigger.lights.length+" 盏<b>黄色观察灯</b>（"+j.trigger.lights.map(l=>l.variable).join("、")+"）——值得警惕、但尚未确认恶化。";
  return s;}
-function plainTemp(T){const pct=T.sw_pe_percentile_since2020;const hot=(100-pct).toFixed(1);
- return "<b>估值温度怎么读：</b>A 股半导体板块的估值处于 2020 年以来最热的 <b>"+hot+"%</b> 区间（分位 "+pct+"%）——仍然很热"+(T.sw_spark&&T.sw_spark.length>1&&T.sw_spark[T.sw_spark.length-1].pe<Math.max(...T.sw_spark.map(x=>x.pe))?"，但已自峰值回落":"")+
- "；A 股存储五股组合较 6 月 1 日累计 "+(T.basket_vs_0601_pct>0?"+":"")+T.basket_vs_0601_pct+"%；美国费城半导体指数较 6 月初 "+(T.sox&&T.sox.chg_vs_0602!=null?(T.sox.chg_vs_0602*100).toFixed(1)+"%":"—")+"。";}
+function plainTemp(T){const pct=T.sw_pe_percentile_since2020;
+ return "<b>估值温度怎么读：</b>"+(pct==null?"A 股半导体板块估值本期取数失败，暂无读数":"A 股半导体板块的估值处于 2020 年以来最热的 <b>"+(100-pct).toFixed(1)+"%</b> 区间（分位 "+pct+"%）——仍然很热"+(T.sw_spark&&T.sw_spark.length>1&&T.sw_spark[T.sw_spark.length-1].pe<Math.max(...T.sw_spark.map(x=>x.pe))?"，但已自峰值回落":""))+
+ "；A 股存储五股组合较 6 月 1 日累计 "+(T.basket_vs_0601_pct==null?"暂无读数（取数失败）":(T.basket_vs_0601_pct>0?"+":"")+T.basket_vs_0601_pct+"%")+"；美国费城半导体指数较 6 月初 "+(T.sox&&T.sox.chg_vs_0602!=null?(T.sox.chg_vs_0602*100).toFixed(1)+"%":"—")+"。";}
 function setView(v){document.body.classList.toggle("plain",v==="plain");
  $("#btnPro").classList.toggle("on",v!=="plain");$("#btnPlain").classList.toggle("on",v==="plain");
  try{location.hash=(v==="plain"?"plain":"");}catch(e){}}
@@ -265,8 +265,10 @@ function render(auto,j){
   let s=JSON.stringify(j);OKPHRASE.forEach(p=>s=s.split(p).join(""));
   const hits=BLACK.filter(w=>s.includes(w));
   if(hits.length){const b=$("#banner");b.style.display="block";b.textContent="⚠ 词汇黑名单命中（判断层）："+hits.join("、")+"——请复核 judgment.json";}
-  if(auto.degraded&&auto.degraded.length){const b=$("#banner");b.style.display="block";
-    b.textContent="⚠ 数据源降级（沿用上期值）："+auto.degraded.map(d=>d.src).join("、")+" ｜ "+(b.textContent||"");}
+  const staleT=auto.stale_tickers||[];
+  if((auto.degraded&&auto.degraded.length)||staleT.length){const b=$("#banner");b.style.display="block";
+    const none=[auto.temperature.sw_pe==null?"申万温度":"",auto.temperature.basket_vs_0601_pct==null?"basket":"",auto.temperature.sox.value==null?"SOX":""].filter(Boolean);
+    b.textContent="⚠ 自动层降级："+[...new Set((auto.degraded||[]).map(d=>d.src))].join("、")+(staleT.length?" ｜ 沿用上期值："+staleT.join("、"):"")+(none.length?" ｜ 本期无读数："+none.join("、"):"")+" ｜ "+(b.textContent||"");}
   $("#asof").textContent=`自动层 ${auto.generated_utc} ｜ 判断层 ${j._meta.updated}（${j._meta.updated_by}）`;
   /* 状态机 */
   const st=j.industry_state;
@@ -283,10 +285,10 @@ function render(auto,j){
   /* 温度 */
   const T=auto.temperature;
   $("#tiles").innerHTML=`
-   <div class="tile"><div class="k">申万半导体 PE(TTM) · ${esc(T.sw_asof)}</div><div class="v">${T.sw_pe}</div>
-     <div class="d">2020 以来分位 <b>${T.sw_pe_percentile_since2020}%</b> ｜ 2021 峰 ${T.sw_anchor.peak2021} · 中位 ${T.sw_anchor.median}</div>${spark(T.sw_spark)}</div>
-   <div class="tile"><div class="k">SOX 费城半导体 · ${esc(T.sox.asof)}</div><div class="v">${Number(T.sox.value).toLocaleString("en-US")}</div><div class="d">基线(06-02)以来 ${(T.sox.chg_vs_0602!=null?(T.sox.chg_vs_0602*100).toFixed(1)+"%":"—")}</div></div>
-   <div class="tile"><div class="k">A股存储 basket（5只等权）</div><div class="v">${T.basket_vs_0601_pct>0?"+":""}${T.basket_vs_0601_pct}%</div><div class="d">vs 2026-06-01 基线</div></div>`;
+   <div class="tile"><div class="k">申万半导体 PE(TTM) · ${esc(T.sw_asof)}</div><div class="v">${T.sw_pe??"—"}</div>
+     <div class="d">${T.sw_pe==null?"⚠ 本期取数失败":`2020 以来分位 <b>${T.sw_pe_percentile_since2020}%</b>`} ｜ 2021 峰 ${T.sw_anchor.peak2021} · 中位 ${T.sw_anchor.median}</div>${spark(T.sw_spark)}</div>
+   <div class="tile"><div class="k">SOX 费城半导体 · ${esc(T.sox.asof)}</div><div class="v">${T.sox.value==null?"—":Number(T.sox.value).toLocaleString("en-US")}</div><div class="d">基线(06-02)以来 ${(T.sox.chg_vs_0602!=null?(T.sox.chg_vs_0602*100).toFixed(1)+"%":"—")}</div></div>
+   <div class="tile"><div class="k">A股存储 basket（5只等权）</div><div class="v">${T.basket_vs_0601_pct==null?"—":(T.basket_vs_0601_pct>0?"+":"")+T.basket_vs_0601_pct+"%"}</div><div class="d">${T.basket_vs_0601_pct==null?"⚠ 成分取数失败："+esc((T.basket_missing||[]).join("、")):"vs 2026-06-01 基线"}</div></div>`;
   $("#tempNote").textContent=T.caliber_note;
   /* 个股 */
   const rows=auto.targets.map(t=>{
@@ -301,7 +303,7 @@ function render(auto,j){
       <td class="num pro-only">${esc(v.implied)}</td>
       <td>${esc(v.a2)}</td>
       <td class="plain-only vw" style="max-width:280px">${esc(PLAIN_BAND[v.band]||"")}</td>
-      ${i===0?`<td rowspan="${t.views.length}" class="vw pro-only">${t.third_leg?`PE ${t.third_leg.pe_ttm} / PB ${t.third_leg.pb}`:"—"}</td>
+      ${i===0?`<td rowspan="${t.views.length}" class="vw pro-only">${t.third_leg?`PE ${t.third_leg.pe_ttm??"—"} / PB ${t.third_leg.pb??"—"}${t.third_leg.asof?`<div>${esc(t.third_leg.asof)}</div>`:""}`:"—"}</td>
       <td rowspan="${t.views.length}" class="pro-only"><div class="flag">${t.flags.map(esc).join("<br>")}</div><div class="vw">E0 as-of ${esc(t.e0_asof)}</div></td>`:""}
       </tr>`}).join("");
     return vs;}).join("");

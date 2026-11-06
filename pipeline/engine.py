@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """两步走第二步 · 干净估值引擎（dashboard pipeline 版）
-源自 two_step_stock_eval_engine.py v2（零方法改动，仅改为返回结构化数据）。
+源自 two_step_stock_eval_engine.py v2（改为返回结构化数据；方法上只改了 implied_Nstar 的年金计法，
+见该函数注释。原研究引擎与演练 tools/engine.py 保持原样，非整年处的 N* 与本文件不同）。
 硬边界：仅输出描述性情景内在价值参考与位置带，无目标价/仓位/买卖建议。
 """
 
@@ -32,7 +33,9 @@ def dcf(E0, Em, N_S, tier, r, g_term, N=10, fade_years=5, g_S=0.03, hc=1.0):
     return pv
 
 def implied_Nstar(P, E0, Em, r_mid=R_MID, g_low=0.01, Nmax=40):
-    """返回 (数值|None, 标注)"""
+    """返回 (数值|None, 标注)。
+    年金按连续小数年计（整数 N 时与逐年求和相同），PV(N) 才随 N 单调。旧写法年金取整年、折现取
+    小数年，PV 在一年内随 N 递减、到整年跳升，N* 对价格呈锯齿（价升而 N* 降）。"""
     if E0 / Em < 1.3:
         return None, "N/A(ill-conditioned)"
     cap = E0 / r_mid
@@ -41,7 +44,7 @@ def implied_Nstar(P, E0, Em, r_mid=R_MID, g_low=0.01, Nmax=40):
     term = Em * (1 + g_low) / (r_mid - g_low)
     best, bestdiff, N = 0.0, 1e18, 0.0
     while N <= Nmax:
-        pv = sum(E0 / (1 + r_mid) ** t for t in range(1, int(N) + 1)) + term / (1 + r_mid) ** N
+        pv = cap * (1 - (1 + r_mid) ** -N) + term / (1 + r_mid) ** N
         if abs(pv - P) < bestdiff:
             best, bestdiff = N, abs(pv - P)
         N += 0.1
