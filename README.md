@@ -9,7 +9,7 @@
 ```
 GitHub Actions（每日两次：UTC 09:30 / 21:30 ≈ 台北 17:30 / 05:30）
   └─ pipeline/fetch_data.py     ← tushare(token=Secrets) + yfinance 直连
-       ├─ 行情：11 标的（美/韩=yfinance，A股=tushare）+ ^SOX；只记最近已收盘交易日
+       ├─ 行情：11 标的（美/韩=yfinance，A股=tushare daily，逐只取）+ ^SOX；只记最近已收盘交易日
        ├─ 引擎：pipeline/engine.py（V_C/V_M/V_S/V_stress、implied N*/g、位置带）
        ├─ 温度：申万半导体 801081.SI PE/PB + 2020 以来分位（唯一 A 股口径）+ basket
        ├─ 第三腿：A股 PE(TTM)/PB（daily_basic，逐只取，带 as-of）

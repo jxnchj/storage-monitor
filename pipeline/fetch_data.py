@@ -103,11 +103,32 @@ def num(x, nd=2):
     except (TypeError, ValueError): return None
     return None if math.isnan(v) else round(v, nd)
 
+def cn_window(now_utc, days=14):
+    """A 股取数窗口（北京日期）。"""
+    today_cn = now_utc + datetime.timedelta(hours=8)
+    return (today_cn - datetime.timedelta(days=days)).strftime("%Y%m%d"), today_cn.strftime("%Y%m%d")
+
+def fetch_cn_quotes(pro, cn, now_utc, degraded):
+    """daily 逐只带日期窗口取：逗号多代码在 2026-11-06 线上返回 0 行（tushare 1.4.29 未变，11-01 前同样写法正常，
+    中间被 six 故障盖住）。窗口内无数据（如长期停牌）进 degraded，由 main 沿用上期值并标记。"""
+    start, end = cn_window(now_utc)
+    quotes, asof, quote_src = {}, {}, {}
+    for code in cn:
+        try:
+            df = pro.daily(ts_code=code, start_date=start, end_date=end, fields="ts_code,trade_date,close")
+            if df is None or df.empty: raise ValueError("daily 无数据")
+            row = df.sort_values("trade_date").iloc[-1]
+            close = num(row.close)
+            if close is None: raise ValueError("daily close 为空")
+            quotes[code], asof[code], quote_src[code] = close, str(row.trade_date), "bar"
+        except Exception as e:
+            note_failure(degraded, "tushare.daily", e, code)
+    return quotes, asof, quote_src
+
 def fetch_third_leg(pro, cn, now_utc, degraded):
     """daily_basic 逐只带日期窗口取：接口文档只写 ts_code/trade_date 二选一，未写支持逗号多代码；
     旧写法一次传 5 只从未取到数据，且异常被吞。缺值现在进 degraded，不再静默。"""
-    today_cn = now_utc + datetime.timedelta(hours=8)
-    start, end = (today_cn - datetime.timedelta(days=14)).strftime("%Y%m%d"), today_cn.strftime("%Y%m%d")
+    start, end = cn_window(now_utc)
     third = {}
     for code in cn:
         try:
@@ -145,16 +166,8 @@ def fetch_live(params, degraded):
         note_failure(degraded, "tushare", e)
         return quotes, third, sox, sw, asof, quote_src
     cn = [t["src"]["ticker"] for t in params["targets"] if t["src"]["quote"] == "ts"]
-    try:
-        df = pro.daily(ts_code=",".join(cn))
-        for code in cn:
-            try:
-                sub = df[df.ts_code == code].sort_values("trade_date")
-                quotes[code] = float(sub.iloc[-1].close); asof[code] = str(sub.iloc[-1].trade_date); quote_src[code] = "bar"
-            except Exception as e:
-                note_failure(degraded, "tushare.daily", e, code)
-    except Exception as e:
-        note_failure(degraded, "tushare.daily", e)
+    cn_quotes, cn_asof, cn_src = fetch_cn_quotes(pro, cn, now_utc, degraded)
+    quotes.update(cn_quotes); asof.update(cn_asof); quote_src.update(cn_src)
     third = fetch_third_leg(pro, cn, now_utc, degraded)
     try:
         swdf = pro.sw_daily(ts_code="801081.SI", fields="trade_date,pe,pb").sort_values("trade_date")
