@@ -122,19 +122,24 @@ class LastClosed(unittest.TestCase):
 
 
 class FakePro:
-    """daily_basic 只认单代码：逗号多代码返回空表（复现第三腿从未写入）。"""
+    """daily、daily_basic 都只认单代码：逗号多代码返回 0 行（复现线上：第三腿从未写入、11-06 的 daily 全部失败）。"""
     ROWS = {"301308.SZ": (6.5672, 3.1666), "688008.SH": (47.704, 8.2709), "002409.SZ": (39.2773, 4.795),
             "603986.SH": (14.4959, 2.1944), "688123.SH": (float("nan"), 4.8752)}
 
     def __init__(self, fail=()):
         self.fail = set(fail)
         self.calls = []
+        self.daily_calls = []
 
     def daily(self, ts_code=None, **kw):
-        if "daily" in self.fail:
+        self.daily_calls.append((ts_code, kw))
+        if "daily" in self.fail or f"daily:{ts_code}" in self.fail:
             raise RuntimeError("daily down")
-        return pd.DataFrame([{"ts_code": c, "trade_date": "20261106", "close": 100.0 + i}
-                             for i, c in enumerate(ts_code.split(","))])
+        if "," in ts_code or ts_code not in self.ROWS:
+            return pd.DataFrame(columns=["ts_code", "trade_date", "close"])
+        close = 100.0 + list(self.ROWS).index(ts_code)
+        return pd.DataFrame([{"ts_code": ts_code, "trade_date": "20261106", "close": close},
+                             {"ts_code": ts_code, "trade_date": "20261105", "close": 1.0}])
 
     def daily_basic(self, ts_code=None, **kw):
         self.calls.append((ts_code, kw))
@@ -185,10 +190,59 @@ class ThirdLeg(unittest.TestCase):
         self.assertEqual(degraded[0]["ticker"], "000000.SZ")
 
 
+class CnQuotes(unittest.TestCase):
+    CN = list(FakePro.ROWS)
+    NOW = dt.datetime(2026, 11, 6, 23, 38, tzinfo=dt.timezone.utc)
+
+    def test_comma_multi_code_returns_no_rows(self):
+        df = FakePro().daily(ts_code=",".join(self.CN))
+        self.assertTrue(df.empty)
+        self.assertIn("ts_code", df.columns)
+
+    def test_each_code_fetched_alone_with_beijing_window(self):
+        pro, degraded = FakePro(), []
+        fd.fetch_cn_quotes(pro, self.CN, self.NOW, degraded)
+        self.assertEqual([c for c, _ in pro.daily_calls], self.CN)
+        for _, kw in pro.daily_calls:
+            self.assertEqual((kw["start_date"], kw["end_date"]), ("20261024", "20261107"))
+        self.assertEqual(degraded, [])
+
+    def test_takes_latest_trade_date_from_descending_rows(self):
+        quotes, asof, src = fd.fetch_cn_quotes(FakePro(), self.CN, self.NOW, [])
+        self.assertEqual(quotes["301308.SZ"], 100.0)
+        self.assertEqual(quotes["688123.SH"], 104.0)
+        self.assertEqual(asof["301308.SZ"], "20261106")
+        self.assertEqual(src["301308.SZ"], "bar")
+        self.assertEqual(set(quotes), set(self.CN))
+
+    def test_one_code_failure_keeps_the_rest(self):
+        degraded = []
+        quotes, *_ = fd.fetch_cn_quotes(FakePro(fail=["daily:688008.SH"]), self.CN, self.NOW, degraded)
+        self.assertNotIn("688008.SH", quotes)
+        self.assertEqual(len(quotes), 4)
+        self.assertEqual([(d["src"], d["ticker"]) for d in degraded], [("tushare.daily", "688008.SH")])
+
+    def test_no_rows_is_degraded(self):
+        degraded = []
+        quotes, *_ = fd.fetch_cn_quotes(FakePro(), ["000000.SZ"], self.NOW, degraded)
+        self.assertEqual(quotes, {})
+        self.assertEqual(degraded[0]["ticker"], "000000.SZ")
+        self.assertIn("无数据", degraded[0]["error"])
+
+    def test_nan_close_is_degraded(self):
+        pro = FakePro()
+        pro.daily = lambda **kw: pd.DataFrame([{"ts_code": "301308.SZ", "trade_date": "20261106", "close": float("nan")}])
+        degraded = []
+        quotes, *_ = fd.fetch_cn_quotes(pro, ["301308.SZ"], self.NOW, degraded)
+        self.assertEqual(quotes, {})
+        self.assertIn("close", degraded[0]["error"])
+
+
 class FetchLive(unittest.TestCase):
     PARAMS = {"targets": [{"src": {"quote": "yf", "ticker": "MU"}},
                           {"src": {"quote": "yf", "ticker": "000660.KS"}},
-                          {"src": {"quote": "ts", "ticker": "301308.SZ"}}]}
+                          {"src": {"quote": "ts", "ticker": "301308.SZ"}},
+                          {"src": {"quote": "ts", "ticker": "688008.SH"}}]}
 
     def fake_yf(self, broken=()):
         def Ticker(tk):
@@ -221,6 +275,8 @@ class FetchLive(unittest.TestCase):
         self.assertEqual(sox["value"], 11.0)
         self.assertIn("301308.SZ", third)
         self.assertEqual(sw["pe"], 80.0)
+        self.assertEqual((quotes["301308.SZ"], quotes["688008.SH"]), (100.0, 101.0))
+        self.assertEqual((asof["301308.SZ"], src["688008.SH"]), ("20261106", "bar"))
 
     def test_one_ticker_failure_keeps_the_rest(self):
         (quotes, *_), degraded = self.run_live(yf=self.fake_yf(broken=["MU"]))
@@ -233,7 +289,8 @@ class FetchLive(unittest.TestCase):
         self.assertNotIn("301308.SZ", quotes)
         self.assertIn("301308.SZ", third)
         self.assertEqual(sw["pe"], 80.0)
-        self.assertEqual([d["src"] for d in degraded], ["tushare.daily"])
+        self.assertEqual([(d["src"], d["ticker"]) for d in degraded],
+                         [("tushare.daily", "301308.SZ"), ("tushare.daily", "688008.SH")])
 
     def test_missing_token_is_degraded(self):
         (quotes, third, _, sw, *_), degraded = self.run_live(token=None)
