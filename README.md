@@ -9,10 +9,10 @@
 ```
 GitHub Actions（每日两次：UTC 09:30 / 21:30 ≈ 台北 17:30 / 05:30）
   └─ pipeline/fetch_data.py     ← tushare(token=Secrets) + yfinance 直连
-       ├─ 行情：11 标的（美/韩=yfinance，A股=tushare）+ ^SOX
+       ├─ 行情：11 标的（美/韩=yfinance，A股=tushare）+ ^SOX；只记最近已收盘交易日
        ├─ 引擎：pipeline/engine.py（V_C/V_M/V_S/V_stress、implied N*/g、位置带）
        ├─ 温度：申万半导体 801081.SI PE/PB + 2020 以来分位（唯一 A 股口径）+ basket
-       ├─ 第三腿：A股 PE(TTM)/PB（daily_basic）
+       ├─ 第三腿：A股 PE(TTM)/PB（daily_basic，逐只取，带 as-of）
        ├─ 条件触发旗标：E0 保质期、带位迁移、P<V_M 下沿参考（非买入线）
        └─ 写 data/auto/latest.json（+ history/YYYY-MM-DD.json 留痕）
 Claude 会话（演练/事件加照 → 作者确认 → 四闸门）
@@ -38,12 +38,19 @@ index.html（纯静态，GitHub Pages 托管）
 
 行业态迁移 / 灯号定级 / 判断型证据定级 / 参数台账变更，只能经 Claude 会话产出 → **作者确认** → 修改 `data/judgment.json`（及 `pipeline/params.json`）→ commit。每次变化同步追加 `cycle_log` 条目（与项目档案《周期日志.md》一致）。取证协议：A 官方行为 > A- 官方表态 > B 专业库 > C 传闻/卖方，原文+URL+日期留痕。
 
+## 取数失败时
+
+- `degraded` 记录失败的数据源（个股级失败带 `ticker`）；`stale_tickers` 列出沿用上期值的标的，这些行保留上期 as-of 并打 `stale`。
+- 依赖失败源的聚合字段置 `null`，不写旧值：`basket_vs_0601_pct`（缺任一成分，缺的列在 `basket_missing`）、`sw_pe` 及分位、`sox.value`。页面显示横幅和"—"。
+- 数据照常提交，随后工作流末步 `fetch_data.py --check-degraded` 让这次运行显示失败。
+
 ## 本地开发
 
 ```bash
 pip install -r pipeline/requirements.txt
 SEED_FILE=pipeline/seed_20260709.json python3 pipeline/fetch_data.py   # 离线种子模式
 TUSHARE_TOKEN=xxx python3 pipeline/fetch_data.py                       # 实取模式
+python3 -m unittest discover -s pipeline                               # 单元测试（不联网）
 python3 -m http.server 8000   # 打开 http://localhost:8000
 ```
 
@@ -64,7 +71,7 @@ PY
 | `data/judgment.json` | LLM 判断层（仅经作者确认更新） |
 | `data/auto/latest.json` + `history/` | 自动数据层最新值 + 每日留痕 |
 | `pipeline/params.json` | 机器可读参数台账（value/prior/source/grade/as_of） |
-| `pipeline/engine.py` | 估值引擎（two_step v2 移植，零方法改动） |
+| `pipeline/engine.py` | 估值引擎（two_step v2 移植；仅 `implied_Nstar` 改为连续年金，修整年锯齿） |
 | `pipeline/fetch_data.py` | 取数+计算+旗标+黑名单自检 |
 | `pipeline/sw_pe_history.csv` | 申万半导体 PE 历史（分位基期 2020 起，每日追加） |
 | `.github/workflows/update-data.yml` | 定时任务（每日两次 + 手动触发） |
