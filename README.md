@@ -43,6 +43,7 @@ index.html（纯静态，GitHub Pages 托管）
 - `degraded` 记录失败的数据源（个股级失败带 `ticker`）；`stale_tickers` 列出沿用上期值的标的，这些行保留上期 as-of 并打 `stale`。
 - 依赖失败源的聚合字段置 `null`，不写旧值：`basket_vs_0601_pct`（缺任一成分，缺的列在 `basket_missing`）、`sw_pe` 及分位、`sox.value`。页面显示横幅和"—"。
 - 数据照常提交，随后工作流末步 `fetch_data.py --check-degraded` 让这次运行显示失败。
+- 页面自身读不到 `data/*.json` 时回退到内嵌的旧快照，并在顶部横幅写明是哪一层、哪一天的数据。
 
 ## 本地开发
 

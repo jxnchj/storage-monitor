@@ -4,6 +4,9 @@
 import datetime as dt
 import json
 import os
+import re
+import shutil
+import subprocess
 import sys
 import tempfile
 import types
@@ -381,6 +384,53 @@ class Blacklist(unittest.TestCase):
             fd.blacklist_check({"x": "买入"})
         fd.blacklist_check({"x": "非买入线"})
         fd.blacklist_check({"flags": ["取数失败·沿用上期值(as-of 2026-11-05)"]})
+
+
+class PageTemplate(unittest.TestCase):
+    ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+    @classmethod
+    def setUpClass(cls):
+        with open(os.path.join(cls.ROOT, "index_template.html"), encoding="utf-8") as f:
+            cls.tpl = f.read()
+        with open(os.path.join(cls.ROOT, "index.html"), encoding="utf-8") as f:
+            cls.idx = f.read()
+
+    def node(self, js):
+        return json.loads(subprocess.run(["node", "-e", js], capture_output=True, text=True, check=True).stdout)
+
+    def test_index_matches_template_except_seeds(self):
+        strip = lambda s: re.sub(r'(id="seed-(?:auto|judgment)">).*?(</script>)', r"\1\2", s, flags=re.S)
+        self.assertEqual(strip(self.idx), strip(self.tpl))
+
+    def test_heat_wording_is_not_hardcoded(self):
+        for phrase in ("仍然很热", "最热的"):
+            self.assertNotIn(phrase, self.tpl)
+
+    @unittest.skipUnless(shutil.which("node"), "需要 node")
+    def test_plain_temp_follows_percentile(self):
+        fn = re.search(r"function tempZone.*?(?=function setView)", self.tpl, re.S).group(0)
+        spark = [{"pe": 148.9}, {"pe": 42.3}]
+        cases = [{"sw_pe_percentile_since2020": p, "sw_spark": spark, "basket_vs_0601_pct": -38.4, "sox": {"chg_vs_0602": -0.3159}}
+                 for p in (13.9, 30, 50, 70, 99.2, None)]
+        out = self.node(fn + f"console.log(JSON.stringify({json.dumps(cases)}.map(plainTemp)))")
+        for text, zone in zip(out, ("低位", "偏低", "中部", "偏高", "高位")):
+            self.assertIn(zone + "区间", text)
+            self.assertIn("低于近一年高点", text)
+        self.assertIn("高于 2020 年以来 <b>13.9%</b> 的交易日", out[0])
+        self.assertEqual(["盈利上升" in x for x in out], [True, True, False, False, False, False])
+        self.assertIn("暂无读数", out[5])
+        self.assertNotIn("区间", out[5])
+
+    @unittest.skipUnless(shutil.which("node"), "需要 node")
+    def test_load_marks_seed_fallback_only_on_failure(self):
+        fn = re.search(r"const SEEDED=\[\];.*?(?=function addBanner)", self.tpl, re.S).group(0)
+        js = """const $=()=>({textContent:'{"from":"seed"}'});""" + fn + """
+        (async()=>{const out=[];
+          for(const f of [async()=>{throw new Error("blocked")},async()=>({ok:false}),async()=>({ok:true,json:async()=>({from:"net"})})]){
+            globalThis.fetch=f;SEEDED.length=0;const d=await load("auto","u");out.push([d.from,[...SEEDED]]);}
+          console.log(JSON.stringify(out));})();"""
+        self.assertEqual(self.node(js), [["seed", ["auto"]], ["seed", ["auto"]], ["net", []]])
 
 
 if __name__ == "__main__":
