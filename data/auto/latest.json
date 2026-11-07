@@ -1,5 +1,5 @@
 {
- "generated_utc": "2026-11-07 01:00 UTC",
+ "generated_utc": "2026-11-07 03:05 UTC",
  "degraded": [],
  "stale_tickers": [],
  "temperature": {
@@ -245,8 +245,8 @@
    "ticker": "MU",
    "P": 690.0,
    "model": "cyclical",
-   "e0_asof": "2026-07-09",
-   "e0_note": "",
+   "e0_asof": "2026-10-01",
+   "e0_note": "FQ4 复核：下季指引×4 = 152.6（+2.0%），值不变",
    "views": [
     {
      "view": "主口径",
@@ -264,35 +264,37 @@
      "band": "in_range",
      "band_label": "区间内（看持久性）",
      "a2": "中性观察",
-     "p_below_vm": true
+     "p_below_vm": true,
+     "boundary": false
     },
     {
      "view": "保守口径",
      "kind": "cyclical",
-     "E0": 73.32,
-     "note": "FY26一致(保守口径)",
-     "V_C": 290.21,
-     "V_M": 594.38,
-     "V_S": 1437.1,
-     "V_stress": 871.67,
-     "p_vc": 2.38,
-     "p_vm": 1.16,
-     "p_vs": 0.48,
-     "implied": "28.7y",
+     "E0": 75.52,
+     "note": "FY26 实际 non-GAAP 稀释 EPS（保守口径；N21 由 FY26 一致替换为实际，同 N4 STX / N6 SNDK）",
+     "V_C": 298.01,
+     "V_M": 611.49,
+     "V_S": 1480.22,
+     "V_stress": 897.82,
+     "p_vc": 2.32,
+     "p_vm": 1.13,
+     "p_vs": 0.47,
+     "implied": "24.7y",
      "band": "in_range",
      "band_label": "区间内（看持久性）",
      "a2": "中性观察",
-     "p_below_vm": false
+     "p_below_vm": false,
+     "boundary": false
     }
    ],
-   "e0_age_days": 121,
+   "e0_age_days": 37,
    "flags": [
-    "E0超一季未复核·置信度降档",
+    "FQ4 复核：下季指引×4 = 152.6（+2.0%），值不变",
     "P<V_M下沿参考·复核结构事实(非买入线)"
    ],
    "stale": false,
    "asof": "2026-11-06",
-   "quote_src": "last_trade"
+   "quote_src": "bar"
   },
   {
    "id": "SNDK",
@@ -300,10 +302,10 @@
    "archetype": "A",
    "currency": "USD",
    "ticker": "SNDK",
-   "P": 835.06,
+   "P": 835.0599975585938,
    "model": "cyclical",
-   "e0_asof": "2026-07-09",
-   "e0_note": "",
+   "e0_asof": "2026-10-30",
+   "e0_note": "FQ1 复核：下季指引×4 = 224（+9.6%），值不变；8 拆 1 于 11-20 生效，per-share 待同步",
    "views": [
     {
      "view": "主口径",
@@ -321,35 +323,37 @@
      "band": "in_range",
      "band_label": "区间内（看持久性）",
      "a2": "中性观察",
-     "p_below_vm": true
+     "p_below_vm": true,
+     "boundary": false
     },
     {
      "view": "保守口径",
      "kind": "cyclical",
-     "E0": 66.41,
-     "note": "FY26一致(保守口径)",
-     "V_C": 260.66,
-     "V_M": 536.61,
-     "V_S": 1301.66,
-     "V_stress": 789.52,
-     "p_vc": 3.2,
-     "p_vm": 1.56,
-     "p_vs": 0.64,
+     "E0": 70.88,
+     "note": "FY26 实际 non-GAAP 稀释 EPS（保守口径；N6 由 FY26 一致替换为实际，同 N4 STX）",
+     "V_C": 276.5,
+     "V_M": 571.36,
+     "V_S": 1389.27,
+     "V_stress": 842.66,
+     "p_vc": 3.02,
+     "p_vm": 1.46,
+     "p_vs": 0.6,
      "implied": "无界(市场把峰值当近永续)",
      "band": "in_range",
      "band_label": "区间内（看持久性）",
      "a2": "中性观察",
-     "p_below_vm": false
+     "p_below_vm": false,
+     "boundary": false
     }
    ],
-   "e0_age_days": 121,
+   "e0_age_days": 8,
    "flags": [
-    "E0超一季未复核·置信度降档",
+    "FQ1 复核：下季指引×4 = 224（+9.6%），值不变；8 拆 1 于 11-20 生效，per-share 待同步",
     "P<V_M下沿参考·复核结构事实(非买入线)"
    ],
    "stale": false,
    "asof": "2026-11-06",
-   "quote_src": "last_trade"
+   "quote_src": "bar"
   },
   {
    "id": "SKH",
@@ -359,8 +363,8 @@
    "ticker": "000660.KS",
    "P": 1132000.0,
    "model": "cyclical",
-   "e0_asof": "2026-06-02",
-   "e0_note": "待2026-07-30财报+指引刷新(韩股纪律)",
+   "e0_asof": "2026-10-30",
+   "e0_note": "3Q 复核：当年正常化 28.0–31.1 万（−0.3%~+10.6%），≤20% 值不变；股本 11-05 注销后约 7.05 亿",
    "views": [
     {
      "view": "主口径",
@@ -378,13 +382,32 @@
      "band": "in_range",
      "band_label": "区间内（看持久性）",
      "a2": "中性观察",
-     "p_below_vm": true
+     "p_below_vm": true,
+     "boundary": true
+    },
+    {
+     "view": "保守口径",
+     "kind": "cyclical",
+     "E0": 232000,
+     "note": "2026 当年正常化保守口径（剔除 1H 一次性投资收益；2H = 2×2Q run-rate；C 级节点估算，N4 新增）",
+     "V_C": 953797.36,
+     "V_M": 1909091.78,
+     "V_S": 4547285.34,
+     "V_stress": 2758144.81,
+     "p_vc": 1.19,
+     "p_vm": 0.59,
+     "p_vs": 0.25,
+     "implied": "5.6y",
+     "band": "in_range",
+     "band_label": "区间内（看持久性）",
+     "a2": "中性观察",
+     "p_below_vm": true,
+     "boundary": false
     }
    ],
-   "e0_age_days": 158,
+   "e0_age_days": 8,
    "flags": [
-    "E0超一季未复核·置信度降档",
-    "待2026-07-30财报+指引刷新(韩股纪律)",
+    "3Q 复核：当年正常化 28.0–31.1 万（−0.3%~+10.6%），≤20% 值不变；股本 11-05 注销后约 7.05 亿",
     "P<V_M下沿参考·复核结构事实(非买入线)"
    ],
    "stale": false,
@@ -399,8 +422,8 @@
    "ticker": "005930.KS",
    "P": 188700.0,
    "model": "cyclical",
-   "e0_asof": "2026-06-02",
-   "e0_note": "Q2初步OP₩89.4T远超；待7-30正式财报刷新",
+   "e0_asof": "2026-10-30",
+   "e0_note": "3Q 复核：当年口径 40.9–44.4k（−2.6%~+5.7%），值不变；E0_cons 30,000 已低于累计实际年化，语义待改",
    "views": [
     {
      "view": "主口径",
@@ -418,7 +441,8 @@
      "band": "in_range",
      "band_label": "区间内（看持久性）",
      "a2": "中性观察",
-     "p_below_vm": true
+     "p_below_vm": true,
+     "boundary": false
     },
     {
      "view": "保守口径",
@@ -436,13 +460,13 @@
      "band": "in_range",
      "band_label": "区间内（看持久性）",
      "a2": "中性观察",
-     "p_below_vm": true
+     "p_below_vm": true,
+     "boundary": false
     }
    ],
-   "e0_age_days": 158,
+   "e0_age_days": 8,
    "flags": [
-    "E0超一季未复核·置信度降档",
-    "Q2初步OP₩89.4T远超；待7-30正式财报刷新",
+    "3Q 复核：当年口径 40.9–44.4k（−2.6%~+5.7%），值不变；E0_cons 30,000 已低于累计实际年化，语义待改",
     "P<V_M下沿参考·复核结构事实(非买入线)"
    ],
    "stale": false,
@@ -455,10 +479,10 @@
    "archetype": "B",
    "currency": "USD",
    "ticker": "WDC",
-   "P": 263.78,
+   "P": 263.7799987792969,
    "model": "cyclical",
-   "e0_asof": "2026-07-09",
-   "e0_note": "raw未做clean再推导(GAAP分拆一次性)，财报季复核",
+   "e0_asof": "2026-10-30",
+   "e0_note": "FQ1 复核：(上季实际+下季指引)×2 = 20.88（+14.3%），值不变；锚点敏感，阈值 E0≈19.64",
    "views": [
     {
      "view": "主口径",
@@ -476,7 +500,8 @@
      "band": "in_range",
      "band_label": "区间内（看持久性）",
      "a2": "中性观察",
-     "p_below_vm": false
+     "p_below_vm": false,
+     "boundary": false
     },
     {
      "view": "保守口径",
@@ -494,17 +519,17 @@
      "band": "in_range",
      "band_label": "区间内（看持久性）",
      "a2": "中性观察",
-     "p_below_vm": false
+     "p_below_vm": false,
+     "boundary": false
     }
    ],
-   "e0_age_days": 121,
+   "e0_age_days": 8,
    "flags": [
-    "E0超一季未复核·置信度降档",
-    "raw未做clean再推导(GAAP分拆一次性)，财报季复核"
+    "FQ1 复核：(上季实际+下季指引)×2 = 20.88（+14.3%），值不变；锚点敏感，阈值 E0≈19.64"
    ],
    "stale": false,
    "asof": "2026-11-06",
-   "quote_src": "last_trade"
+   "quote_src": "bar"
   },
   {
    "id": "STX",
@@ -512,55 +537,57 @@
    "archetype": "B",
    "currency": "USD",
    "ticker": "STX",
-   "P": 460.99,
+   "P": 460.989990234375,
    "model": "cyclical",
-   "e0_asof": "2026-07-09",
-   "e0_note": "",
+   "e0_asof": "2026-10-30",
+   "e0_note": "FQ1 复核改值 27.39→33.76（v1.3 §29）；锚点敏感，阈值 E0≈34.79",
    "views": [
     {
      "view": "主口径",
      "kind": "cyclical",
-     "E0": 27.39,
+     "E0": 33.76,
      "note": "",
-     "V_C": 108.38,
-     "V_M": 225.3,
-     "V_S": 551.5,
-     "V_stress": 334.0,
-     "p_vc": 4.25,
-     "p_vm": 2.05,
-     "p_vs": 0.84,
+     "V_C": 127.3,
+     "V_M": 272.84,
+     "V_S": 679.77,
+     "V_stress": 411.68,
+     "p_vc": 3.62,
+     "p_vm": 1.69,
+     "p_vs": 0.68,
      "implied": "无界(市场把峰值当近永续)",
      "band": "in_range",
      "band_label": "区间内（看持久性）",
      "a2": "中性观察",
-     "p_below_vm": false
+     "p_below_vm": false,
+     "boundary": false
     },
     {
      "view": "保守口径",
      "kind": "cyclical",
-     "E0": 14.89,
-     "note": "FY26一致(保守口径)",
-     "V_C": 71.27,
-     "V_M": 132.02,
-     "V_S": 299.81,
-     "V_stress": 181.57,
-     "p_vc": 6.47,
-     "p_vm": 3.49,
-     "p_vs": 1.54,
+     "E0": 15.58,
+     "note": "FY26 实际 non-GAAP 稀释 EPS（保守口径；N4 由 FY26 一致替换为实际）",
+     "V_C": 73.32,
+     "V_M": 137.17,
+     "V_S": 313.71,
+     "V_stress": 189.99,
+     "p_vc": 6.29,
+     "p_vm": 3.36,
+     "p_vs": 1.47,
      "implied": "无界(市场把峰值当近永续)",
      "band": "over",
      "band_label": "高估区",
      "a2": "风险预警",
-     "p_below_vm": false
+     "p_below_vm": false,
+     "boundary": false
     }
    ],
-   "e0_age_days": 121,
+   "e0_age_days": 8,
    "flags": [
-    "E0超一季未复核·置信度降档"
+    "FQ1 复核改值 27.39→33.76（v1.3 §29）；锚点敏感，阈值 E0≈34.79"
    ],
    "stale": false,
    "asof": "2026-11-06",
-   "quote_src": "last_trade"
+   "quote_src": "bar"
   },
   {
    "id": "JBL",
@@ -570,50 +597,51 @@
    "ticker": "301308.SZ",
    "P": 214.77,
    "model": "cyclical",
-   "e0_asof": "2026-06-01",
-   "e0_note": "H1预告92-110亿(+622x)无法拆分；8月中报=剥离比例裁决点",
+   "e0_asof": "2026-10-30",
+   "e0_note": "三季报复核：剥离口径 22.67（−5.5%），值不变；库存收益仍无法拆分，毛利率超额法约 13 并列待定",
    "views": [
     {
      "view": "主口径",
      "kind": "cyclical",
-     "E0": 20.0,
+     "E0": 24.0,
      "note": "",
-     "V_C": 68.49,
-     "V_M": 158.81,
-     "V_S": 493.74,
-     "V_stress": 250.66,
-     "p_vc": 3.14,
-     "p_vm": 1.35,
-     "p_vs": 0.43,
-     "implied": "无界(市场把峰值当近永续)",
+     "V_C": 77.79,
+     "V_M": 187.28,
+     "V_S": 592.49,
+     "V_stress": 300.79,
+     "p_vc": 2.76,
+     "p_vm": 1.15,
+     "p_vs": 0.36,
+     "implied": "21.8y",
      "band": "in_range",
      "band_label": "区间内（看持久性）",
      "a2": "中性观察",
-     "p_below_vm": false
+     "p_below_vm": false,
+     "boundary": false
     },
     {
      "view": "并列口径",
      "kind": "cyclical",
-     "E0": 30.56,
-     "note": "报告口径一致(长城证券7-01,单源)——与剥离口径带位反向,并列展示",
-     "V_C": 93.05,
-     "V_M": 233.97,
-     "V_S": 754.44,
-     "V_stress": 383.01,
-     "p_vc": 2.31,
-     "p_vm": 0.92,
-     "p_vs": 0.28,
-     "implied": "11.3y",
+     "E0": 39.3,
+     "note": "报告口径一致（v1.2-drill.1.1 中位数来源 = 华泰证券 2026-08-12 2026E 净利 180.58 亿；按 v1.2-drill.17.1(b) 以净利 ÷ H 股发行后总股本 4.5966 亿重算 = 39.29 → 39.3；prior 42.68 为原报告 EPS，研报股本口径约 4.231 亿）——含库存收益，与剥离口径并列（§20 双口径）",
+     "V_C": 113.37,
+     "V_M": 296.19,
+     "V_S": 970.2,
+     "V_stress": 492.55,
+     "p_vc": 1.89,
+     "p_vm": 0.73,
+     "p_vs": 0.22,
+     "implied": "7.2y",
      "band": "in_range",
      "band_label": "区间内（看持久性）",
      "a2": "中性观察",
-     "p_below_vm": true
+     "p_below_vm": true,
+     "boundary": false
     }
    ],
-   "e0_age_days": 159,
+   "e0_age_days": 8,
    "flags": [
-    "E0超一季未复核·置信度降档",
-    "H1预告92-110亿(+622x)无法拆分；8月中报=剥离比例裁决点"
+    "三季报复核：剥离口径 22.67（−5.5%），值不变；库存收益仍无法拆分，毛利率超额法约 13 并列待定"
    ],
    "stale": false,
    "asof": "20261106",
@@ -632,31 +660,31 @@
    "ticker": "688008.SH",
    "P": 150.1,
    "model": "growth",
-   "e0_asof": "2026-06-01",
-   "e0_note": "6-15~7-09窗口report_rc无新研报,待刷新",
+   "e0_asof": "2026-10-30",
+   "e0_note": "三季报复核：1–3Q 扣非年化 2.60（+16.0%），值不变；回升条件未满足，一致口径约 3.19 并列",
    "views": [
     {
      "view": "成长档",
      "kind": "growth",
-     "E0": 2.6,
-     "note": "一致增速30-37%(6月口径)",
-     "V_C": 61.81,
-     "V_M": 107.81,
-     "V_S": 203.34,
-     "p_vc": 2.43,
-     "p_vm": 1.39,
-     "p_vs": 0.74,
-     "implied": "g≈24.2%",
+     "E0": 2.24,
+     "note": "一致增速 30-37%(6月口径)；7-18 高盛 2026E/27E/28E EPS 3.36/4.37/5.96（27E +30%、28E +36%）；N13：中报后 E0 改为经营性口径 2.24（13.1），growth 参数 gC/gM/gS 不变",
+     "V_C": 53.25,
+     "V_M": 92.88,
+     "V_S": 175.19,
+     "p_vc": 2.82,
+     "p_vm": 1.62,
+     "p_vs": 0.86,
+     "implied": "g≈27.0%",
      "band": "in_range",
      "band_label": "区间内（看持久性）",
      "a2": "中性观察",
-     "p_below_vm": false
+     "p_below_vm": false,
+     "boundary": false
     }
    ],
-   "e0_age_days": 159,
+   "e0_age_days": 8,
    "flags": [
-    "E0超一季未复核·置信度降档",
-    "6-15~7-09窗口report_rc无新研报,待刷新"
+    "三季报复核：1–3Q 扣非年化 2.60（+16.0%），值不变；回升条件未满足，一致口径约 3.19 并列"
    ],
    "stale": false,
    "asof": "20261106",
@@ -675,8 +703,8 @@
    "ticker": "002409.SZ",
    "P": 85.67,
    "model": "growth",
-   "e0_asof": "2026-07-09",
-   "e0_note": "上修发生在股价+91%之后,热数据折价",
+   "e0_asof": "2026-10-30",
+   "e0_note": "三季报复核：2.29（−16.4%），值不变；热一致兑现缺口",
    "views": [
     {
      "view": "成长档",
@@ -693,13 +721,13 @@
      "band": "in_range",
      "band_label": "区间内（看持久性）",
      "a2": "中性观察",
-     "p_below_vm": true
+     "p_below_vm": true,
+     "boundary": false
     }
    ],
-   "e0_age_days": 121,
+   "e0_age_days": 8,
    "flags": [
-    "E0超一季未复核·置信度降档",
-    "上修发生在股价+91%之后,热数据折价"
+    "三季报复核：2.29（−16.4%），值不变；热一致兑现缺口"
    ],
    "stale": false,
    "asof": "20261106",
@@ -718,48 +746,51 @@
    "ticker": "603986.SH",
    "P": 239.49,
    "model": "dual",
-   "e0_asof": "2026-06-01",
-   "e0_note": "",
+   "e0_asof": "2026-10-30",
+   "e0_note": "三季报改值 14.0→18.0（1–3Q 扣非×4/3）；锚点敏感，成长视角阈值 E0≈19.37",
    "views": [
     {
      "view": "周期视角",
      "kind": "cyclical",
-     "E0": 8.0,
+     "E0": 18.0,
      "note": "",
-     "V_C": 46.3,
-     "V_M": 77.12,
-     "V_S": 191.96,
-     "V_stress": 97.55,
-     "p_vc": 5.17,
-     "p_vm": 3.11,
-     "p_vs": 1.25,
+     "V_C": 75.99,
+     "V_M": 151.75,
+     "V_S": 431.91,
+     "V_stress": 219.5,
+     "p_vc": 3.15,
+     "p_vm": 1.58,
+     "p_vs": 0.55,
      "implied": "无界(市场把峰值当近永续)",
-     "band": "over",
-     "band_label": "高估区",
-     "a2": "风险预警",
-     "p_below_vm": false
+     "band": "in_range",
+     "band_label": "区间内（看持久性）",
+     "a2": "中性观察",
+     "p_below_vm": false,
+     "boundary": false
     },
     {
      "view": "成长/复苏视角",
      "kind": "growth",
-     "E0": 8.0,
+     "E0": 18.0,
      "note": "成长视角:CXMT/NOR中途站",
-     "V_C": 212.96,
-     "V_M": 482.47,
-     "V_S": 1032.2,
-     "p_vc": 1.12,
-     "p_vm": 0.5,
-     "p_vs": 0.23,
-     "implied": "g≈12.1%",
-     "band": "in_range",
-     "band_label": "区间内（看持久性）",
-     "a2": "中性观察",
-     "p_below_vm": true
+     "V_C": 479.15,
+     "V_M": 1085.57,
+     "V_S": 2322.45,
+     "p_vc": 0.5,
+     "p_vm": 0.22,
+     "p_vs": 0.1,
+     "implied": "g≈-2.0%",
+     "band": "deep_under",
+     "band_label": "深度低估区",
+     "a2": "位置描述：P<V_C（非正向验证）",
+     "p_below_vm": true,
+     "boundary": true
     }
    ],
-   "e0_age_days": 159,
+   "e0_age_days": 8,
    "flags": [
-    "E0超一季未复核·置信度降档"
+    "三季报改值 14.0→18.0（1–3Q 扣非×4/3）；锚点敏感，成长视角阈值 E0≈19.37",
+    "带位迁移: 高估区→区间内（看持久性）"
    ],
    "stale": false,
    "asof": "20261106",
@@ -778,8 +809,8 @@
    "ticker": "688123.SH",
    "P": 95.36,
    "model": "dual",
-   "e0_asof": "2026-06-01",
-   "e0_note": "",
+   "e0_asof": "2026-10-30",
+   "e0_note": "三季报复核：塌缩视角 TTM 扣非 1.74（−3.3%），值不变；复苏视角改 2.19（作者 11-07），原 3.18 并列",
    "views": [
     {
      "view": "周期视角",
@@ -797,29 +828,31 @@
      "band": "extreme_over",
      "band_label": "极端高估区",
      "a2": "风险预警",
-     "p_below_vm": false
+     "p_below_vm": false,
+     "boundary": false
     },
     {
      "view": "成长/复苏视角",
      "kind": "growth",
-     "E0": 3.18,
-     "note": "复苏视角E0=3.18(华安6-29单源,C级弱);2027-28一致+50%/年",
-     "V_C": 63.69,
-     "V_M": 111.87,
-     "V_S": 191.78,
-     "p_vc": 1.5,
-     "p_vm": 0.85,
-     "p_vs": 0.5,
-     "implied": "g≈12.1%",
+     "E0": 2.19,
+     "note": "复苏视角 E0=2.19（A 级 run-rate，剔除股份支付；作者 2026-11-07）；原 3.18（华安 6-29 单源）并列",
+     "V_C": 43.86,
+     "V_M": 77.04,
+     "V_S": 132.08,
+     "p_vc": 2.17,
+     "p_vm": 1.24,
+     "p_vs": 0.72,
+     "implied": "g≈18.9%",
      "band": "in_range",
      "band_label": "区间内（看持久性）",
      "a2": "中性观察",
-     "p_below_vm": true
+     "p_below_vm": false,
+     "boundary": false
     }
    ],
-   "e0_age_days": 159,
+   "e0_age_days": 8,
    "flags": [
-    "E0超一季未复核·置信度降档"
+    "三季报复核：塌缩视角 TTM 扣非 1.74（−3.3%），值不变；复苏视角改 2.19（作者 11-07），原 3.18 并列"
    ],
    "stale": false,
    "asof": "20261106",
