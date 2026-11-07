@@ -194,7 +194,7 @@ body.plain .pro-only{display:none!important}
     口径纪律：A 股温度唯一口径=申万半导体 801081.SI（sw_daily），分位基期 2020 起，跨口径禁比；TrendForce 价格标注 P（预测）/A（实测）；所有数值带 as-of。<br>
     数据分层：行情/估值/温度=自动 pipeline（GitHub Actions，每日两次）；行业态/灯号/事件=LLM 判断层（Claude 会话产出，<b>经作者确认后</b>写入）。<br>
     硬边界：作者无存储持仓；本页为研究框架的监控视图，无目标价、无仓位百分比、无买入/卖出/持有/做空建议；词汇黑名单由 pipeline 与前端双重审查。<br>
-    方法：《研究纲领 v2.3》《完整方法论 审计版 v1.2》（两步走 · 双向状态机 · 状态依赖下轨 · 三角验证）。
+    方法：《研究纲领 v2.3》《完整方法论 审计版 v1.3》（两步走 · 双向状态机 · 状态依赖下轨 · 三角验证）。
   </footer>
 </div>
 <div id="tip"></div>
@@ -204,7 +204,7 @@ body.plain .pro-only{display:none!important}
 <script>
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-const LIGHT={green:["var(--good)","🟢"],yellow:["var(--warn)","🟡"],"yellow-watch":["var(--warn)","🟡"],orange:["var(--serious)","🟠"],red:["var(--crit)","🔴"]};
+const LIGHT={green:["var(--good)","🟢"],yellow:["var(--warn)","🟡"],"yellow-watch":["var(--warn)","🟡"],"yellow-confirmed":["var(--warn)","🟡"],orange:["var(--serious)","🟠"],red:["var(--crit)","🔴"]};
 const READ={"bull-hold":["var(--s2)","偏韧性"],"bear-lean":["var(--serious)","偏钝化"],"watch":["var(--warn)","观察"],"neutral":["var(--axis)","中性"]};
 const BLACK=["目标价","建仓","加仓","减仓","买入","卖出","做空","止损","仓位"];
 const OKPHRASE=["非买入线","无买入","无卖出","无目标价","无仓位","买入/卖出/持有/做空建议","非交易指令","不构成买入"];
@@ -222,8 +222,10 @@ const PLAIN_STATE={
  "触底再起":"下行段出现企稳信号：跌幅收窄、库存去化、订单回稳。"};
 function plainState(j){const st=j.industry_state;let s="<b>行业现在处于："+st.label+"</b>。"+(PLAIN_STATE[st.label]||"");
  if(st.qualifier==="P")s+=" 目前的判定基于权威机构的<b>预测</b>数据（P 口径），要等实际成交数据落地才升级确认。";
- const wl=j.trigger&&j.trigger.lights&&j.trigger.lights.length;
- if(wl)s+=" 另有 "+j.trigger.lights.length+" 盏<b>黄色观察灯</b>（"+j.trigger.lights.map(l=>l.variable).join("、")+"）——值得警惕、但尚未确认恶化。";
+ if(st.qualifier==="A")s+=" 这个判定已由原厂官方的实际价格数据确认（A 口径），第三方的同口径实测到了之后还会再核对一次。";
+ const ls=(j.trigger&&j.trigger.lights)||[];const cf=ls.filter(l=>l.light==="yellow-confirmed"),wa=ls.filter(l=>l.light!=="yellow-confirmed");
+ if(cf.length)s+=" 另有 "+cf.length+" 盏<b>黄灯已确认恶化</b>（"+cf.map(l=>l.variable).join("、")+"）——计入结构变量，但尚不足以升橙灯。";
+ if(wa.length)s+=" 另有 "+wa.length+" 盏<b>黄色观察灯</b>（"+wa.map(l=>l.variable).join("、")+"）——值得警惕、但尚未确认恶化。";
  return s;}
 /* 分位 = 2020 年以来 PE 低于当前的交易日占比。文案跟分位走，不写死冷热 */
 function tempZone(pct){return pct>=80?"高位":pct>=60?"偏高":pct>=40?"中部":pct>=20?"偏低":"低位";}
@@ -285,7 +287,7 @@ function render(auto,j){
     return `<div class="var"><div class="nm"><span class="dot" style="background:${c}"></span>${esc(v.name)}<span class="chip">${t}</span></div><div class="sm">${esc(v.summary)}</div><div class="meta">${esc(v.grade)} · as-of ${esc(v.as_of)}</div></div>`}).join("");
   const tl=j.ai_layers.map(l=>{const[c,e]=LIGHT[l.light];return `<span class="chip" title="${esc(l.note)}"><span class="dot" style="background:${c}"></span>AI·${esc(l.layer)} ${e}</span>`}).join("");
   const tr=j.trigger, wl=tr.lights.map(l=>{const[c,e]=LIGHT[l.light];
-    return `<span class="chip" title="${esc(l.basis)}｜裁决读数: ${esc(l.adjudication.join("；"))}｜${esc(l.cadence)}"><span class="dot" style="background:${c}"></span>${e} 观察灯·${esc(l.variable)}（${esc(l.date)} 作者确认）</span>`}).join("");
+    return `<span class="chip" title="${esc(l.basis)}｜裁决读数: ${esc(l.adjudication.join("；"))}｜${esc(l.cadence)}"><span class="dot" style="background:${c}"></span>${e} ${l.light==="yellow-confirmed"?"结构恶化已确认":"观察灯"}·${esc(l.variable)}（${esc(l.date)} 作者确认）</span>`}).join("");
   $("#lights").innerHTML=`<span class="chip">触发器：结构变量 ${tr.structural_confirmed}/${tr.structural_total} 恶化确认</span>${wl}${tl}<span class="chip">下轨档位：${esc(tr.floor_regime)}</span>`;
   $("#floorNote").textContent=tr.floor_note+"（悬停各灯可见依据与裁决读数）";
   /* 温度 */
@@ -304,7 +306,7 @@ function render(auto,j){
       <td class="vw">${esc(v.view)}</td>
       ${i===0?`<td class="num" rowspan="${t.views.length}">${fmtP(t.P,t.currency)}<div class="vw">${esc(t.asof||"")}</div></td>`:""}
       <td class="bandcell">${bandBar(v,t.currency)}</td>
-      <td><span class="badge ${v.band}">${esc(v.band_label)}</span></td>
+      <td><span class="badge ${v.band}">${esc(v.band_label)}</span>${v.band==="in_range"&&v.p_below_vm?'<div class="vw">P&lt;V_M</div>':""}${v.boundary?'<div class="vw">边界敏感（±3%）</div>':""}</td>
       <td class="num pro-only">${v.p_vm}</td><td class="num pro-only">${v.p_vs}</td>
       <td class="num pro-only">${esc(v.implied)}</td>
       <td>${esc(v.a2)}</td>

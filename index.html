@@ -194,80 +194,25 @@ body.plain .pro-only{display:none!important}
     口径纪律：A 股温度唯一口径=申万半导体 801081.SI（sw_daily），分位基期 2020 起，跨口径禁比；TrendForce 价格标注 P（预测）/A（实测）；所有数值带 as-of。<br>
     数据分层：行情/估值/温度=自动 pipeline（GitHub Actions，每日两次）；行业态/灯号/事件=LLM 判断层（Claude 会话产出，<b>经作者确认后</b>写入）。<br>
     硬边界：作者无存储持仓；本页为研究框架的监控视图，无目标价、无仓位百分比、无买入/卖出/持有/做空建议；词汇黑名单由 pipeline 与前端双重审查。<br>
-    方法：《研究纲领 v2.3》《完整方法论 审计版 v1.2》（两步走 · 双向状态机 · 状态依赖下轨 · 三角验证）。
+    方法：《研究纲领 v2.3》《完整方法论 审计版 v1.3》（两步走 · 双向状态机 · 状态依赖下轨 · 三角验证）。
   </footer>
 </div>
 <div id="tip"></div>
 
 <script type="application/json" id="seed-auto">{
- "generated_utc": "2026-07-10 03:32 UTC",
- "degraded": [],
+ "generated_utc": "2026-11-06 16:51 UTC",
+ "degraded": [
+  {
+   "src": "tushare",
+   "error": "No module named 'six'"
+  }
+ ],
  "temperature": {
-  "sw_pe": 158.38,
+  "sw_pe": null,
   "sw_pb": null,
-  "sw_asof": "20260709",
-  "sw_pe_percentile_since2020": 99.1,
+  "sw_asof": null,
+  "sw_pe_percentile_since2020": null,
   "sw_spark": [
-   {
-    "d": "20250616",
-    "pe": 79.5
-   },
-   {
-    "d": "20250623",
-    "pe": 80.4
-   },
-   {
-    "d": "20250630",
-    "pe": 84.2
-   },
-   {
-    "d": "20250707",
-    "pe": 82.0
-   },
-   {
-    "d": "20250714",
-    "pe": 82.7
-   },
-   {
-    "d": "20250721",
-    "pe": 83.7
-   },
-   {
-    "d": "20250728",
-    "pe": 87.4
-   },
-   {
-    "d": "20250804",
-    "pe": 87.4
-   },
-   {
-    "d": "20250811",
-    "pe": 88.2
-   },
-   {
-    "d": "20250818",
-    "pe": 95.9
-   },
-   {
-    "d": "20250825",
-    "pe": 107.7
-   },
-   {
-    "d": "20250901",
-    "pe": 106.1
-   },
-   {
-    "d": "20250908",
-    "pe": 97.9
-   },
-   {
-    "d": "20250915",
-    "pe": 104.5
-   },
-   {
-    "d": "20250922",
-    "pe": 111.1
-   },
    {
     "d": "20250929",
     "pe": 116.5
@@ -417,8 +362,68 @@ body.plain .pro-only{display:none!important}
     "pe": 145.2
    },
    {
-    "d": "20260709",
-    "pe": 158.4
+    "d": "20260710",
+    "pe": 148.4
+   },
+   {
+    "d": "20260717",
+    "pe": 117.7
+   },
+   {
+    "d": "20260724",
+    "pe": 120.4
+   },
+   {
+    "d": "20260731",
+    "pe": 106.8
+   },
+   {
+    "d": "20260807",
+    "pe": 123.8
+   },
+   {
+    "d": "20260814",
+    "pe": 124.0
+   },
+   {
+    "d": "20260821",
+    "pe": 120.9
+   },
+   {
+    "d": "20260828",
+    "pe": 118.7
+   },
+   {
+    "d": "20260904",
+    "pe": 77.0
+   },
+   {
+    "d": "20260911",
+    "pe": 71.4
+   },
+   {
+    "d": "20260918",
+    "pe": 77.4
+   },
+   {
+    "d": "20260928",
+    "pe": 72.8
+   },
+   {
+    "d": "20261012",
+    "pe": 65.2
+   },
+   {
+    "d": "20261019",
+    "pe": 59.7
+   },
+   {
+    "d": "20261026",
+    "pe": 58.9
+   },
+   {
+    "d": "20261030",
+    "pe": 53.0
    }
   ],
   "sw_anchor": {
@@ -427,11 +432,11 @@ body.plain .pro-only{display:none!important}
    "base_0601": 110.45
   },
   "sox": {
-   "value": 12574.97,
-   "asof": "2026-07-08",
-   "chg_vs_0602": -0.0839
+   "value": 9408.447265625,
+   "asof": "2026-11-06",
+   "chg_vs_0602": -0.3146
   },
-  "basket_vs_0601_pct": 48.2,
+  "basket_vs_0601_pct": -37.8,
   "caliber_note": "A股温度唯一口径=申万半导体801081.SI(sw_daily)；分位基期2020-01起；跨口径禁比"
  },
  "targets": [
@@ -441,7 +446,7 @@ body.plain .pro-only{display:none!important}
    "archetype": "A",
    "currency": "USD",
    "ticker": "MU",
-   "P": 948.8,
+   "P": 695.6099853515625,
    "model": "cyclical",
    "e0_asof": "2026-07-09",
    "e0_note": "",
@@ -455,10 +460,10 @@ body.plain .pro-only{display:none!important}
      "V_M": 1187.84,
      "V_S": 2933.0,
      "V_stress": 1779.0,
-     "p_vc": 1.69,
-     "p_vm": 0.8,
-     "p_vs": 0.32,
-     "implied": "10.1y",
+     "p_vc": 1.24,
+     "p_vm": 0.59,
+     "p_vs": 0.24,
+     "implied": "6.1y",
      "band": "in_range",
      "band_label": "区间内（看持久性）",
      "a2": "中性观察",
@@ -473,22 +478,23 @@ body.plain .pro-only{display:none!important}
      "V_M": 594.38,
      "V_S": 1437.1,
      "V_stress": 871.67,
-     "p_vc": 3.27,
-     "p_vm": 1.6,
-     "p_vs": 0.66,
-     "implied": "无界(市场把峰值当近永续)",
+     "p_vc": 2.4,
+     "p_vm": 1.17,
+     "p_vs": 0.48,
+     "implied": "30.0y",
      "band": "in_range",
      "band_label": "区间内（看持久性）",
      "a2": "中性观察",
      "p_below_vm": false
     }
    ],
-   "e0_age_days": 1,
+   "e0_age_days": 120,
    "flags": [
+    "E0超一季未复核·置信度降档",
     "P<V_M下沿参考·复核结构事实(非买入线)"
    ],
    "stale": false,
-   "asof": ""
+   "asof": "2026-11-06"
   },
   {
    "id": "SNDK",
@@ -496,7 +502,7 @@ body.plain .pro-only{display:none!important}
    "archetype": "A",
    "currency": "USD",
    "ticker": "SNDK",
-   "P": 1727.18,
+   "P": 840.5,
    "model": "cyclical",
    "e0_asof": "2026-07-09",
    "e0_note": "",
@@ -510,14 +516,14 @@ body.plain .pro-only{display:none!important}
      "V_M": 1610.15,
      "V_S": 4007.69,
      "V_stress": 2430.85,
-     "p_vc": 2.3,
-     "p_vm": 1.07,
-     "p_vs": 0.43,
-     "implied": "19.0y",
+     "p_vc": 1.12,
+     "p_vm": 0.52,
+     "p_vs": 0.21,
+     "implied": "5.1y",
      "band": "in_range",
      "band_label": "区间内（看持久性）",
      "a2": "中性观察",
-     "p_below_vm": false
+     "p_below_vm": true
     },
     {
      "view": "保守口径",
@@ -528,20 +534,23 @@ body.plain .pro-only{display:none!important}
      "V_M": 536.61,
      "V_S": 1301.66,
      "V_stress": 789.52,
-     "p_vc": 6.63,
-     "p_vm": 3.22,
-     "p_vs": 1.33,
+     "p_vc": 3.22,
+     "p_vm": 1.57,
+     "p_vs": 0.65,
      "implied": "无界(市场把峰值当近永续)",
-     "band": "over",
-     "band_label": "高估区",
-     "a2": "风险预警",
+     "band": "in_range",
+     "band_label": "区间内（看持久性）",
+     "a2": "中性观察",
      "p_below_vm": false
     }
    ],
-   "e0_age_days": 1,
-   "flags": [],
+   "e0_age_days": 120,
+   "flags": [
+    "E0超一季未复核·置信度降档",
+    "P<V_M下沿参考·复核结构事实(非买入线)"
+   ],
    "stale": false,
-   "asof": ""
+   "asof": "2026-11-06"
   },
   {
    "id": "SKH",
@@ -549,7 +558,7 @@ body.plain .pro-only{display:none!important}
    "archetype": "A",
    "currency": "KRW",
    "ticker": "000660.KS",
-   "P": 2186000,
+   "P": 1264000.0,
    "model": "cyclical",
    "e0_asof": "2026-06-02",
    "e0_note": "待2026-07-30财报+指引刷新(韩股纪律)",
@@ -563,23 +572,24 @@ body.plain .pro-only{display:none!important}
      "V_M": 2290110.83,
      "V_S": 5507703.37,
      "V_stress": 3340684.02,
-     "p_vc": 1.94,
-     "p_vm": 0.95,
-     "p_vs": 0.4,
-     "implied": "16.0y",
+     "p_vc": 1.12,
+     "p_vm": 0.55,
+     "p_vs": 0.23,
+     "implied": "5.1y",
      "band": "in_range",
      "band_label": "区间内（看持久性）",
      "a2": "中性观察",
      "p_below_vm": true
     }
    ],
-   "e0_age_days": 38,
+   "e0_age_days": 157,
    "flags": [
+    "E0超一季未复核·置信度降档",
     "待2026-07-30财报+指引刷新(韩股纪律)",
     "P<V_M下沿参考·复核结构事实(非买入线)"
    ],
    "stale": false,
-   "asof": ""
+   "asof": "2026-11-05"
   },
   {
    "id": "SSNLF",
@@ -587,7 +597,7 @@ body.plain .pro-only{display:none!important}
    "archetype": "A",
    "currency": "KRW",
    "ticker": "005930.KS",
-   "P": 278000,
+   "P": 201500.0,
    "model": "cyclical",
    "e0_asof": "2026-06-02",
    "e0_note": "Q2初步OP₩89.4T远超；待7-30正式财报刷新",
@@ -601,10 +611,10 @@ body.plain .pro-only{display:none!important}
      "V_M": 338688.37,
      "V_S": 845680.31,
      "V_stress": 512155.36,
-     "p_vc": 1.77,
-     "p_vm": 0.82,
-     "p_vs": 0.33,
-     "implied": "11.0y",
+     "p_vc": 1.28,
+     "p_vm": 0.59,
+     "p_vs": 0.24,
+     "implied": "5.1y",
      "band": "in_range",
      "band_label": "区间内（看持久性）",
      "a2": "中性观察",
@@ -619,23 +629,24 @@ body.plain .pro-only{display:none!important}
      "V_M": 249137.04,
      "V_S": 604057.36,
      "V_stress": 365825.26,
-     "p_vc": 2.28,
-     "p_vm": 1.12,
-     "p_vs": 0.46,
-     "implied": "25.6y",
+     "p_vc": 1.65,
+     "p_vm": 0.81,
+     "p_vs": 0.33,
+     "implied": "9.1y",
      "band": "in_range",
      "band_label": "区间内（看持久性）",
      "a2": "中性观察",
-     "p_below_vm": false
+     "p_below_vm": true
     }
    ],
-   "e0_age_days": 38,
+   "e0_age_days": 157,
    "flags": [
+    "E0超一季未复核·置信度降档",
     "Q2初步OP₩89.4T远超；待7-30正式财报刷新",
     "P<V_M下沿参考·复核结构事实(非买入线)"
    ],
    "stale": false,
-   "asof": ""
+   "asof": "2026-11-05"
   },
   {
    "id": "WDC",
@@ -643,7 +654,7 @@ body.plain .pro-only{display:none!important}
    "archetype": "B",
    "currency": "USD",
    "ticker": "WDC",
-   "P": 550.3,
+   "P": 262.614990234375,
    "model": "cyclical",
    "e0_asof": "2026-07-09",
    "e0_note": "raw未做clean再推导(GAAP分拆一次性)，财报季复核",
@@ -657,13 +668,13 @@ body.plain .pro-only{display:none!important}
      "V_M": 153.76,
      "V_S": 367.87,
      "V_stress": 222.79,
-     "p_vc": 7.17,
-     "p_vm": 3.58,
-     "p_vs": 1.5,
+     "p_vc": 3.42,
+     "p_vm": 1.71,
+     "p_vs": 0.71,
      "implied": "无界(市场把峰值当近永续)",
-     "band": "over",
-     "band_label": "高估区",
-     "a2": "风险预警",
+     "band": "in_range",
+     "band_label": "区间内（看持久性）",
+     "a2": "中性观察",
      "p_below_vm": false
     },
     {
@@ -675,22 +686,23 @@ body.plain .pro-only{display:none!important}
      "V_M": 123.76,
      "V_S": 286.93,
      "V_stress": 173.77,
-     "p_vc": 8.48,
-     "p_vm": 4.45,
-     "p_vs": 1.92,
+     "p_vc": 4.05,
+     "p_vm": 2.12,
+     "p_vs": 0.92,
      "implied": "无界(市场把峰值当近永续)",
-     "band": "over",
-     "band_label": "高估区",
-     "a2": "风险预警",
+     "band": "in_range",
+     "band_label": "区间内（看持久性）",
+     "a2": "中性观察",
      "p_below_vm": false
     }
    ],
-   "e0_age_days": 1,
+   "e0_age_days": 120,
    "flags": [
+    "E0超一季未复核·置信度降档",
     "raw未做clean再推导(GAAP分拆一次性)，财报季复核"
    ],
    "stale": false,
-   "asof": ""
+   "asof": "2026-11-06"
   },
   {
    "id": "STX",
@@ -698,7 +710,7 @@ body.plain .pro-only{display:none!important}
    "archetype": "B",
    "currency": "USD",
    "ticker": "STX",
-   "P": 860.02,
+   "P": 457.9599914550781,
    "model": "cyclical",
    "e0_asof": "2026-07-09",
    "e0_note": "",
@@ -712,13 +724,13 @@ body.plain .pro-only{display:none!important}
      "V_M": 225.3,
      "V_S": 551.5,
      "V_stress": 334.0,
-     "p_vc": 7.94,
-     "p_vm": 3.82,
-     "p_vs": 1.56,
+     "p_vc": 4.23,
+     "p_vm": 2.03,
+     "p_vs": 0.83,
      "implied": "无界(市场把峰值当近永续)",
-     "band": "over",
-     "band_label": "高估区",
-     "a2": "风险预警",
+     "band": "in_range",
+     "band_label": "区间内（看持久性）",
+     "a2": "中性观察",
      "p_below_vm": false
     },
     {
@@ -730,20 +742,23 @@ body.plain .pro-only{display:none!important}
      "V_M": 132.02,
      "V_S": 299.81,
      "V_stress": 181.57,
-     "p_vc": 12.07,
-     "p_vm": 6.51,
-     "p_vs": 2.87,
+     "p_vc": 6.43,
+     "p_vm": 3.47,
+     "p_vs": 1.53,
      "implied": "无界(市场把峰值当近永续)",
-     "band": "extreme_over",
-     "band_label": "极端高估区",
+     "band": "over",
+     "band_label": "高估区",
      "a2": "风险预警",
      "p_below_vm": false
     }
    ],
-   "e0_age_days": 1,
-   "flags": [],
+   "e0_age_days": 120,
+   "flags": [
+    "E0超一季未复核·置信度降档",
+    "带位迁移: 高估区→区间内（看持久性）"
+   ],
    "stale": false,
-   "asof": ""
+   "asof": "2026-11-06"
   },
   {
    "id": "JBL",
@@ -751,7 +766,7 @@ body.plain .pro-only{display:none!important}
    "archetype": "E",
    "currency": "CNY",
    "ticker": "301308.SZ",
-   "P": 620.0,
+   "P": 212.17,
    "model": "cyclical",
    "e0_asof": "2026-06-01",
    "e0_note": "H1预告92-110亿(+622x)无法拆分；8月中报=剥离比例裁决点",
@@ -765,13 +780,13 @@ body.plain .pro-only{display:none!important}
      "V_M": 158.81,
      "V_S": 493.74,
      "V_stress": 250.66,
-     "p_vc": 9.05,
-     "p_vm": 3.9,
-     "p_vs": 1.26,
+     "p_vc": 3.1,
+     "p_vm": 1.34,
+     "p_vs": 0.43,
      "implied": "无界(市场把峰值当近永续)",
-     "band": "over",
-     "band_label": "高估区",
-     "a2": "风险预警",
+     "band": "in_range",
+     "band_label": "区间内（看持久性）",
+     "a2": "中性观察",
      "p_below_vm": false
     },
     {
@@ -783,26 +798,23 @@ body.plain .pro-only{display:none!important}
      "V_M": 233.97,
      "V_S": 754.44,
      "V_stress": 383.01,
-     "p_vc": 6.66,
-     "p_vm": 2.65,
-     "p_vs": 0.82,
-     "implied": "无界(市场把峰值当近永续)",
+     "p_vc": 2.28,
+     "p_vm": 0.91,
+     "p_vs": 0.28,
+     "implied": "11.1y",
      "band": "in_range",
      "band_label": "区间内（看持久性）",
      "a2": "中性观察",
-     "p_below_vm": false
+     "p_below_vm": true
     }
    ],
-   "e0_age_days": 39,
+   "e0_age_days": 158,
    "flags": [
+    "E0超一季未复核·置信度降档",
     "H1预告92-110亿(+622x)无法拆分；8月中报=剥离比例裁决点"
    ],
-   "stale": false,
-   "asof": "",
-   "third_leg": {
-    "pe_ttm": 48.24,
-    "pb": 21.53
-   }
+   "stale": true,
+   "asof": ""
   },
   {
    "id": "MONTAGE",
@@ -810,7 +822,7 @@ body.plain .pro-only{display:none!important}
    "archetype": "D",
    "currency": "CNY",
    "ticker": "688008.SH",
-   "P": 285.8,
+   "P": 158.3,
    "model": "growth",
    "e0_asof": "2026-06-01",
    "e0_note": "6-15~7-09窗口report_rc无新研报,待刷新",
@@ -823,26 +835,23 @@ body.plain .pro-only{display:none!important}
      "V_C": 61.81,
      "V_M": 107.81,
      "V_S": 203.34,
-     "p_vc": 4.62,
-     "p_vm": 2.65,
-     "p_vs": 1.41,
-     "implied": "g≈36.7%",
-     "band": "over",
-     "band_label": "高估区",
-     "a2": "风险预警",
+     "p_vc": 2.56,
+     "p_vm": 1.47,
+     "p_vs": 0.78,
+     "implied": "g≈25.2%",
+     "band": "in_range",
+     "band_label": "区间内（看持久性）",
+     "a2": "中性观察",
      "p_below_vm": false
     }
    ],
-   "e0_age_days": 39,
+   "e0_age_days": 158,
    "flags": [
+    "E0超一季未复核·置信度降档",
     "6-15~7-09窗口report_rc无新研报,待刷新"
    ],
-   "stale": false,
-   "asof": "",
-   "third_leg": {
-    "pe_ttm": 136.39,
-    "pb": 16.73
-   }
+   "stale": true,
+   "asof": ""
   },
   {
    "id": "YOKE",
@@ -850,7 +859,7 @@ body.plain .pro-only{display:none!important}
    "archetype": "D",
    "currency": "CNY",
    "ticker": "002409.SZ",
-   "P": 209.0,
+   "P": 77.42,
    "model": "growth",
    "e0_asof": "2026-07-09",
    "e0_note": "上修发生在股价+91%之后,热数据折价",
@@ -863,26 +872,23 @@ body.plain .pro-only{display:none!important}
      "V_C": 72.94,
      "V_M": 126.61,
      "V_S": 214.29,
-     "p_vc": 2.87,
-     "p_vm": 1.65,
-     "p_vs": 0.98,
-     "implied": "g≈29.5%",
+     "p_vc": 1.06,
+     "p_vm": 0.61,
+     "p_vs": 0.36,
+     "implied": "g≈11.1%",
      "band": "in_range",
      "band_label": "区间内（看持久性）",
      "a2": "中性观察",
-     "p_below_vm": false
+     "p_below_vm": true
     }
    ],
-   "e0_age_days": 1,
+   "e0_age_days": 120,
    "flags": [
+    "E0超一季未复核·置信度降档",
     "上修发生在股价+91%之后,热数据折价"
    ],
-   "stale": false,
-   "asof": "",
-   "third_leg": {
-    "pe_ttm": 98.8,
-    "pb": 12.28
-   }
+   "stale": true,
+   "asof": ""
   },
   {
    "id": "GIGA",
@@ -890,7 +896,7 @@ body.plain .pro-only{display:none!important}
    "archetype": "C",
    "currency": "CNY",
    "ticker": "603986.SH",
-   "P": 663.49,
+   "P": 257.8,
    "model": "dual",
    "e0_asof": "2026-06-01",
    "e0_note": "",
@@ -904,12 +910,12 @@ body.plain .pro-only{display:none!important}
      "V_M": 77.12,
      "V_S": 191.96,
      "V_stress": 97.55,
-     "p_vc": 14.33,
-     "p_vm": 8.6,
-     "p_vs": 3.46,
+     "p_vc": 5.57,
+     "p_vm": 3.34,
+     "p_vs": 1.34,
      "implied": "无界(市场把峰值当近永续)",
-     "band": "extreme_over",
-     "band_label": "极端高估区",
+     "band": "over",
+     "band_label": "高估区",
      "a2": "风险预警",
      "p_below_vm": false
     },
@@ -921,24 +927,22 @@ body.plain .pro-only{display:none!important}
      "V_C": 212.96,
      "V_M": 482.47,
      "V_S": 1032.2,
-     "p_vc": 3.12,
-     "p_vm": 1.38,
-     "p_vs": 0.64,
-     "implied": "g≈31.1%",
+     "p_vc": 1.21,
+     "p_vm": 0.53,
+     "p_vs": 0.25,
+     "implied": "g≈13.4%",
      "band": "in_range",
      "band_label": "区间内（看持久性）",
      "a2": "中性观察",
-     "p_below_vm": false
+     "p_below_vm": true
     }
    ],
-   "e0_age_days": 39,
-   "flags": [],
-   "stale": false,
-   "asof": "",
-   "third_leg": {
-    "pe_ttm": 161.97,
-    "pb": 18.42
-   }
+   "e0_age_days": 158,
+   "flags": [
+    "E0超一季未复核·置信度降档"
+   ],
+   "stale": true,
+   "asof": ""
   },
   {
    "id": "GSME",
@@ -946,7 +950,7 @@ body.plain .pro-only{display:none!important}
    "archetype": "special",
    "currency": "CNY",
    "ticker": "688123.SH",
-   "P": 217.12,
+   "P": 99.55,
    "model": "dual",
    "e0_asof": "2026-06-01",
    "e0_note": "",
@@ -960,9 +964,9 @@ body.plain .pro-only{display:none!important}
      "V_M": 21.27,
      "V_S": 44.44,
      "V_stress": 22.56,
-     "p_vc": 14.02,
-     "p_vm": 10.21,
-     "p_vs": 4.89,
+     "p_vc": 6.43,
+     "p_vm": 4.68,
+     "p_vs": 2.24,
      "implied": "N/A(ill-conditioned)",
      "band": "extreme_over",
      "band_label": "极端高估区",
@@ -977,100 +981,241 @@ body.plain .pro-only{display:none!important}
      "V_C": 63.69,
      "V_M": 111.87,
      "V_S": 191.78,
-     "p_vc": 3.41,
-     "p_vm": 1.94,
-     "p_vs": 1.13,
-     "implied": "g≈27.4%",
-     "band": "over",
-     "band_label": "高估区",
-     "a2": "风险预警",
-     "p_below_vm": false
+     "p_vc": 1.56,
+     "p_vm": 0.89,
+     "p_vs": 0.52,
+     "implied": "g≈12.9%",
+     "band": "in_range",
+     "band_label": "区间内（看持久性）",
+     "a2": "中性观察",
+     "p_below_vm": true
     }
    ],
-   "e0_age_days": 39,
-   "flags": [],
-   "stale": false,
-   "asof": "",
-   "third_leg": {
-    "pe_ttm": 116.98,
-    "pb": 12.89
-   }
+   "e0_age_days": 158,
+   "flags": [
+    "E0超一季未复核·置信度降档"
+   ],
+   "stale": true,
+   "asof": ""
   }
  ]
 }</script>
 <script type="application/json" id="seed-judgment">{
-  "_meta": {
-    "note": "LLM 判断层：仅经 Claude 会话产出并经作者确认后更新（四闸门）。自动 pipeline 只读本文件。",
-    "updated": "2026-07-09",
-    "updated_by": "Claude 会话 · 作者已确认",
-    "hard_boundary": "本页全部内容为描述性研究状态标签与条件触发，无目标价、无仓位、不构成任何投资建议。"
+ "_meta": {
+  "note": "LLM 判断层：仅经 Claude 会话产出并经作者确认后更新（四闸门）。自动 pipeline 只读本文件。",
+  "updated": "2026-11-07",
+  "updated_by": "Claude 会话 · 作者已确认（回放演练终审）",
+  "hard_boundary": "本页全部内容为描述性研究状态标签与条件触发，无目标价、无仓位、不构成任何投资建议。"
+ },
+ "industry_state": {
+  "label": "顶部钝化",
+  "qualifier": "A",
+  "qualifier_note": "A=官方实测确认（路径②：SKH、三星同季官方 ASP 同向，水平升、斜率降）；为含 HBM 的混合 ASP，TrendForce conventional 同口径回顾到达后复核一次，反向则回摆并留痕",
+  "confidence": "中",
+  "since": "2026-07-09",
+  "states": [
+   "上行强化",
+   "顶部钝化",
+   "下行确认",
+   "触底再起"
+  ],
+  "basis": "官方 3Q ASP 水平升、斜率降 + 消费破坏扩大 + 扩产决议落地；ASP 未转负，下行确认判据未满足",
+  "prev": "顶部钝化(P)（2026-07-09 起；2026-10-30 升 A）"
+ },
+ "variables": [
+  {
+   "id": 1,
+   "name": "ASP 二阶导（总开关）",
+   "reading": "bear-lean",
+   "summary": "官方 3Q ASP：SKH DRAM +20% 后半（2Q 约 +30%）、NAND +20% 中段（+50% 中段）；三星 DRAM 约 +20%（+40% 中段）、NAND +10% 后半（+60% 后半）。10 月 DDR4 8Gb $27.5（+5.77%）；4Q conventional +10–15%（P）。软化：128Gb MLC 21 个月来首次未涨、TLC 现货连跌",
+   "grade": "A-/B",
+   "as_of": "2026-11-06"
   },
-  "industry_state": {
-    "label": "顶部钝化",
-    "qualifier": "P",
-    "qualifier_note": "P=预测口径确认（TrendForce 3Q26E），待实测升 A；实测反向则回摆并留痕",
-    "confidence": "中",
-    "since": "2026-07-09",
-    "states": ["上行强化", "顶部钝化", "下行确认", "触底再起"],
-    "basis": "④ 定位三个独立读数：二阶导收窄 + 消费破坏确认 + capex 激增官宣",
-    "prev": "上行强化→顶部钝化过渡（2026-06-01 基线）"
+  {
+   "id": 2,
+   "name": "AI 现金兑现度 ROI",
+   "reading": "bull-hold",
+   "summary": "Alphabet、亚马逊 2027 capex 向上；Azure 48%、AWS 39%、Google Cloud 103%；AMD 2027 营收 +80%。资金端压力加深：S&P 把 Meta 展望降为负面、亚马逊 5 年 CDS 约 94bp 创新高",
+   "grade": "A/A-/B",
+   "as_of": "2026-11-06"
   },
-  "variables": [
-    {"id": 1, "name": "ASP 二阶导（总开关）", "reading": "bear-lean",
-     "summary": "DRAM 合约环比 1Q26 +90~98% → 2Q26 +58~63% → 3Q26E +13~18%（P口径）；价格水平仍升、未转负", "grade": "B(TrendForce)", "as_of": "2026-07-03"},
-    {"id": 2, "name": "AI 现金兑现度 ROI", "reading": "bull-hold",
-     "summary": "Micron FQ4 指引 $50B/GM86%；2026 CSP capex $630-725B 续升；2027 无净下修；SKH $28B ADR 融资", "grade": "A/B", "as_of": "2026-07-07"},
-    {"id": 3, "name": "供给纪律", "reading": "watch",
-     "summary": "当期纪律未破（三星续提价、Micron 锁需求不加产能）；韩国 ₩800万亿/4 fab 官宣 → ④判据成立、恐慌扩产记观察灯", "grade": "A(官宣)", "as_of": "2026-06-29"},
-    {"id": 4, "name": "需求广度 vs 价格破坏", "reading": "bear-lean",
-     "summary": "消费端破坏获官方确认（TrendForce）+ Apple 6-25 官宣 14 款提价（A级行为证据）；server/eSSD 蔓延阈值未触发", "grade": "A/B", "as_of": "2026-06-25"}
-  ],
-  "ai_layers": [
-    {"layer": "资金层", "light": "yellow", "note": "debt-financed 延续；新增国家资本入场注脚（韩政府 30万亿₩+）"},
-    {"layer": "订单层", "light": "green", "note": "2027 无净下修；Micron SCA $100B take-or-pay（16 客户）更绿"},
-    {"layer": "商业模式层", "light": "yellow", "note": "ROI 未证；消费端破坏确认"}
-  ],
-  "trigger": {
-    "structural_confirmed": 0, "structural_total": 4,
-    "floor_regime": "结构未证伪下轨",
-    "floor_note": "重资产≈V_M 下沿、设计名=穿周期倍数地板；非买入线、不代表亏损有限",
-    "lights": [
-      {"variable": "供给恐慌扩产", "light": "yellow-watch", "date": "2026-07-09", "confirmed_by": "作者",
-       "basis": "韩国+三星+SKH ₩800万亿/15年/4 fab+HBM枢纽官宣（宣示性远期，非当期抢份额）",
-       "adjudication": ["分年 capex 落地节奏 vs 官宣总额", "价格纪律是否随预建产能松动", "新增产能长协/SCA 覆盖比", "CXMT/YMTC 是否跟进加码"],
-       "cadence": "双周复核"}
-    ]
+  {
+   "id": 3,
+   "name": "供给纪律",
+   "reading": "watch",
+   "summary": "结构变量 1/4：SKH M15X 提前、capex 约 +50%、Y2/M17 决议。价格纪律未破；长协 SKH 14 家、三星 10 家、Micron 26 份。长鑫 09-28 批招股书外研发与后道测试项目",
+   "grade": "A/A-",
+   "as_of": "2026-11-06"
   },
-  "events": [
-    {"date": "2026-07-03", "grade": "B", "title": "TrendForce 3Q26E：DRAM +13~18% / NAND +10~15%，涨幅显著放缓（P口径）", "url": "https://www.trendforce.com/presscenter/news/20260703-13134.html"},
-    {"date": "2026-07-03", "grade": "A", "title": "江波龙 H1 预告净利 92–110 亿（+622~744x）；归因景气+LTA 续签+端侧 AI", "url": ""},
-    {"date": "2026-06-29", "grade": "A", "title": "韩国+三星+SK Hynix 官宣 ₩800 万亿/15 年：4 座新 fab + HBM 封装枢纽，「五年内存产量翻倍」", "url": "https://www.tomshardware.com/tech-industry/semiconductors/south-korea-unveils-usd520-billion-investment-plan-with-samsung-and-sk-hynix-to-expand-memory-chip-dominance-plan-includes-four-new-fabs-and-hbm-facilities-amid-strong-government-support"},
-    {"date": "2026-06-25", "grade": "A", "title": "Apple 官宣 14 款产品提价、归因存储成本（「从未见过组件价格涨得如此之快」）；iPhone 未动", "url": "https://www.macrumors.com/2026/06/25/apple-explains-why-it-raised-prices/"},
-    {"date": "2026-06-24", "grade": "A", "title": "Micron FY26Q3：营收 $41.46B(+74% QoQ)、GM 84.6%；FQ4 指引 $50B/GM~86%；SCA $100B take-or-pay", "url": "https://investors.micron.com/news-releases/news-release-details/micron-technology-inc-reports-record-results-third-quarter"},
-    {"date": "2026-06-22", "grade": "B", "title": "利基级联短缺蔓延至 DDR2（2Q +55~60%、3Q26E +35~40%）——子赛道轮换「兑现读数」命中", "url": "https://www.trendforce.com/presscenter/news/20260622-13112.html"},
-    {"date": "2026-07-07", "grade": "A-", "title": "Samsung Q2 初步 OP ₩89.4T（19x YoY）但股价下跌——「盈利创纪录 vs 拒付峰值」反身性顶部特征", "url": ""}
-  ],
-  "pending_confirmation": [],
-  "next_checkpoints": [
-    {"date": "2026-07 中旬", "what": "A 股中报预告季：聚辰/兆易/雅克/澜起（复苏与增速兑现 vs 一致）"},
-    {"date": "2026-07-30", "what": "SKH/Samsung 财报+定价指引（韩股 E0 刷新窗口）★ 已预约事件加照"},
-    {"date": "2026-07下旬~08初", "what": "四大 CSP Q2 财报：2027 capex 首批表述（AI 三层订单层复核）"},
-    {"date": "2026-08", "what": "江波龙中报：剥离 vs 报告双口径裁决点"},
-    {"date": "2026-10 前后", "what": "TrendForce 3Q26 实测：顶部钝化 P→A 判定"}
-  ],
-  "cycle_log": [
-    {"date": "2026-06-01", "entry": "基线：③晚→④early（上行强化→顶部钝化过渡）；AI 三层 资金🟡/订单🟢/模式🟡；触发器不点灯"},
-    {"date": "2026-07-09", "entry": "演练：行业态推进「顶部钝化(P)」；美韩原厂回调 vs A股 basket +44% 分化扩大；雅克/澜起带位迁移"},
-    {"date": "2026-07-09", "entry": "v1.1 增补：Apple 提价（A级行为证据）+ 韩国 4 fab 官宣并入；④ 定位证据 2→3 个"},
-    {"date": "2026-07-09", "entry": "作者确认：「供给恐慌扩产」点 🟡 观察灯（非恶化确认）；下轨维持结构未证伪档；双周复核"},
-    {"date": "2026-07-09", "entry": "批1：温度口径锁定 801081.SI（跨口径误比更正）；E0 批量刷新（MU 104→149.64 等7项）；方法论升 v1.2"}
+  {
+   "id": 4,
+   "name": "需求广度 vs 价格破坏",
+   "reading": "bear-lean",
+   "summary": "Apple 12 月季毛利率指引 45–46%，主因内存；AMD 规划 2027 PC 双位数下滑；三季度手机约 −20%；韩国 10 月半导体日均较 9 月 −8.5%。server/eSSD 蔓延阈值未触发",
+   "grade": "A-/A/B",
+   "as_of": "2026-11-06"
+  }
+ ],
+ "ai_layers": [
+  {
+   "layer": "资金层",
+   "light": "yellow",
+   "note": "FCF 转负与举债扩张扩散到多家云厂；融资仍在进行，红灯条件（明确削减或推迟 capex 融资）未触发"
+  },
+  {
+   "layer": "订单层",
+   "light": "green",
+   "note": "2027 无净下修。边界读数：微软 CY26 约 $1,750→1,700 亿（归因交付）、新云收缩报道。若微软 2027-01 不重申 FY27 同比增长，或官方归因需求、融资，转黄"
+  },
+  {
+   "layer": "商业模式层",
+   "light": "yellow",
+   "note": "云收入同季加速、无需求侧措辞转向；但 AI 收入集中于持股或担保的实验室（微软约 70% 来自 OpenAI），代理独立性未满足"
+  }
+ ],
+ "trigger": {
+  "structural_confirmed": 1,
+  "structural_total": 4,
+  "floor_regime": "结构未证伪下轨",
+  "floor_note": "下轨是结构事实复核触发线，只产生复核结论，不产生位置判定；非买入线、不代表亏损有限",
+  "lights": [
+   {
+    "variable": "供给恐慌扩产",
+    "light": "yellow-confirmed",
+    "date": "2026-08-20",
+    "confirmed_by": "作者（2026-11-07 终审）",
+    "basis": "SKH M15X 量产提前、2026 capex 约 +50%（A）连续两次正式复核记恶化级，计入结构变量 1/4；灯色仍黄，升橙需 4 个结构变量中 2 项恶化且持续 ≥1 季度",
+    "adjudication": [
+     "分年 capex 落地节奏 vs 官宣总额",
+     "价格纪律是否随预建产能松动",
+     "新增产能长协/SCA 覆盖比",
+     "CXMT/YMTC 是否跟进加码"
+    ],
+    "cadence": "月度复核（方法论 v1.3 §28）"
+   }
   ]
+ },
+ "events": [
+  {
+   "date": "2026-11-05",
+   "grade": "B",
+   "title": "微软加强审查新云、退出西弗吉尼亚 1.35GW 意向书、不行使 Nscale 选择权；发言人称按需求管理合作方（订单层边界读数）",
+   "url": "https://finance.sina.com.cn/stock/usstock/c/2026-11-06/doc-inixtnvn9139462.shtml"
+  },
+  {
+   "date": "2026-11-02",
+   "grade": "A-",
+   "title": "Apple 12 月季毛利率指引 45–46%，大部分降幅来自内存；Mac、iPad 因内存受限",
+   "url": "https://www.fool.com/earnings/call-transcripts/2026/11/02/apple-aapl-q4-2026-earnings-call-transcript/"
+  },
+  {
+   "date": "2026-11-01",
+   "grade": "A",
+   "title": "韩国 10 月半导体出口 $564.4 亿；日均 $25.65 亿，较 9 月 −8.5%",
+   "url": "https://www.yna.co.kr/view/AKR20261101015351003"
+  },
+  {
+   "date": "2026-10-30",
+   "grade": "B",
+   "title": "DDR4 8Gb 10 月固定价 $27.5（+5.77%）；128Gb MLC $30.61 持平，21 个月来首次未涨",
+   "url": "https://www.yna.co.kr/view/AKR20261030141900003"
+  },
+  {
+   "date": "2026-10-30",
+   "grade": "A-",
+   "title": "亚马逊 2026 capex 约 $2,200 亿，2027 'meaningfully more'；AWS 需求 exceptionally strong",
+   "url": "https://www.fool.com/earnings/call-transcripts/2026/10/30/amazon-amzn-q3-2026-earnings-call-transcript/"
+  },
+  {
+   "date": "2026-10-29",
+   "grade": "A",
+   "title": "三星 3Q 确定值：DRAM ASP 约 +20%（2Q +40% 中段）、NAND +10% 后半；10 家客户签长协，10 家在谈",
+   "url": "https://news.samsung.com/global/samsung-electronics-announces-third-quarter-2026-results"
+  },
+  {
+   "date": "2026-10-28",
+   "grade": "A",
+   "title": "SK Hynix 3Q：营业利润 ₩83.33 万亿（OPM 80%）；DRAM ASP +20% 后半、NAND +20% 中段；LTA 14 家，2027/28 产能 >50%",
+   "url": "https://news.skhynix.com/en/q3-2026-business-results/"
+  },
+  {
+   "date": "2026-10-01",
+   "grade": "A",
+   "title": "Micron FQ4 营收 $542.3 亿；FQ1 指引 $615 亿（环比 +13.4%，上季 +30.8%）；26 份 SCA",
+   "url": ""
+  },
+  {
+   "date": "2026-08-20",
+   "grade": "A",
+   "title": "供给恐慌扩产计入结构变量 1/4：SKH M15X 提前、capex 约 +50%、Y2/M17 决议、资本承诺 ₩61.48 万亿",
+   "url": ""
+  },
+  {
+   "date": "2026-07-29",
+   "grade": "A",
+   "title": "SK Hynix 2Q 营业利润 ₩60.54 万亿，低于一致约 ₩64 万亿；KIS-HBM4 传闻部分落地",
+   "url": ""
+  }
+ ],
+ "pending_confirmation": [],
+ "next_checkpoints": [
+  {
+   "date": "2026-11 上旬",
+   "what": "供给恐慌扩产 月度正式复核（v1.3 §28，自双周改月度）"
+  },
+  {
+   "date": "约 2026-11-30",
+   "what": "DRAMeXchange 11 月固定价：4Q 合约议价结果"
+  },
+  {
+   "date": "约 2026-12-01",
+   "what": "韩国 11 月半导体出口：日均能否回到 9 月水平"
+  },
+  {
+   "date": "2026-12 初（推算）",
+   "what": "TrendForce 3Q 回顾：(A) 态的 conventional 同口径复核"
+  },
+  {
+   "date": "约 2026-12",
+   "what": "Micron FQ1 FY27：官方 ASP 与下季指引"
+  },
+  {
+   "date": "2027-01~02",
+   "what": "SKH、三星 4Q 官方 ASP；Alphabet、Meta、微软 2027 capex 硬数字（裁决价格是否领先）"
+  }
+ ],
+ "cycle_log": [
+  {
+   "date": "2026-06-01",
+   "entry": "基线：③晚→④early（上行强化→顶部钝化过渡）；AI 三层 资金🟡/订单🟢/模式🟡；触发器不点灯"
+  },
+  {
+   "date": "2026-07-09",
+   "entry": "演练：行业态推进「顶部钝化(P)」；作者确认「供给恐慌扩产」点🟡观察灯；温度口径锁定 801081.SI；方法论升 v1.2"
+  },
+  {
+   "date": "2026-07-13",
+   "entry": "中期更新：顶部钝化(P) 维持；KIS-HBM4 C 级传闻不点灯待 7-30；三只原厂 P/V_M<1"
+  },
+  {
+   "date": "2026-08-20",
+   "entry": "回放（作者 11-07 确认）：供给恐慌扩产计入结构变量 1/4，灯色仍🟡，下轨不动"
+  },
+  {
+   "date": "2026-10-30",
+   "entry": "回放（作者 11-07 确认）：SKH、三星官方 3Q ASP 同向，水平升、斜率降 → 顶部钝化由 (P) 升 (A)"
+  },
+  {
+   "date": "2026-11-07",
+   "entry": "作者终审通过回放演练（7-13→11-06）；方法论升 v1.3。到 11-06 价格领先四条读数 3 条未出现、1 条部分，这不证明价格没有领先"
+  }
+ ]
 }
 </script>
 <script>
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-const LIGHT={green:["var(--good)","🟢"],yellow:["var(--warn)","🟡"],"yellow-watch":["var(--warn)","🟡"],orange:["var(--serious)","🟠"],red:["var(--crit)","🔴"]};
+const LIGHT={green:["var(--good)","🟢"],yellow:["var(--warn)","🟡"],"yellow-watch":["var(--warn)","🟡"],"yellow-confirmed":["var(--warn)","🟡"],orange:["var(--serious)","🟠"],red:["var(--crit)","🔴"]};
 const READ={"bull-hold":["var(--s2)","偏韧性"],"bear-lean":["var(--serious)","偏钝化"],"watch":["var(--warn)","观察"],"neutral":["var(--axis)","中性"]};
 const BLACK=["目标价","建仓","加仓","减仓","买入","卖出","做空","止损","仓位"];
 const OKPHRASE=["非买入线","无买入","无卖出","无目标价","无仓位","买入/卖出/持有/做空建议","非交易指令","不构成买入"];
@@ -1088,8 +1233,10 @@ const PLAIN_STATE={
  "触底再起":"下行段出现企稳信号：跌幅收窄、库存去化、订单回稳。"};
 function plainState(j){const st=j.industry_state;let s="<b>行业现在处于："+st.label+"</b>。"+(PLAIN_STATE[st.label]||"");
  if(st.qualifier==="P")s+=" 目前的判定基于权威机构的<b>预测</b>数据（P 口径），要等实际成交数据落地才升级确认。";
- const wl=j.trigger&&j.trigger.lights&&j.trigger.lights.length;
- if(wl)s+=" 另有 "+j.trigger.lights.length+" 盏<b>黄色观察灯</b>（"+j.trigger.lights.map(l=>l.variable).join("、")+"）——值得警惕、但尚未确认恶化。";
+ if(st.qualifier==="A")s+=" 这个判定已由原厂官方的实际价格数据确认（A 口径），第三方的同口径实测到了之后还会再核对一次。";
+ const ls=(j.trigger&&j.trigger.lights)||[];const cf=ls.filter(l=>l.light==="yellow-confirmed"),wa=ls.filter(l=>l.light!=="yellow-confirmed");
+ if(cf.length)s+=" 另有 "+cf.length+" 盏<b>黄灯已确认恶化</b>（"+cf.map(l=>l.variable).join("、")+"）——计入结构变量，但尚不足以升橙灯。";
+ if(wa.length)s+=" 另有 "+wa.length+" 盏<b>黄色观察灯</b>（"+wa.map(l=>l.variable).join("、")+"）——值得警惕、但尚未确认恶化。";
  return s;}
 /* 分位 = 2020 年以来 PE 低于当前的交易日占比。文案跟分位走，不写死冷热 */
 function tempZone(pct){return pct>=80?"高位":pct>=60?"偏高":pct>=40?"中部":pct>=20?"偏低":"低位";}
@@ -1151,7 +1298,7 @@ function render(auto,j){
     return `<div class="var"><div class="nm"><span class="dot" style="background:${c}"></span>${esc(v.name)}<span class="chip">${t}</span></div><div class="sm">${esc(v.summary)}</div><div class="meta">${esc(v.grade)} · as-of ${esc(v.as_of)}</div></div>`}).join("");
   const tl=j.ai_layers.map(l=>{const[c,e]=LIGHT[l.light];return `<span class="chip" title="${esc(l.note)}"><span class="dot" style="background:${c}"></span>AI·${esc(l.layer)} ${e}</span>`}).join("");
   const tr=j.trigger, wl=tr.lights.map(l=>{const[c,e]=LIGHT[l.light];
-    return `<span class="chip" title="${esc(l.basis)}｜裁决读数: ${esc(l.adjudication.join("；"))}｜${esc(l.cadence)}"><span class="dot" style="background:${c}"></span>${e} 观察灯·${esc(l.variable)}（${esc(l.date)} 作者确认）</span>`}).join("");
+    return `<span class="chip" title="${esc(l.basis)}｜裁决读数: ${esc(l.adjudication.join("；"))}｜${esc(l.cadence)}"><span class="dot" style="background:${c}"></span>${e} ${l.light==="yellow-confirmed"?"结构恶化已确认":"观察灯"}·${esc(l.variable)}（${esc(l.date)} 作者确认）</span>`}).join("");
   $("#lights").innerHTML=`<span class="chip">触发器：结构变量 ${tr.structural_confirmed}/${tr.structural_total} 恶化确认</span>${wl}${tl}<span class="chip">下轨档位：${esc(tr.floor_regime)}</span>`;
   $("#floorNote").textContent=tr.floor_note+"（悬停各灯可见依据与裁决读数）";
   /* 温度 */
@@ -1170,7 +1317,7 @@ function render(auto,j){
       <td class="vw">${esc(v.view)}</td>
       ${i===0?`<td class="num" rowspan="${t.views.length}">${fmtP(t.P,t.currency)}<div class="vw">${esc(t.asof||"")}</div></td>`:""}
       <td class="bandcell">${bandBar(v,t.currency)}</td>
-      <td><span class="badge ${v.band}">${esc(v.band_label)}</span></td>
+      <td><span class="badge ${v.band}">${esc(v.band_label)}</span>${v.band==="in_range"&&v.p_below_vm?'<div class="vw">P&lt;V_M</div>':""}${v.boundary?'<div class="vw">边界敏感（±3%）</div>':""}</td>
       <td class="num pro-only">${v.p_vm}</td><td class="num pro-only">${v.p_vs}</td>
       <td class="num pro-only">${esc(v.implied)}</td>
       <td>${esc(v.a2)}</td>

@@ -210,7 +210,7 @@ def compute_target(t, P, industry_state):
                 "p_vc": round(P / V["C"], 2), "p_vm": round(P / V["M"], 2), "p_vs": round(P / V["S"], 2),
                 "implied": ntxt, "band": b, "band_label": engine.BAND_LABELS[b],
                 "a2": engine.a2_label(industry_state, P, V["C"], V["S"]),
-                "p_below_vm": P < V["M"]}
+                "p_below_vm": P < V["M"], "boundary": engine.boundary_sensitive(P, V["C"], V["S"])}
     def gro_view(label, E0, g, extra=""):
         V = engine.growth_values(E0, g["gC"], g["gM"], g["gS"])
         ig = engine.implied_g1(P, E0)
@@ -220,7 +220,7 @@ def compute_target(t, P, industry_state):
                 "p_vc": round(P / V["C"], 2), "p_vm": round(P / V["M"], 2), "p_vs": round(P / V["S"], 2),
                 "implied": f"g≈{ig*100:.1f}%", "band": b, "band_label": engine.BAND_LABELS[b],
                 "a2": engine.a2_label(industry_state, P, V["C"], V["S"]),
-                "p_below_vm": P < V["M"]}
+                "p_below_vm": P < V["M"], "boundary": engine.boundary_sensitive(P, V["C"], V["S"])}
     if t["model"] == "cyclical":
         out["views"].append(cyc_view("主口径", t["E0"]["value"]))
         if t.get("E0_cons", {}).get("value"):
