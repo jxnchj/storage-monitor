@@ -99,10 +99,14 @@ def band(P, V_bear, V_bull):
 # 行业态 × 价格位置 → 研究状态标签（A2 映射，描述性、非交易指令）
 A2_MAP = {
     "上行强化": {"below_vc": "强正向验证", "mid": "正向偏离候选", "above_vs": "风险预警"},
-    "顶部钝化": {"below_vc": "正向偏离候选", "mid": "中性观察", "above_vs": "风险预警"},
+    "顶部钝化": {"below_vc": "位置描述：P<V_C（非正向验证）", "mid": "中性观察", "above_vs": "风险预警"},  # 方法论 v1.3 §31
     "下行确认": {"below_vc": "触底观察（非确认）", "mid": "中性偏risk", "above_vs": "强风险预警"},
     "触底再起": {"below_vc": "强正向验证", "mid": "正向偏离候选", "above_vs": "中性"},
 }
+
+def boundary_sensitive(P, V_bear, V_bull, tol=0.03):
+    """方法论 v1.3 §31：价格在带位阈值 ±3% 内时，带位可能因价格口径误差翻转。"""
+    return any(abs(P / x - 1) <= tol for x in (0.5 * V_bear, V_bear, V_bull, 2 * V_bull))
 
 def a2_label(industry_state, P, V_C, V_S):
     zone = "below_vc" if P < V_C else ("above_vs" if P >= V_S else "mid")
