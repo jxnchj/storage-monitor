@@ -1,5 +1,5 @@
 {
- "generated_utc": "2026-11-06 23:48 UTC",
+ "generated_utc": "2026-11-07 01:00 UTC",
  "degraded": [],
  "stale_tickers": [],
  "temperature": {
@@ -285,14 +285,14 @@
      "p_below_vm": false
     }
    ],
-   "e0_age_days": 120,
+   "e0_age_days": 121,
    "flags": [
     "E0超一季未复核·置信度降档",
     "P<V_M下沿参考·复核结构事实(非买入线)"
    ],
    "stale": false,
    "asof": "2026-11-06",
-   "quote_src": "bar"
+   "quote_src": "last_trade"
   },
   {
    "id": "SNDK",
@@ -300,7 +300,7 @@
    "archetype": "A",
    "currency": "USD",
    "ticker": "SNDK",
-   "P": 835.0599975585938,
+   "P": 835.06,
    "model": "cyclical",
    "e0_asof": "2026-07-09",
    "e0_note": "",
@@ -342,14 +342,14 @@
      "p_below_vm": false
     }
    ],
-   "e0_age_days": 120,
+   "e0_age_days": 121,
    "flags": [
     "E0超一季未复核·置信度降档",
     "P<V_M下沿参考·复核结构事实(非买入线)"
    ],
    "stale": false,
    "asof": "2026-11-06",
-   "quote_src": "bar"
+   "quote_src": "last_trade"
   },
   {
    "id": "SKH",
@@ -381,7 +381,7 @@
      "p_below_vm": true
     }
    ],
-   "e0_age_days": 157,
+   "e0_age_days": 158,
    "flags": [
     "E0超一季未复核·置信度降档",
     "待2026-07-30财报+指引刷新(韩股纪律)",
@@ -439,7 +439,7 @@
      "p_below_vm": true
     }
    ],
-   "e0_age_days": 157,
+   "e0_age_days": 158,
    "flags": [
     "E0超一季未复核·置信度降档",
     "Q2初步OP₩89.4T远超；待7-30正式财报刷新",
@@ -455,7 +455,7 @@
    "archetype": "B",
    "currency": "USD",
    "ticker": "WDC",
-   "P": 263.7799987792969,
+   "P": 263.78,
    "model": "cyclical",
    "e0_asof": "2026-07-09",
    "e0_note": "raw未做clean再推导(GAAP分拆一次性)，财报季复核",
@@ -497,14 +497,14 @@
      "p_below_vm": false
     }
    ],
-   "e0_age_days": 120,
+   "e0_age_days": 121,
    "flags": [
     "E0超一季未复核·置信度降档",
     "raw未做clean再推导(GAAP分拆一次性)，财报季复核"
    ],
    "stale": false,
    "asof": "2026-11-06",
-   "quote_src": "bar"
+   "quote_src": "last_trade"
   },
   {
    "id": "STX",
@@ -512,7 +512,7 @@
    "archetype": "B",
    "currency": "USD",
    "ticker": "STX",
-   "P": 460.989990234375,
+   "P": 460.99,
    "model": "cyclical",
    "e0_asof": "2026-07-09",
    "e0_note": "",
@@ -554,13 +554,13 @@
      "p_below_vm": false
     }
    ],
-   "e0_age_days": 120,
+   "e0_age_days": 121,
    "flags": [
     "E0超一季未复核·置信度降档"
    ],
    "stale": false,
    "asof": "2026-11-06",
-   "quote_src": "bar"
+   "quote_src": "last_trade"
   },
   {
    "id": "JBL",
@@ -610,7 +610,7 @@
      "p_below_vm": true
     }
    ],
-   "e0_age_days": 158,
+   "e0_age_days": 159,
    "flags": [
     "E0超一季未复核·置信度降档",
     "H1预告92-110亿(+622x)无法拆分；8月中报=剥离比例裁决点"
@@ -653,7 +653,7 @@
      "p_below_vm": false
     }
    ],
-   "e0_age_days": 158,
+   "e0_age_days": 159,
    "flags": [
     "E0超一季未复核·置信度降档",
     "6-15~7-09窗口report_rc无新研报,待刷新"
@@ -696,7 +696,7 @@
      "p_below_vm": true
     }
    ],
-   "e0_age_days": 120,
+   "e0_age_days": 121,
    "flags": [
     "E0超一季未复核·置信度降档",
     "上修发生在股价+91%之后,热数据折价"
@@ -757,7 +757,7 @@
      "p_below_vm": true
     }
    ],
-   "e0_age_days": 158,
+   "e0_age_days": 159,
    "flags": [
     "E0超一季未复核·置信度降档"
    ],
@@ -817,7 +817,7 @@
      "p_below_vm": true
     }
    ],
-   "e0_age_days": 158,
+   "e0_age_days": 159,
    "flags": [
     "E0超一季未复核·置信度降档"
    ],
