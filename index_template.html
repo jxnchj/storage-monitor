@@ -225,15 +225,20 @@ function plainState(j){const st=j.industry_state;let s="<b>行业现在处于：
  const wl=j.trigger&&j.trigger.lights&&j.trigger.lights.length;
  if(wl)s+=" 另有 "+j.trigger.lights.length+" 盏<b>黄色观察灯</b>（"+j.trigger.lights.map(l=>l.variable).join("、")+"）——值得警惕、但尚未确认恶化。";
  return s;}
-function plainTemp(T){const pct=T.sw_pe_percentile_since2020;
- return "<b>估值温度怎么读：</b>"+(pct==null?"A 股半导体板块估值本期取数失败，暂无读数":"A 股半导体板块的估值处于 2020 年以来最热的 <b>"+(100-pct).toFixed(1)+"%</b> 区间（分位 "+pct+"%）——仍然很热"+(T.sw_spark&&T.sw_spark.length>1&&T.sw_spark[T.sw_spark.length-1].pe<Math.max(...T.sw_spark.map(x=>x.pe))?"，但已自峰值回落":""))+
+/* 分位 = 2020 年以来 PE 低于当前的交易日占比。文案跟分位走，不写死冷热 */
+function tempZone(pct){return pct>=80?"高位":pct>=60?"偏高":pct>=40?"中部":pct>=20?"偏低":"低位";}
+function plainTemp(T){const pct=T.sw_pe_percentile_since2020,sp=T.sw_spark;
+ const offHigh=sp&&sp.length>1&&sp[sp.length-1].pe<Math.max(...sp.map(x=>x.pe));
+ return "<b>估值温度怎么读：</b>"+(pct==null?"A 股半导体板块估值本期取数失败，暂无读数":"A 股半导体板块的 PE 高于 2020 年以来 <b>"+pct+"%</b> 的交易日，处于这段时间的"+tempZone(pct)+"区间"+(offHigh?"，低于近一年高点":"")+(pct<40?"（PE 走低也可能来自盈利上升，不单独代表便宜）":""))+
  "；A 股存储五股组合较 6 月 1 日累计 "+(T.basket_vs_0601_pct==null?"暂无读数（取数失败）":(T.basket_vs_0601_pct>0?"+":"")+T.basket_vs_0601_pct+"%")+"；美国费城半导体指数较 6 月初 "+(T.sox&&T.sox.chg_vs_0602!=null?(T.sox.chg_vs_0602*100).toFixed(1)+"%":"—")+"。";}
 function setView(v){document.body.classList.toggle("plain",v==="plain");
  $("#btnPro").classList.toggle("on",v!=="plain");$("#btnPlain").classList.toggle("on",v==="plain");
  try{location.hash=(v==="plain"?"plain":"");}catch(e){}}
 
+const SEEDED=[];
 async function load(id,url){try{const r=await fetch(url,{cache:"no-store"});if(r.ok)return await r.json();}catch(e){}
-  return JSON.parse($("#seed-"+id).textContent);}
+  SEEDED.push(id);return JSON.parse($("#seed-"+id).textContent);}
+function addBanner(msg){const b=$("#banner");b.style.display="block";b.textContent=b.textContent?msg+" ｜ "+b.textContent:msg;}
 function fmtP(p,cur){const n=p>=10000?p.toLocaleString("en-US"):(Math.round(p*100)/100).toLocaleString("en-US");
   return n+" "+({USD:"$",KRW:"₩",CNY:"¥"}[cur]||"");}
 function tip(html,x,y){const t=$("#tip");if(!html){t.style.display="none";return}
@@ -264,11 +269,12 @@ function render(auto,j){
   /* 黑名单运行时审查（判断层） */
   let s=JSON.stringify(j);OKPHRASE.forEach(p=>s=s.split(p).join(""));
   const hits=BLACK.filter(w=>s.includes(w));
-  if(hits.length){const b=$("#banner");b.style.display="block";b.textContent="⚠ 词汇黑名单命中（判断层）："+hits.join("、")+"——请复核 judgment.json";}
+  if(hits.length)addBanner("⚠ 词汇黑名单命中（判断层）："+hits.join("、")+"——请复核 judgment.json");
   const staleT=auto.stale_tickers||[];
-  if((auto.degraded&&auto.degraded.length)||staleT.length){const b=$("#banner");b.style.display="block";
+  if((auto.degraded&&auto.degraded.length)||staleT.length){
     const none=[auto.temperature.sw_pe==null?"申万温度":"",auto.temperature.basket_vs_0601_pct==null?"basket":"",auto.temperature.sox.value==null?"SOX":""].filter(Boolean);
-    b.textContent="⚠ 自动层降级："+[...new Set((auto.degraded||[]).map(d=>d.src))].join("、")+(staleT.length?" ｜ 沿用上期值："+staleT.join("、"):"")+(none.length?" ｜ 本期无读数："+none.join("、"):"")+" ｜ "+(b.textContent||"");}
+    addBanner("⚠ 自动层降级："+[...new Set((auto.degraded||[]).map(d=>d.src))].join("、")+(staleT.length?" ｜ 沿用上期值："+staleT.join("、"):"")+(none.length?" ｜ 本期无读数："+none.join("、"):""));}
+  if(SEEDED.length)addBanner("⚠ 最新数据读取失败，以下不是最新数据，来自页面内嵌的旧快照："+[SEEDED.includes("auto")?"自动层 "+auto.generated_utc:"",SEEDED.includes("judgment")?"判断层 "+j._meta.updated:""].filter(Boolean).join("、"));
   $("#asof").textContent=`自动层 ${auto.generated_utc} ｜ 判断层 ${j._meta.updated}（${j._meta.updated_by}）`;
   /* 状态机 */
   const st=j.industry_state;
