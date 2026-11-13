@@ -1,5 +1,5 @@
 {
- "generated_utc": "2026-11-12 17:40 UTC",
+ "generated_utc": "2026-11-13 01:59 UTC",
  "degraded": [],
  "stale_tickers": [],
  "temperature": {
@@ -227,10 +227,10 @@
    "base_0601": 110.45
   },
   "sox": {
-   "value": 10564.1103515625,
-   "asof": "2026-11-11",
+   "value": 10506.673828125,
+   "asof": "2026-11-12",
    "quote_src": "bar",
-   "chg_vs_0602": -0.2304
+   "chg_vs_0602": -0.2346
   },
   "basket_vs_0601_pct": -34.2,
   "basket_missing": [],
@@ -243,7 +243,7 @@
    "archetype": "A",
    "currency": "USD",
    "ticker": "MU",
-   "P": 811.2999877929688,
+   "P": 798.44,
    "model": "cyclical",
    "e0_asof": "2026-10-01",
    "e0_note": "FQ4 复核：下季指引×4 = 152.6（+2.0%），值不变",
@@ -257,10 +257,10 @@
      "V_M": 1187.84,
      "V_S": 2933.0,
      "V_stress": 1779.0,
-     "p_vc": 1.45,
-     "p_vm": 0.68,
-     "p_vs": 0.28,
-     "implied": "7.7y",
+     "p_vc": 1.42,
+     "p_vm": 0.67,
+     "p_vs": 0.27,
+     "implied": "7.5y",
      "band": "in_range",
      "band_label": "区间内（看持久性）",
      "a2": "中性观察",
@@ -276,9 +276,9 @@
      "V_M": 611.49,
      "V_S": 1480.22,
      "V_stress": 897.82,
-     "p_vc": 2.72,
-     "p_vm": 1.33,
-     "p_vs": 0.55,
+     "p_vc": 2.68,
+     "p_vm": 1.31,
+     "p_vs": 0.54,
      "implied": "无界(市场把峰值当近永续)",
      "band": "in_range",
      "band_label": "区间内（看持久性）",
@@ -287,14 +287,14 @@
      "boundary": false
     }
    ],
-   "e0_age_days": 42,
+   "e0_age_days": 43,
    "flags": [
     "FQ4 复核：下季指引×4 = 152.6（+2.0%），值不变",
     "P<V_M下沿参考·复核结构事实(非买入线)"
    ],
    "stale": false,
-   "asof": "2026-11-11",
-   "quote_src": "bar"
+   "asof": "2026-11-12",
+   "quote_src": "last_trade"
   },
   {
    "id": "SNDK",
@@ -302,7 +302,7 @@
    "archetype": "A",
    "currency": "USD",
    "ticker": "SNDK",
-   "P": 977.6900024414062,
+   "P": 937.46,
    "model": "cyclical",
    "e0_asof": "2026-10-30",
    "e0_note": "FQ1 复核：下季指引×4 = 224（+9.6%），值不变；8 拆 1 于 11-20 生效，per-share 待同步",
@@ -316,10 +316,10 @@
      "V_M": 1610.15,
      "V_S": 4007.69,
      "V_stress": 2430.85,
-     "p_vc": 1.3,
-     "p_vm": 0.61,
-     "p_vs": 0.24,
-     "implied": "6.5y",
+     "p_vc": 1.25,
+     "p_vm": 0.58,
+     "p_vs": 0.23,
+     "implied": "6.1y",
      "band": "in_range",
      "band_label": "区间内（看持久性）",
      "a2": "中性观察",
@@ -335,9 +335,9 @@
      "V_M": 571.36,
      "V_S": 1389.27,
      "V_stress": 842.66,
-     "p_vc": 3.54,
-     "p_vm": 1.71,
-     "p_vs": 0.7,
+     "p_vc": 3.39,
+     "p_vm": 1.64,
+     "p_vs": 0.67,
      "implied": "无界(市场把峰值当近永续)",
      "band": "in_range",
      "band_label": "区间内（看持久性）",
@@ -346,14 +346,14 @@
      "boundary": false
     }
    ],
-   "e0_age_days": 13,
+   "e0_age_days": 14,
    "flags": [
     "FQ1 复核：下季指引×4 = 224（+9.6%），值不变；8 拆 1 于 11-20 生效，per-share 待同步",
     "P<V_M下沿参考·复核结构事实(非买入线)"
    ],
    "stale": false,
-   "asof": "2026-11-11",
-   "quote_src": "bar"
+   "asof": "2026-11-12",
+   "quote_src": "last_trade"
   },
   {
    "id": "SKH",
@@ -405,14 +405,14 @@
      "boundary": false
     }
    ],
-   "e0_age_days": 13,
+   "e0_age_days": 14,
    "flags": [
     "3Q 复核：当年正常化 28.0–31.1 万（−0.3%~+10.6%），≤20% 值不变；股本 11-05 注销后约 7.05 亿",
     "P<V_M下沿参考·复核结构事实(非买入线)"
    ],
    "stale": false,
    "asof": "2026-11-12",
-   "quote_src": "last_trade"
+   "quote_src": "bar"
   },
   {
    "id": "SSNLF",
@@ -464,14 +464,14 @@
      "boundary": false
     }
    ],
-   "e0_age_days": 13,
+   "e0_age_days": 14,
    "flags": [
     "3Q 复核：当年口径 40.9–44.4k（−2.6%~+5.7%），值不变；E0_cons 30,000 已低于累计实际年化，语义待改",
     "P<V_M下沿参考·复核结构事实(非买入线)"
    ],
    "stale": false,
    "asof": "2026-11-12",
-   "quote_src": "last_trade"
+   "quote_src": "bar"
   },
   {
    "id": "WDC",
@@ -479,7 +479,7 @@
    "archetype": "B",
    "currency": "USD",
    "ticker": "WDC",
-   "P": 313.30999755859375,
+   "P": 311.21,
    "model": "cyclical",
    "e0_asof": "2026-10-30",
    "e0_note": "FQ1 复核：(上季实际+下季指引)×2 = 20.88（+14.3%），值不变；锚点敏感，阈值 E0≈19.64",
@@ -493,8 +493,8 @@
      "V_M": 153.76,
      "V_S": 367.87,
      "V_stress": 222.79,
-     "p_vc": 4.08,
-     "p_vm": 2.04,
+     "p_vc": 4.05,
+     "p_vm": 2.02,
      "p_vs": 0.85,
      "implied": "无界(市场把峰值当近永续)",
      "band": "in_range",
@@ -512,9 +512,9 @@
      "V_M": 123.76,
      "V_S": 286.93,
      "V_stress": 173.77,
-     "p_vc": 4.83,
-     "p_vm": 2.53,
-     "p_vs": 1.09,
+     "p_vc": 4.8,
+     "p_vm": 2.51,
+     "p_vs": 1.08,
      "implied": "无界(市场把峰值当近永续)",
      "band": "over",
      "band_label": "高估区",
@@ -523,13 +523,13 @@
      "boundary": false
     }
    ],
-   "e0_age_days": 13,
+   "e0_age_days": 14,
    "flags": [
     "FQ1 复核：(上季实际+下季指引)×2 = 20.88（+14.3%），值不变；锚点敏感，阈值 E0≈19.64"
    ],
    "stale": false,
-   "asof": "2026-11-11",
-   "quote_src": "bar"
+   "asof": "2026-11-12",
+   "quote_src": "last_trade"
   },
   {
    "id": "STX",
@@ -537,7 +537,7 @@
    "archetype": "B",
    "currency": "USD",
    "ticker": "STX",
-   "P": 551.719970703125,
+   "P": 545.14,
    "model": "cyclical",
    "e0_asof": "2026-10-30",
    "e0_note": "FQ1 复核改值 27.39→33.76（v1.3 §29）；锚点敏感，阈值 E0≈34.79",
@@ -551,9 +551,9 @@
      "V_M": 272.84,
      "V_S": 679.77,
      "V_stress": 411.68,
-     "p_vc": 4.33,
-     "p_vm": 2.02,
-     "p_vs": 0.81,
+     "p_vc": 4.28,
+     "p_vm": 2.0,
+     "p_vs": 0.8,
      "implied": "无界(市场把峰值当近永续)",
      "band": "in_range",
      "band_label": "区间内（看持久性）",
@@ -570,9 +570,9 @@
      "V_M": 137.17,
      "V_S": 313.71,
      "V_stress": 189.99,
-     "p_vc": 7.53,
-     "p_vm": 4.02,
-     "p_vs": 1.76,
+     "p_vc": 7.44,
+     "p_vm": 3.97,
+     "p_vs": 1.74,
      "implied": "无界(市场把峰值当近永续)",
      "band": "over",
      "band_label": "高估区",
@@ -581,13 +581,13 @@
      "boundary": false
     }
    ],
-   "e0_age_days": 13,
+   "e0_age_days": 14,
    "flags": [
     "FQ1 复核改值 27.39→33.76（v1.3 §29）；锚点敏感，阈值 E0≈34.79"
    ],
    "stale": false,
-   "asof": "2026-11-11",
-   "quote_src": "bar"
+   "asof": "2026-11-12",
+   "quote_src": "last_trade"
   },
   {
    "id": "JBL",
@@ -639,7 +639,7 @@
      "boundary": false
     }
    ],
-   "e0_age_days": 13,
+   "e0_age_days": 14,
    "flags": [
     "三季报复核：剥离口径 22.67（−5.5%），值不变；库存收益仍无法拆分，毛利率超额法约 13 并列待定"
    ],
@@ -682,7 +682,7 @@
      "boundary": false
     }
    ],
-   "e0_age_days": 13,
+   "e0_age_days": 14,
    "flags": [
     "三季报复核：1–3Q 扣非年化 2.60（+16.0%），值不变；回升条件未满足，一致口径约 3.19 并列"
    ],
@@ -725,7 +725,7 @@
      "boundary": false
     }
    ],
-   "e0_age_days": 13,
+   "e0_age_days": 14,
    "flags": [
     "三季报复核：2.29（−16.4%），值不变；热一致兑现缺口"
    ],
@@ -787,7 +787,7 @@
      "boundary": false
     }
    ],
-   "e0_age_days": 13,
+   "e0_age_days": 14,
    "flags": [
     "三季报改值 14.0→18.0（1–3Q 扣非×4/3）；锚点敏感，成长视角阈值 E0≈19.37"
    ],
@@ -849,7 +849,7 @@
      "boundary": false
     }
    ],
-   "e0_age_days": 13,
+   "e0_age_days": 14,
    "flags": [
     "三季报复核：塌缩视角 TTM 扣非 1.74（−3.3%），值不变；复苏视角改 2.19（作者 11-07），原 3.18 并列"
    ],
