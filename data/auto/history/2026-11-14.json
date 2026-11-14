@@ -1,5 +1,5 @@
 {
- "generated_utc": "2026-11-14 01:31 UTC",
+ "generated_utc": "2026-11-14 15:55 UTC",
  "degraded": [],
  "stale_tickers": [],
  "temperature": {
@@ -227,7 +227,7 @@
    "base_0601": 110.45
   },
   "sox": {
-   "value": 10146.3232421875,
+   "value": 10146.3203125,
    "asof": "2026-11-13",
    "quote_src": "bar",
    "chg_vs_0602": -0.2608
@@ -243,7 +243,7 @@
    "archetype": "A",
    "currency": "USD",
    "ticker": "MU",
-   "P": 778.31,
+   "P": 778.3099975585938,
    "model": "cyclical",
    "e0_asof": "2026-10-01",
    "e0_note": "FQ4 复核：下季指引×4 = 152.6（+2.0%），值不变",
@@ -294,7 +294,7 @@
    ],
    "stale": false,
    "asof": "2026-11-13",
-   "quote_src": "last_trade"
+   "quote_src": "bar"
   },
   {
    "id": "SNDK",
@@ -302,7 +302,7 @@
    "archetype": "A",
    "currency": "USD",
    "ticker": "SNDK",
-   "P": 885.01,
+   "P": 885.010009765625,
    "model": "cyclical",
    "e0_asof": "2026-10-30",
    "e0_note": "FQ1 复核：下季指引×4 = 224（+9.6%），值不变；8 拆 1 于 11-20 生效，per-share 待同步",
@@ -353,7 +353,7 @@
    ],
    "stale": false,
    "asof": "2026-11-13",
-   "quote_src": "last_trade"
+   "quote_src": "bar"
   },
   {
    "id": "SKH",
@@ -479,7 +479,7 @@
    "archetype": "B",
    "currency": "USD",
    "ticker": "WDC",
-   "P": 295.65,
+   "P": 295.6499938964844,
    "model": "cyclical",
    "e0_asof": "2026-10-30",
    "e0_note": "FQ1 复核：(上季实际+下季指引)×2 = 20.88（+14.3%），值不变；锚点敏感，阈值 E0≈19.64",
@@ -529,7 +529,7 @@
    ],
    "stale": false,
    "asof": "2026-11-13",
-   "quote_src": "last_trade"
+   "quote_src": "bar"
   },
   {
    "id": "STX",
@@ -537,7 +537,7 @@
    "archetype": "B",
    "currency": "USD",
    "ticker": "STX",
-   "P": 528.29,
+   "P": 528.2899780273438,
    "model": "cyclical",
    "e0_asof": "2026-10-30",
    "e0_note": "FQ1 复核改值 27.39→33.76（v1.3 §29）；锚点敏感，阈值 E0≈34.79",
@@ -587,7 +587,7 @@
    ],
    "stale": false,
    "asof": "2026-11-13",
-   "quote_src": "last_trade"
+   "quote_src": "bar"
   },
   {
    "id": "JBL",
