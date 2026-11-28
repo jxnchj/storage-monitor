@@ -1,5 +1,5 @@
 {
- "generated_utc": "2026-11-28 03:23 UTC",
+ "generated_utc": "2026-11-28 17:41 UTC",
  "degraded": [],
  "stale_tickers": [],
  "temperature": {
@@ -227,7 +227,7 @@
    "base_0601": 110.45
   },
   "sox": {
-   "value": 9186.7060546875,
+   "value": 9186.7099609375,
    "asof": "2026-11-27",
    "quote_src": "bar",
    "chg_vs_0602": -0.3307
